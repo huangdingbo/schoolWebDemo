@@ -1,0 +1,164 @@
+<template>
+    <div  :id="option.id" :style="{ height:option.height?option.height:GaugeData.height, width:option.width?option.height:GaugeData.width}"></div>
+</template>
+
+<script>
+    let eCharts = require("echarts/lib/echarts");
+    require("echarts/lib/chart/gauge");
+    require("echarts/lib/component/legendScroll");
+    require("echarts/lib/component/tooltip");
+    export default {
+        name: "GaugeChart",
+        data() {
+            return {
+                GaugeData: {
+                    name:'',
+                    height: '240px',
+                    width: '240px',
+                    radius:'80%',
+                    center: ['50%','50%'],
+                    min:0,
+                    max:100,
+                    splitNumber:10,
+                    axisLine_color:[[0.6, '#ff4500'],[0.8, '#1e90ff'],[1, '#13ff13']],
+                    // fontSize: 14,
+                    // txtColor: '#fff',
+                    // txtWidth: '100px',
+                    // colorArray: ['#01dafe', '#58e569', '#f0a54a'],//颜色
+                    pointer_length:'80%',
+                    title_offsetCenter:['0','35%'],
+                    detail_offsetCenter:['0','65%'],
+                    data:[{value: 85, name: '毕业率'}], //数据格式
+
+                }
+            }
+        },
+        props: {
+            option: {}
+        },
+        mounted() {
+            this.init();
+        },
+        methods: {
+            init:function () {
+                let options = Object.assign(this.GaugeData, this.option);
+                let myChart = eCharts.init(document.getElementById(options.id));
+                let option = {
+                    tooltip : {
+                        // formatter: "{a} <br/>{c} {b}"
+                    },
+                    // toolbox: {
+                    //     show : true,
+                    //     feature : {
+                    //         mark : {show: true},
+                    //         restore : {show: true},
+                    //         saveAsImage : {show: true}
+                    //     }
+                    // },
+                    series : [
+                        {
+                            type:'gauge',
+                            name:options.name,
+                            min:options.min,
+                            max:options.max,
+                            splitNumber:options.splitNumber,
+                            radius:options.radius,
+                            center:options.center,
+                            axisLine: {            // 坐标轴线
+                                lineStyle: {       // 属性lineStyle控制线条样式
+                                    color: options.axisLine_color,
+                                    width: 3,
+                                    shadowColor : '#fff', //默认透明
+                                    shadowBlur: 10,
+                                    // shadowOffsetX: 0,
+                                    // shadowOffsetY: 0,
+                                    // opacity:1,  //暂时不用 用的时候可以填
+                                }
+                            },
+                            axisLabel: {            // 坐标轴小标记
+                                textStyle: {       // 属性lineStyle控制线条样式
+                                    fontWeight: 'bolder',
+                                    color: '#fff',
+                                    shadowColor : '#fff', //默认透明
+                                    shadowBlur: 10
+                                }
+                            },
+                            axisTick: {            // 坐标轴小标记
+                                length :15,        // 属性length控制线长
+                                lineStyle: {       // 属性lineStyle控制线条样式
+                                    color: 'auto',
+                                    shadowColor : '#fff', //默认透明
+                                    shadowBlur: 10
+                                }
+                            },
+                            splitLine: {           // 分隔线
+                                length :25,         // 属性length控制线长
+                                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                    width:3,
+                                    color: '#fff',
+                                    shadowColor : '#fff', //默认透明
+                                    shadowBlur: 10
+                                }
+                            },
+                            pointer: {           // 分隔线
+                                shadowColor : '#fff', //默认透明
+                                shadowBlur: 5,
+                                length:options.pointer_length, //指针长度
+                            },
+                            title : {
+                                offsetCenter:options.title_offsetCenter,
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    fontSize: 20,
+                                    color: '#fff',
+                                    // shadowColor : '#fff', //默认透明
+                                    // shadowBlur: 10
+                                }
+                            },
+                            detail : {
+                                formatter: function (value) {
+                                    return value.toFixed(0) +'%';
+                                },
+                                // backgroundColor: 'rgba(30,144,255,0.8)',
+                                // borderWidth: 1,
+                                // borderColor: '#fff',
+                                // shadowColor : '#fff', //默认透明
+                                // shadowBlur: 5,
+                                offsetCenter: options.detail_offsetCenter,
+                                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                    fontWeight: 'bolder',
+                                    color: '#fff'
+                                }
+                            },
+                            markArea:{
+                                normal: {
+                                    color: new eCharts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgba(64,216,84,1)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(79,242,240,0.3)'
+                                    }])
+                                },
+                               data:[
+                                   {
+                                       x:'50%',
+                                       y:'50%'
+                                   }
+                               ]
+
+                            },
+                            data:options.data
+                        },
+
+                    ]
+                };
+                myChart.setOption(option);
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
