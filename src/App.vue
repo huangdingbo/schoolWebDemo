@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <router-view/>
+        <RouterView></RouterView>
     </div>
 </template>
 <script>
@@ -17,13 +17,8 @@
 </script>
 
 <style lang="less">
-    html, body, p {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0
-    }
-    h1{margin:0;padding: 0;}
+    html, body {height: 100%;width: 100%;margin: 0;padding: 0}
+    p,h1,h2,h3{margin: 0;padding: 0;}
     #app {
         position: relative;
         height: 100%;
@@ -34,4 +29,6 @@
         text-align: center;
         color: #2c3e50;
     }
+    .router-link-active{color: #fff;text-decoration: none;display: block}
+
 </style>

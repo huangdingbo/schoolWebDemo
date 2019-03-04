@@ -23,6 +23,37 @@ export default new Router({
             },
             component: () => import("./views/Home.vue")
         },
+        {
+            path: "/analysis",
+            name: "analysis",
+            // redirect: "/analysis/test",
+            meta: {
+                requireAuth: true
+            },
+            component: () => import("./views/Analysis.vue"),
+            children:[
+                {
+                    path: "test",
+                    name: "test",
+                    // meta: { menu: 1 },
+                    component: () => import("./components/AnalysisTest.vue")
+                },
+                {
+                    path: "life",
+                    name: "life",
+                    // meta: { menu: 2 },
+                    component: () => import("./components/AnalysisLife.vue")
+                },
+            ]
+        },
+        {
+            path: "/warning",
+            name: "warning",
+            meta: {
+                requireAuth: true
+            },
+            component: () => import("./views/Warning.vue")
+        }
     ]
 });
 

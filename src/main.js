@@ -16,18 +16,18 @@ new Vue({
 }).$mount("#app");
 
 
-router.beforeEach((to, from, next) => {
-    let username = getCookie('username');
-    if (to.meta.requireAuth) {
-        if (username==''||username=='undefind') { 
-            next({ path: '/' })
-        }
-        else {
-            next();
-        }
-    }
-    else {
-        next();
-    }
-
-});
+// router.beforeEach((to, from, next) => {
+//     let username = getCookie('username');
+//     if (to.meta.requireAuth) {
+//         if (username==''||username=='undefind') {
+//             next({ path: '/' })
+//         }
+//         else {
+//             next();
+//         }
+//     }
+//     else {
+//         next();
+//     }
+//
+// });
