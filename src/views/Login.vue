@@ -33,7 +33,6 @@
                 if (this.username == "" || this.password == "") {
                     alert("请输入用户名或密码")
                 } else {
-                    console.log(22);
                     this.$router.push("/home");
                     setCookie('username',this.username,1000*60);
                     /*接口请求*/
