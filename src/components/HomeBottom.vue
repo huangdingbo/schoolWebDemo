@@ -1,35 +1,18 @@
 <template>
     <div class="index-bottom">
-        <!--<div class="bottom-dashboard">-->
-            <!--<img class="dashboard-bg" src="../assets/home/bottom_dashboard_blue.png" width="240px">-->
-            <!--<img class="dashboard-pointer"  src="../assets/home/bottom_dashboard_pointer.png" width="240px">-->
-            <!--<div class="dashboard-center">-->
-                <!--<p class="num"><span>96</span>%</p>-->
-                <!--<p class="name"></p>-->
-            <!--</div>-->
-        <!--</div>-->
         <div class="bottom-dashboard" style="left:45px">
             <GaugeChart :option="gauge"></GaugeChart>
         </div>
         <div class="bottom-center" id="bottom_warning">
-            <div class="">学校共有老师：1200</div>
-            <div class="">学校共有学生：</div>
-            <div class="">2019年毕业生有：</div>
-            <div class="">2019年研究生有：</div>
+            <!--<div class="">学校共有老师：1200</div>-->
+            <!--<div class="">学校共有学生：</div>-->
+            <!--<div class="">2019年毕业生有：</div>-->
+            <!--<div class="">2019年研究生有：</div>-->
             <!--<img  class="bottom-animate-bg" src="../assets/home/bottom_monitor_light.png">-->
         </div>
-        <div class="bottom-dashboard" style="right:45px">
+        <div class="bottom-dashboard" style="right:45px;background-color:#10270f;">
             <GaugeChart :option="gauge2"></GaugeChart>
         </div>
-        <!--<div class="bottom-dashboard" id="deal_dashboard">-->
-            <!--<img class="dashboard-bg" src="../assets/home/bottom_dashboard_green.png" width="240px">-->
-            <!--<img class="dashboard-pointer" src="../assets/home/bottom_dashboard_pointer.png" width="240px">-->
-            <!--<img class="dashboard-side" style="transform: rotateX(360deg) rotateY(180deg);left:-68px" src="../assets/home/bottom_bg_side.png">-->
-            <!--<div class="dashboard-center">-->
-                <!--<p class="num"><span>97</span>%</p>-->
-                <!--<p class="name"></p>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 
@@ -68,8 +51,9 @@
 <style scoped>
     .index-bottom{display: flex;position: absolute;bottom: 0;overflow: hidden;width: 100%;justify-content: center;align-items: center}
     .bottom-dashboard{display: flex;justify-content: center;border: 3px solid #6089e1;box-shadow: 0px 0px 15px #6089e1;
-        border-radius: 50%;width: 300px;height: 280px;position: relative;z-index: 2;margin: 5px 0;background: #0a2e41;}
-    .bottom-center{width: 600px;height: 200px;border-top:3px solid;border-bottom: 3px solid;border-color: #6089e1;color:#fff;font-size: 20px;background: #0a2e41;}
+        border-radius: 50%;width: 230px;height: 230px;position: relative;margin: 5px 0;background: #153957;}
+    .bottom-center{width: 600px;height: 160px;}
+    #gauge-chart,#gauge-chart2{top:-30px}
     @keyframes mymove
     {
         0% {

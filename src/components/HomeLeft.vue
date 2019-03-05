@@ -1,15 +1,15 @@
 <template>
     <div class="index-left">
         <div class="lineChart" >
-            <div class="title">模块1</div>
+            <div class="title_small">模块1</div>
             <LineChart :option="line"></LineChart>
         </div>
         <div class="pieChart">
-            <div class="title">模块2</div>
+            <div class="title_small">模块2</div>
             <PieChart :option="pie"></PieChart>
         </div>
         <div class="barChart">
-            <div class="title">模块3</div>
+            <div class="title_small">模块3</div>
             <BarChart :option="bar"></BarChart>
         </div>
     </div>
@@ -54,19 +54,8 @@
 </script>
 
 
-<style>
-    .title {
-        display: flex;
-        vertical-align: middle;
-        color: #fff;
-        font-size: 28px;
-        text-shadow: 0 0 20px #013c80, 0 0 20px #013c80, 0 0 20px #013c80;
-        margin: 0;
-    }
-</style>
-
 <style scoped>
-    .index-left {position: absolute;padding: 20px;width: 345px;top: 100px;left: 20px;border: 1px solid #19516f;height: 700px;
-        border-radius: 5px;background-color: rgba(3, 16, 23, 0.702);box-shadow: 5px 8px 10px 0 rgb(0, 0, 0);}
+    .index-left {position: absolute;padding: 20px;width: 360px;top: 100px;left: 20px;border: 1px solid #19516f;height: 700px;
+        border-radius: 5px;background-color: rgba(3, 16, 23, 0.702);box-shadow: 0px 0px 10px 0 #7bd4fc inset;}
 </style>
 

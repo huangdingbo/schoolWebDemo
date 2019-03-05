@@ -29,6 +29,9 @@
         text-align: center;
         color: #2c3e50;
     }
-    .router-link-active{color: #fff;text-decoration: none;display: block}
-
+    .router-link-active,a{color: #fff;text-decoration: none;display: block}
+    .title{text-shadow: 0 0 20px #145f87, 0 0 20px #145f87, 0 0 20px #145f87;text-align: center;font-size: 48px;
+        font-weight: bold;color: #d6e9ff;}
+    .title_small {display: flex;vertical-align: middle;color: #fff;font-size: 28px;margin: 0;
+        text-shadow: 0 0 20px #013c80, 0 0 20px #013c80, 0 0 20px #013c80;}
 </style>

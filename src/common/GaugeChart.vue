@@ -26,9 +26,9 @@
                     // txtWidth: '100px',
                     // colorArray: ['#01dafe', '#58e569', '#f0a54a'],//颜色
                     pointer_length:'80%',
-                    title_offsetCenter:['0','35%'],
-                    detail_offsetCenter:['0','65%'],
-                    data:[{value: 85, name: '毕业率'}], //数据格式
+                    title_offsetCenter:['0','50%'],
+                    detail_offsetCenter:['0','78%'],
+                    data:[{value: 85, name: '及格率'}], //数据格式
 
                 }
             }
@@ -67,7 +67,7 @@
                             axisLine: {            // 坐标轴线
                                 lineStyle: {       // 属性lineStyle控制线条样式
                                     color: options.axisLine_color,
-                                    width: 3,
+                                    width: 10,
                                     shadowColor : '#fff', //默认透明
                                     shadowBlur: 10,
                                     // shadowOffsetX: 0,
@@ -78,13 +78,14 @@
                             axisLabel: {            // 坐标轴小标记
                                 textStyle: {       // 属性lineStyle控制线条样式
                                     fontWeight: 'bolder',
+                                    fontSize:10,
                                     color: '#fff',
                                     shadowColor : '#fff', //默认透明
                                     shadowBlur: 10
                                 }
                             },
                             axisTick: {            // 坐标轴小标记
-                                length :15,        // 属性length控制线长
+                                length :25,        // 属性length控制线长
                                 lineStyle: {       // 属性lineStyle控制线条样式
                                     color: 'auto',
                                     shadowColor : '#fff', //默认透明
@@ -92,7 +93,7 @@
                                 }
                             },
                             splitLine: {           // 分隔线
-                                length :25,         // 属性length控制线长
+                                length :30,         // 属性length控制线长
                                 lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
                                     width:3,
                                     color: '#fff',
@@ -109,7 +110,7 @@
                                 offsetCenter:options.title_offsetCenter,
                                 textStyle: {
                                     fontWeight: 'bolder',
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: '#fff',
                                     // shadowColor : '#fff', //默认透明
                                     // shadowBlur: 10
@@ -129,24 +130,6 @@
                                     fontWeight: 'bolder',
                                     color: '#fff'
                                 }
-                            },
-                            markArea:{
-                                normal: {
-                                    color: new eCharts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                        offset: 0,
-                                        color: 'rgba(64,216,84,1)'
-                                    }, {
-                                        offset: 1,
-                                        color: 'rgba(79,242,240,0.3)'
-                                    }])
-                                },
-                               data:[
-                                   {
-                                       x:'50%',
-                                       y:'50%'
-                                   }
-                               ]
-
                             },
                             data:options.data
                         },

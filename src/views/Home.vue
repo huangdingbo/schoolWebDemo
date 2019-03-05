@@ -5,6 +5,7 @@
             <HomeLeft></HomeLeft>
             <HomeRight></HomeRight>
             <HomeBottom></HomeBottom>
+            <HomeCenter></HomeCenter>
         </div>
         <Nav :option="isShow"></Nav>
         <img class="nav-switch" src="../assets/home/home_icon_top_right.svg" @click="navShow()">
@@ -17,6 +18,7 @@
     import HomeBottom from "../components/HomeBottom.vue";
     import HomeLeft from "../components/HomeLeft.vue";
     import HomeRight from "../components/HomeRight.vue";
+    import HomeCenter from "../components/HomeCenter.vue";
     import Nav from "../components/Nav.vue";
 
     export default {
@@ -26,6 +28,7 @@
             HomeBottom,
             HomeLeft,
             HomeRight,
+            HomeCenter,
             Nav,
         },
         data () {

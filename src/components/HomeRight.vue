@@ -1,11 +1,11 @@
 <template>
     <div class="index-right">
         <div class="pieChart" >
-            <div class="title">模块1</div>
+            <div class="title_small">模块1</div>
             <PieChart :option="pie"></PieChart>
         </div>
         <div class="radarChart">
-            <div class="title">模块2</div>
+            <div class="title_small">模块2</div>
             <RadarChart :option="radar"></RadarChart>
         </div>
     </div>
@@ -41,5 +41,6 @@
 </script>
 
 <style scoped>
-    .index-right{position: absolute;right: 35px;width: 410px;top: 140px;z-index: 2;}
+    .index-right{position: absolute;right: 20px;width: 360px;top: 100px;border: 1px solid #19516f;padding: 20px;
+        border-radius: 5px;background-color: rgba(3, 16, 23, 0.702);box-shadow: 0px 0px 10px 0 #7bd4fc inset;}
 </style>
