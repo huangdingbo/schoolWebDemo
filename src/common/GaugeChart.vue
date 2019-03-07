@@ -27,13 +27,13 @@ export default {
         max: 100,
         splitNumber: 10,
         axisLine_color: [[0.6, "#0a2e41"], [0.8, "#0a2e41"], [1, "#0a2e41"]],
-        // fontSize: 14,
-        // txtColor: '#fff',
-        // txtWidth: '100px',
+        fontSize: 14,
+        txtColor: '#fff',
+        txtWidth: '100px',
         // colorArray: ['#01dafe', '#58e569', '#f0a54a'],//颜色
         pointer_length: "80%",
         title_offsetCenter: ["0", "50%"],
-        detail_offsetCenter: ["0", "78%"],
+        detail_offsetCenter: ["0", "75%"],
         data: [{ value: 85, name: "及格率" }] //数据格式
       }
     };
@@ -52,14 +52,6 @@ export default {
         tooltip: {
           // formatter: "{a} <br/>{c} {b}"
         },
-        // toolbox: {
-        //     show : true,
-        //     feature : {
-        //         mark : {show: true},
-        //         restore : {show: true},
-        //         saveAsImage : {show: true}
-        //     }
-        // },
         series: [
           {
             type: "gauge",
@@ -69,7 +61,7 @@ export default {
             splitNumber: options.splitNumber,
             radius: options.radius,
             center: options.center,
-            axisLine: {
+              axisLine: {
               // 坐标轴线
               lineStyle: {
                 // 属性lineStyle控制线条样式
@@ -91,9 +83,8 @@ export default {
                 fontWeight: "bolder",
                 fontSize: 10,
                 color: "#fff",
-
                 shadowColor: "#fff", //默认透明
-                shadowBlur: 10
+                shadowBlur: 5
               }
             },
             axisTick: {
@@ -103,7 +94,7 @@ export default {
                 // 属性lineStyle控制线条样式
                 color: "auto",
                 shadowColor: "#fff", //默认透明
-                shadowBlur: 10
+                shadowBlur: 5
               }
             },
             splitLine: {
@@ -114,7 +105,7 @@ export default {
                 width: 3,
                 color: "#fff",
                 shadowColor: "#fff", //默认透明
-                shadowBlur: 10
+                shadowBlur: 5
               }
             },
             pointer: {
@@ -127,7 +118,7 @@ export default {
               offsetCenter: options.title_offsetCenter,
               textStyle: {
                 fontWeight: "bolder",
-                fontSize: 18,
+                fontSize: 14,
                 color: "#fff"
                 // shadowColor : '#fff', //默认透明
                 // shadowBlur: 10
@@ -137,11 +128,7 @@ export default {
               formatter: function(value) {
                 return value.toFixed(0) + "%";
               },
-              // backgroundColor: 'rgba(30,144,255,0.8)',
-              // borderWidth: 1,
-              // borderColor: '#fff',
-              // shadowColor : '#fff', //默认透明
-              // shadowBlur: 5,
+              fontSize:16,
               offsetCenter: options.detail_offsetCenter,
               textStyle: {
                 // 其余属性默认使用全局文本样式，详见TEXTSTYLE

@@ -18,12 +18,21 @@
                         "rgba(9,192,213,0.9)"],
                     center:['50%', '50%'],
                     radius: '75%',
+                    data:[
+                        {
+                            value : [4300, 10000, 28000, 35000, 50000, 19000],
+                            name : '预算分配'
+                        },
+                        {
+                            value : [5000, 14000, 28000, 31000, 42000, 21000],
+                            name : '实际开销'
+                        }
+                        ]
                 }
-            }
+                }
         },
         props:{
           option:{
-
           }
         },
         mounted() {
@@ -44,7 +53,8 @@
                         },
                     },
                     radar: {
-                        // shape: 'circle',
+                        // shape: 'circle', //形状
+                        // splitNumber: 3, // 雷达图圈数设置
                         center:options.center,
                         radius:options.radius,
                         name: {
@@ -55,16 +65,36 @@
                                 padding: [3, 5]
                             }
                         },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(131,141,158,.1)',
+                            },
+                        },
                         indicator: [
-                            { name: '销售（sales）', max: 6500},
-                            { name: '管理（Administration）', max: 16000},
-                            { name: '信息技术（Information Techology）', max: 30000},
-                            { name: '客服（Customer Support）', max: 38000},
-                            { name: '研发（Development）', max: 52000},
-                            { name: '市场（Marketing）', max: 25000}
-                        ]
+                            { name: '销售', max: 6500},
+                            { name: '管理', max: 16000},
+                            { name: '信息技术', max: 30000},
+                            { name: '客服', max: 38000},
+                            { name: '研发', max: 52000},
+                            { name: '市场', max: 25000}
+                        ],
+                        splitArea : {
+                            show : false,
+                            // areaStyle : {
+                            //     color: 'rgba(255,0,0,0)', // 图表背景的颜色
+                            // },
+                        },
+                        splitLine : {
+                            show : true,
+                            lineStyle : {
+                                width : 2,
+                                color : 'rgba(131,141,158,.1)', // 设置网格的颜色
+                            },
+                        },
                     },
                     series: [{
+                        symbol: 'circle', // 拐点的样式，还可以取值'rect','angle'等
+                        symbolSize: 10, // 拐点的大小
                         // name: '预算 vs 开销',
                         type: 'radar',
                         // areaStyle: {normal: {}},
@@ -74,16 +104,15 @@
                             shadowOffsetX: 0,
                             shadowOffsetY: 0,
                         },
-                        data : [
-                            {
-                                value : [4300, 10000, 28000, 35000, 50000, 19000],
-                                name : '预算分配'
+                        areaStyle:{
+                            normal:{
+                                opacity: '0.2',
                             },
-                            {
-                                value : [5000, 14000, 28000, 31000, 42000, 21000],
-                                name : '实际开销'
-                            }
-                        ]
+                            emphasis:{
+                                opacity: '0.3',
+                            },
+                        },
+                        data :options.data
                     }]
                 };
                 myChart.setOption(option);

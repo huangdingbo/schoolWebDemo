@@ -1,15 +1,15 @@
 <template>
-  <div class="login">
-    <div class="login-wrap" v-show="showLogin">
-      <img class="login_logo" src="../assets/login_logo.jpg" />
-      <div class="login_input">
-        <h1>登录</h1>
-        <input type="text" placeholder="请输入用户名" v-model="username" />
-        <input type="password" placeholder="请输入密码" v-model="password" />
-        <button v-on:click="login">登录</button>
-      </div>
+    <div class="login">
+        <div class="login-wrap" v-show="showLogin">
+            <img class="login_logo" src="../assets/login_logo.jpg">
+            <div class="login_input">
+                <h1>登录</h1>
+                <input type="text" placeholder="请输入用户名" v-model="username">
+                <input type="password" placeholder="请输入密码" v-model="password">
+                <button v-on:click="login">登录</button>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>

@@ -28,9 +28,9 @@
                     roseType:'radius',
                     radius : '65%',
                     height:'240px',
-                    data: [{value: 335, name: '直接访问'},
-                        {value: 310, name: '邮件营销'},
-                        {value: 234, name: '联盟广告'}],
+                    data: [{value: 335, name: '1'},
+                        {value: 310, name: '2'},
+                        {value: 234, name: '3'}],
                 },
                 radar:{
                     id:'radar-chart',

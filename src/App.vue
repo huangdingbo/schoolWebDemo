@@ -1,17 +1,32 @@
 <template>
     <div id="app">
+        <img class="nav-switch" src="./assets/home/home_icon_top_right.svg" @click="navShow()">
+        <Nav :option="isShow"></Nav>
         <RouterView></RouterView>
     </div>
 </template>
 <script>
+    import Nav from "./components/Nav.vue";
+
     export default {
+        components: {
+            Nav
+        },
         data() {
-            return {}
+            return {
+                isShow:false
+            }
         },
         mounted() {
 
         },
-        methods: {}
+        methods: {
+            navShow:function () {
+                this.isShow =! this.isShow
+                // childValue就是子组件传过来的值
+                // this.isShow = childValue
+            }
+        }
     }
 
 </script>
@@ -34,4 +49,8 @@
         font-weight: bold;color: #d6e9ff;}
     .title_small {display: flex;vertical-align: middle;color: #fff;font-size: 28px;margin: 0;
         text-shadow: 0 0 20px #013c80, 0 0 20px #013c80, 0 0 20px #013c80;}
+    .nav-switch{position: absolute;right:50px;top:10px;z-index: 4;cursor: pointer}
+    .nav-switch{width: 30px;height: 30px;}
 </style>
+
+

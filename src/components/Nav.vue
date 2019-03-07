@@ -32,11 +32,11 @@
         },
         data(){
             return{
-                isShow:false,
                 ac:'',
             }
         },
         mounted(){
+            this.opacity
         },
         methods:{
             jump:function(index){

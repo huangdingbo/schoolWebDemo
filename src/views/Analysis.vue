@@ -10,7 +10,6 @@
             <!--<div class="" :route="{path:'/analysis/lift'}">2222</div>-->
         </div>
 
-
         <div class="analysis_cont">
             <router-view></router-view>
         </div>

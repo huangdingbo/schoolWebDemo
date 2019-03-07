@@ -36,10 +36,11 @@
                 },
                 pie: {
                     id:'pie-chart',
-                    data: [{value: 335, name: '直接访问'},
-                        {value: 310, name: '邮件营销'},
-                        {value: 234, name: '联盟广告'}],
-                    height: '240px'
+                    height: '240px',
+                    // data: [{value: 335, name: '1'},
+                    //     {value: 310, name: '2'},
+                    //     {value: 234, name: '3'}],
+                    isRing: true,
                 },
                 bar: {
                     id:'bar-chart',
@@ -55,7 +56,7 @@
 
 
 <style scoped>
-    .index-left {position: absolute;padding: 20px;width: 360px;top: 100px;left: 20px;border: 1px solid #19516f;height: 700px;
+    .index-left {position: absolute;padding: 20px;width: 360px;top: 100px;left: 20px;border: 1px solid #19516f;
         border-radius: 5px;background-color: rgba(3, 16, 23, 0.702);box-shadow: 0px 0px 10px 0 #7bd4fc inset;}
 </style>
 

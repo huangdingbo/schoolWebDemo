@@ -1,13 +1,9 @@
 <template>
   <div class="index-bottom">
-    <div class="bottom-dashboard" style="left:45px">
+    <div class="bottom-dashboard" style="left:230px">
       <GaugeChart :option="gauge"></GaugeChart>
     </div>
-    <img
-      class="bottom-img"
-      src="../assets/home/bottom_bg_side.png"
-      style="left:-50px"
-    />
+    <img class="bottom-img" src="../assets/home/bottom_bg_side.png" style="left:56px"/>
     <div class="bottom-center" id="bottom_warning">
       <!--<div class="">学校共有老师：1200</div>-->
       <!--<div class="">学校共有学生：</div>-->
@@ -15,8 +11,8 @@
       <!--<div class="">2019年研究生有：</div>-->
       <!--<img  class="bottom-animate-bg" src="../assets/home/bottom_monitor_light.png">-->
     </div>
-    <img class="bottom-img" src="../assets/home/bottom_bg_side.png" />
-    <div class="bottom-dashboard">
+    <img class="bottom-img" src="../assets/home/bottom_bg_side.png" style="transform: rotateY(180deg);left:-56px"/>
+    <div class="bottom-dashboard" style="left:-230px">
       <GaugeChart :option="gauge2"></GaugeChart>
     </div>
   </div>
@@ -73,6 +69,8 @@ export default {
   height: 180px;
   position: relative;
   margin: 5px 0;
+  z-index: 2;
+  background: #020b10;
 }
 .bottom-center {
   width: 600px;
@@ -82,6 +80,8 @@ export default {
 }
 .bottom-img {
   position: relative;
+  width: 320px;
+  height: 40px;
 }
 #gauge-chart,
 #gauge-chart2 {

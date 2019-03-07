@@ -1,14 +1,12 @@
 <template>
     <div class="index">
-        <div class="home" :class="{filter_style :isShow}">
+        <div class="home">
             <HomeTop></HomeTop>
             <HomeLeft></HomeLeft>
             <HomeRight></HomeRight>
             <HomeBottom></HomeBottom>
             <HomeCenter></HomeCenter>
         </div>
-        <Nav :option="isShow"></Nav>
-        <img class="nav-switch" src="../assets/home/home_icon_top_right.svg" @click="navShow()">
     </div>
 </template>
 
@@ -19,7 +17,6 @@
     import HomeLeft from "../components/HomeLeft.vue";
     import HomeRight from "../components/HomeRight.vue";
     import HomeCenter from "../components/HomeCenter.vue";
-    import Nav from "../components/Nav.vue";
 
     export default {
         name: "home",
@@ -29,7 +26,6 @@
             HomeLeft,
             HomeRight,
             HomeCenter,
-            Nav,
         },
         data () {
             return {
@@ -38,11 +34,7 @@
         },
 
         methods: {
-            navShow:function () {
-                this.isShow =! this.isShow
-                // childValue就是子组件传过来的值
-                // this.isShow = childValue
-            }
+
         }
     };
 </script>
@@ -59,8 +51,7 @@
         /*background: url("../assets/home_bg.jpeg");*/
         background-color:#000 ;
     }
-    .nav-switch{position: absolute;right:50px;top:10px;z-index: 4;cursor: pointer}
-    .nav-switch{width: 30px;height: 30px;}
+
     .filter_style{
         -webkit-filter: blur(5px);
         -moz-filter: blur(5px);

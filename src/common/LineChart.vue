@@ -25,7 +25,7 @@
                     gridLeft: '5%',
                     gridRight: '5%',
                     txtWidth: '100px',
-                    colorArray: ['#01dafe', '#58e569', '#f0a54a'],//颜色
+                    colorArray: ['#01dafe', '#58e569', '#f0a54a',"#c23531","#cfb2a9"],//颜色
                     unit: '',  //单位
                     dataArray: [
                         {lineName: 1,name:555, value: [4, 5, 6, 7]}, {lineName: 2,name:444, value: [2, 5, 8, 9]},
