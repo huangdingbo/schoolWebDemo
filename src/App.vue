@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <img class="nav-switch" src="./assets/home/home_icon_top_right.svg" @click="navShow()">
-        <Nav :option="isShow"></Nav>
+        <Nav :option="isShow" v-on:navTab="navTab"></Nav>
         <RouterView></RouterView>
     </div>
 </template>
@@ -21,6 +21,9 @@
 
         },
         methods: {
+            navTab:function(navTab){
+                this.isShow = navTab
+            },
             navShow:function () {
                 this.isShow =! this.isShow
                 // childValue就是子组件传过来的值

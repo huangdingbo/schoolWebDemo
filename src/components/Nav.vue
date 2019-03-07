@@ -33,6 +33,7 @@
         data(){
             return{
                 ac:'',
+                isShow:false
             }
         },
         mounted(){
@@ -40,6 +41,7 @@
         },
         methods:{
             jump:function(index){
+                this.$emit('navTab', this.isShow);
                 switch (index) {
                     case 1:
                         this.$router.push("/home");
