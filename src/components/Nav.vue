@@ -3,7 +3,7 @@
         <div class="nav-content"  >
             <div class="nav-layer"></div>
             <div class="nav-main">
-                <div class="nav-title">XXXXXX</div>
+                <div class="nav-title">智慧校园</div>
                 <div class="nav-list">
                     <div class="nav-item" @click="jump(1)" @mouseenter="pointEnter(1)" @mouseleave="pointOut" :class="{ac:this.ac==1}">
                         <img src="" width="400" height="300">
