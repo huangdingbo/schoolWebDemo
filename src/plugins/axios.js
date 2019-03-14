@@ -30,7 +30,8 @@ function clearTimer(res) {
   }
 }*/
 
-axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+axios.defaults.headers.post["Content-Type"] =
+  "application/x-www-form-urlencoded";
 
 let config = {
   baseURL: baseUrl.online,
@@ -65,7 +66,6 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
   function(response) {
-      console.log(response);
     loading && loading.close();
     if (response.status === 200) {
       let res = response.data;
@@ -80,8 +80,7 @@ _axios.interceptors.response.use(
       //   Message.error(res.error);
       //   return false;
       // }
-        return res
-
+      return res;
     }
     return false;
   },
