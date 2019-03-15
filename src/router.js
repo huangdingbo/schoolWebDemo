@@ -26,24 +26,31 @@ export default new Router({
         {
             path: "/analysis",
             name: "analysis",
-            // redirect: "/analysis/test",
+            redirect: "/analysis/grade",
             meta: {
                 requireAuth: true
             },
             component: () => import("./views/Analysis.vue"),
             children:[
                 {
-                    path: "test",
-                    name: "test",
-                    // meta: { menu: 1 },
-                    component: () => import("./components/AnalysisTest.vue")
+                    path: "grade",
+                    name: "grade",
+                    // meta: { menu: 2 },
+                    component: () => import("./components/AnalysisGrade.vue")
                 },
                 {
-                    path: "life",
-                    name: "life",
-                    // meta: { menu: 2 },
-                    component: () => import("./components/AnalysisLife.vue")
+                    path: "class",
+                    name: "class",
+                    // meta: { menu: 1 },
+                    component: () => import("./components/AnalysisClass.vue")
                 },
+                {
+                    path: "subject",
+                    name: "subject",
+                    // meta: { menu: 2 },
+                    component: () => import("./components/AnalysisSubject.vue")
+
+                }
             ]
         },
         {

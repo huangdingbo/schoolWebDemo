@@ -1,10 +1,11 @@
 <template>
     <div class="analysis">
         <div class="analysis_nav">
-            <div class="title">成绩分析</div>
+            <div class="title">考试分析</div>
             <div class="analysis_list">
-                <router-link to="/analysis/test" class="analysis_item">子组件1</router-link>
-                <router-link to="/analysis/life" class="analysis_item">子组件2</router-link>
+                <router-link to="/analysis/grade" class="analysis_item">年级</router-link>
+                <router-link to="/analysis/class" class="analysis_item">班级</router-link>
+                <router-link to="/analysis/subject" class="analysis_item">学科</router-link>
             </div>
             <!--<div class="" :route="{path:'/analysis/test'}">1111</div>-->
             <!--<div class="" :route="{path:'/analysis/lift'}">2222</div>-->
