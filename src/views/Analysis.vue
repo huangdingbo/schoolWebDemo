@@ -7,10 +7,7 @@
                 <router-link to="/analysis/class" class="analysis_item">班级</router-link>
                 <router-link to="/analysis/subject" class="analysis_item">学科</router-link>
             </div>
-            <!--<div class="" :route="{path:'/analysis/test'}">1111</div>-->
-            <!--<div class="" :route="{path:'/analysis/lift'}">2222</div>-->
         </div>
-
         <div class="analysis_cont">
             <router-view></router-view>
         </div>
@@ -20,16 +17,27 @@
 <script>
     export default {
         name: "Analysis",
+        components: {
+        },
+        data() {
+            return {
+            };
+        },
+        mounted() {
+
+        },
+        methods: {}
     }
 </script>
 
 <style scoped>
-    .analysis{display: flex;width: 100%;height:100%;background: #000}
+    @import '../css/list.css';
+
+    .analysis{display: flex;width: 100%;height:100%;}
     .title{margin-top:40px}
     .analysis_nav{width: 400px;height:100%;border-right:2px solid #0a5b85}
     .analysis_list{display: flex;flex-direction: column;font-size: 24px;font-weight: bold;margin-top:30px}
-    .analysis_item {display: flex;align-items: center;height:90px;}
+    .analysis_item {display: flex;align-items: center;height:90px;justify-content: center;font-size: 32px}
     .analysis_item.router-link-active{color: #45daff}
-    .analysis_cont{}
-
+    .analysis_cont{width: 100%;padding:40px}
 </style>

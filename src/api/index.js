@@ -22,6 +22,13 @@ export const rank = data =>
     api.post("api/web/index.php?r=cockpit/rank-pic", data).then(res => res);
 export const teacher = data =>
     api.post("api/web/index.php?r=cockpit/teacher-distribution", data).then(res => res);
-
+export const left = data =>
+    api.post("api/web/index.php?r=read-grade/header-left", data).then(res => res);
+export const right = data =>
+    api.post("api/web/index.php?r=read-grade/header-right", data).then(res => res);
+export const num = data =>
+    api.post("api/web/index.php?r=read-grade/num", data).then(res => res);
+export const online = data =>
+    api.post("api/web/index.php?r=read-grade/online", data).then(res => res);
 
 /*logout*/

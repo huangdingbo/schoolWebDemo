@@ -108,6 +108,8 @@
 </script>
 
 <style scoped>
+    @import '../css/list.css';
+
     .index-left {
         position: absolute;
         padding: 20px;
@@ -123,16 +125,5 @@
     .svg_list{
         display: flex;
     }
-    .cont {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 160px;
-        color: #fff;
-        font-size: 20px;
-    }
 
-    .num {
-        font-size: 28px;
-    }
 </style>

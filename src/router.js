@@ -35,19 +35,19 @@ export default new Router({
                 {
                     path: "grade",
                     name: "grade",
-                    // meta: { menu: 2 },
+                    // meta: { menu: 1 },
                     component: () => import("./components/AnalysisGrade.vue")
                 },
                 {
                     path: "class",
                     name: "class",
-                    // meta: { menu: 1 },
+                    // meta: { menu: 2 },
                     component: () => import("./components/AnalysisClass.vue")
                 },
                 {
                     path: "subject",
                     name: "subject",
-                    // meta: { menu: 2 },
+                    // meta: { menu: 3 },
                     component: () => import("./components/AnalysisSubject.vue")
 
                 }
