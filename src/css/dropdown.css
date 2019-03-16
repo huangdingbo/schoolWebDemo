@@ -1,0 +1,8 @@
+
+
+.el-dropdown{font-size: 24px;color:#fff;}
+.el-dropdown-selfdefine{box-sizing: border-box;border: 2px solid rgb( 123, 212, 252 );box-shadow: inset 0 0 20px 0 #1570a0;padding:5px 10px;border-radius: 5px}
+.el-dropdown-selfdefine{outline:none}
+.el-dropdown-menu{padding:0;text-align: center;border: 1px solid rgb( 110, 194, 255 );box-shadow: inset 0 0 20px 0 #1570a0;border-radius: 5px;
+    background-color: rgba( 19, 57, 101, 0.949 );margin-top:6px}
+.el-dropdown-menu__item{font-size: 20px;color:#fff;list-style: none;outline:none;padding:5px 10px }
