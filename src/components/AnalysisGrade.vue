@@ -28,15 +28,19 @@
             <div class="grade_total">
                 <div class="title_small">参考人数</div>
                 <div class="cont">
-                    <img class="wave" src="../assets/grade/card_wave_bg.png">
-                    <img  src="../assets/grade/card_wave_bg.png" style="position: absolute;left:-812px;display: none">
+                    <div class="wave">
+                        <img src="../assets/grade/card_wave_bg.png">
+                        <img  src="../assets/grade/card_wave_bg.png">
+                    </div>
                     <div class="cont_item" v-for="item in num">
                         <div class="num">{{ item.value}}</div>
                         <div class="optic">{{ item.name}}</div>
                     </div>
                 </div>
             </div>
-            <div class=""></div>
+            <div class="grade_online">
+
+            </div>
         </div>
     </div>
 </template>
@@ -115,14 +119,14 @@
     .grade_title{font-size: 46px;color:#fff;display:inline-block;border-bottom: 3px solid rgb( 110, 194, 255 );padding: 16px 0;}
     .grade_total{width: 480px;}
     .cont{position:relative;margin-top:15px;border: 1px solid #1a4f6b;border-radius: 6px;background-color: rgba(7, 53, 79, 0.749);overflow: hidden}
-    .wave{position: absolute;left:0;animation:wave 4s linear infinite;-webkit-animation:wave 8s linear infinite;}
-    /*@keyframes wave*/
-    /*{*/
-        /*0% {*/
-            /*left: 0;*/
-        /*}*/
-        /*100% {*/
-            /*left: -764px;*/
-        /*}*/
-    /*}*/
+    .wave{display:flex;position:absolute;bottom:0;left:0;animation:wave 4s linear infinite;-webkit-animation:wave 8s linear infinite;}
+    @keyframes wave
+    {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: -1292px;
+        }
+    }
 </style>
