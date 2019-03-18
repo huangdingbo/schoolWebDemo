@@ -32,6 +32,8 @@
                     gridBottom: "10%",
                     gridLeft: "5%",
                     gridRight: "5%",
+                    legendLeft:'auto',
+                    orient:'horizontal',  //horizontal vertical
                     formatter: function (val) {
                     }, //X轴自定义axisLabel显示内容
                     data: [
@@ -74,18 +76,12 @@
                     type: "bar",
                     data: value
                 });
-                // for(let i=0;i<options.dataArray.length;i++){
-                //     series.push({
-                //         type:'bar',
-                //         // name:options.dataArray[i].lineName,
-                //         data:options.dataArray[i].value,
-                //     });
-                //     Xname.push(series)
-                // }
                 let myChart = eCharts.init(document.getElementById(options.id));
                 let option = {
                     color: options.color,
                     legend: {
+                        left:options.legendLeft,
+                        orient:options.orient,
                         textStyle: {
                             color: "#fff"
                         }

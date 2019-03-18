@@ -30,5 +30,17 @@ export const num = data =>
     api.post("api/web/index.php?r=read-grade/num", data).then(res => res);
 export const online = data =>
     api.post("api/web/index.php?r=read-grade/online", data).then(res => res);
+// 年级---学生构成分析
+export const constitute = data =>
+    api.post("api/web/index.php?r=read-grade/constitute-analysis", data).then(res => res);
+//总成绩显著进步学生
+export const progress = data =>
+    api.post("api/web/index.php?r=read-grade/progress-student", data).then(res => res);
+// 单科分数段
+export const scale = data =>
+    api.post("api/web/index.php?r=discipline-analysis/single-scale", data).then(res => res);
+// 学科概要分析和单科年级平均分上下分析
+export const profile = data =>
+    api.post("api/web/index.php?r=discipline-analysis/profile", data).then(res => res);
 
 /*logout*/
