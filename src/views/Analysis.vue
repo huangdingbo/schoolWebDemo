@@ -72,7 +72,6 @@
                     this.right = res.list;
                     this.test = res.list[0].value;
                     this.testName = res.list[0].name;
-                    // this.refresh();
                 });
             },
             leftItem(command){
@@ -87,7 +86,6 @@
             rightItem(command){
                 this.test = command[0];
                 this.testName = command[1];
-                // this.refresh();
             }
         }
     }
