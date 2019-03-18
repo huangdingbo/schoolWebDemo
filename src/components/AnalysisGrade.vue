@@ -81,7 +81,6 @@
         },
         data() {
             return {
-
                 num:[],
                 pie:{
                     id:'pieChart',
