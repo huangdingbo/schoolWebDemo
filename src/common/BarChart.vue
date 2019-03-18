@@ -33,6 +33,7 @@
                     gridLeft: "5%",
                     gridRight: "5%",
                     legendLeft:'auto',
+                    legendTop:'auto',
                     orient:'horizontal',  //horizontal vertical
                     formatter: function (val) {
                     }, //X轴自定义axisLabel显示内容

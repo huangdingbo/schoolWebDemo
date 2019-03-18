@@ -18,6 +18,14 @@
                         "rgba(9,192,213,0.9)"],
                     center:['50%', '50%'],
                     radius: '75%',
+                    indicator: [
+                        { name: '销售', max: 6500},
+                        { name: '管理', max: 16000},
+                        { name: '信息技术', max: 30000},
+                        { name: '客服', max: 38000},
+                        { name: '研发', max: 52000},
+                        { name: '市场', max: 25000}
+                    ],
                     data:[
                         {
                             value : [4300, 10000, 28000, 35000, 50000, 19000],
@@ -34,6 +42,13 @@
         props:{
           option:{
           }
+        },
+        watch: {
+            "option.data"() {
+                this.init();
+            },
+            immediate: true,
+            deep: true
         },
         mounted() {
             this.init()
@@ -60,6 +75,7 @@
                         name: {
                             textStyle: {
                                 color: '#fff',
+                                fontSize:'16',
                                 // backgroundColor: '#999',
                                 borderRadius: 3,
                                 padding: [3, 5]
@@ -67,17 +83,10 @@
                         },
                         axisLine: {
                             lineStyle: {
-                                color: 'rgba(131,141,158,.1)',
+                                color: 'rgba(131,141,158,.3)',
                             },
                         },
-                        indicator: [
-                            { name: '销售', max: 6500},
-                            { name: '管理', max: 16000},
-                            { name: '信息技术', max: 30000},
-                            { name: '客服', max: 38000},
-                            { name: '研发', max: 52000},
-                            { name: '市场', max: 25000}
-                        ],
+                        indicator: options.indicator,
                         splitArea : {
                             show : false,
                             // areaStyle : {
@@ -88,7 +97,7 @@
                             show : true,
                             lineStyle : {
                                 width : 2,
-                                color : 'rgba(131,141,158,.1)', // 设置网格的颜色
+                                color : 'rgba(131,141,158,.3)', // 设置网格的颜色
                             },
                         },
                     },

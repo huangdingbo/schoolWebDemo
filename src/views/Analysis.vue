@@ -9,24 +9,87 @@
             </div>
         </div>
         <div class="analysis_cont">
-            <router-view></router-view>
+            <div class="grade_top">
+                <div class="grade_top">
+                    <div class="grade_subject">
+                        <el-dropdown trigger="click"  @command="leftItem" placement="bottom-start">
+                            <span class="el-dropdown-link">
+                                {{subjectName}}
+                            </span>
+                            <el-dropdown-menu slot="dropdown" >
+                                <el-dropdown-item v-for="(item,index) in left" :command="item.value" >{{item.name}}</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
+                    <div class="grade_title">总体概况</div>
+                    <div class="grade_test">
+                        <el-dropdown trigger="click"  @command="rightItem">
+                            <span class="el-dropdown-link">
+                                {{testName}}
+                            </span>
+                            <el-dropdown-menu slot="dropdown" >
+                                <el-dropdown-item v-for="(item,index) in right" :command="[item.value,item.name]">{{item.name}}</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <router-view :subject="subject" :test="test"></router-view>
         </div>
     </div>
 </template>
 
 <script>
+    import Vue from "vue";
+    import { Dropdown, DropdownMenu, DropdownItem } from "element-ui";
+    Vue.use(Dropdown);
+    Vue.use(DropdownMenu);
+    Vue.use(DropdownItem);
     export default {
         name: "Analysis",
         components: {
         },
         data() {
             return {
+                subjectName:'理科',
+                subject:1,
+                testName:'',
+                test:'',
+                left:[],
+                right:[],
             };
         },
         mounted() {
-
+            this.$api.left().then(res => {
+                this.left = res;
+            });
+            this.init()
         },
-        methods: {}
+        methods: {
+            init(){
+                this.$api.right({type:this.subject}).then(res => {
+                    this.right = res.list;
+                    this.test = res.list[0].value;
+                    this.testName = res.list[0].name;
+                    // this.refresh();
+                });
+            },
+            leftItem(command){
+                this.subject= command;
+                if( command == 1){
+                    this.subjectName = '理科'
+                }else{
+                    this.subjectName = '文科'
+                }
+                this.init()
+            },
+            rightItem(command){
+                this.test = command[0];
+                this.testName = command[1];
+                // this.refresh();
+            }
+        }
     }
 </script>
 
@@ -39,5 +102,9 @@
     .analysis_list{display: flex;flex-direction: column;font-size: 24px;font-weight: bold;margin-top:30px}
     .analysis_item {display: flex;align-items: center;height:90px;justify-content: center;font-size: 32px}
     .analysis_item.router-link-active{color: #45daff}
-    .analysis_cont{width: 100%;padding:40px}
+    .analysis_cont{width: 100%;padding:40px 80px}
+    .grade_top{display: flex;text-align: center;align-items: center;justify-content: center}
+    .grade_subject{margin-right: 40px}
+    .grade_test{margin-left:40px;}
+    .grade_title{font-size: 46px;color:#fff;display:inline-block;border-bottom: 3px solid rgb( 110, 194, 255 );padding: 16px 0;}
 </style>

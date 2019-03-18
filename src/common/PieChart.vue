@@ -24,6 +24,9 @@
                         "#1aabb7",
                         "#45a55b"
                     ],
+                    legendLeft:'auto',
+                    legendTop:'auto',
+                    orient:'horizontal',  //horizontal vertical
                     seriesName: "",
                     radius: ["40%", "70%"],
                     center: ["50%", "50%"],
@@ -86,6 +89,7 @@
                     },
                     legend: {
                         left: options.legendLeft,
+                        top: options.legendTop,
                         orient: options.orient,
                         textStyle: {
                             color: "#fff"

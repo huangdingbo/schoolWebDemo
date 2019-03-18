@@ -36,6 +36,9 @@ export const constitute = data =>
 //总成绩显著进步学生
 export const progress = data =>
     api.post("api/web/index.php?r=read-grade/progress-student", data).then(res => res);
+// 本次考试-上次考试年级各科均分
+export const divide = data =>
+    api.post("api/web/index.php?r=read-grade/divide-more", data).then(res => res);
 // 单科分数段
 export const scale = data =>
     api.post("api/web/index.php?r=discipline-analysis/single-scale", data).then(res => res);

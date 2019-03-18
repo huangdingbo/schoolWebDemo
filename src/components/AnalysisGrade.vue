@@ -1,29 +1,6 @@
 <template>
     <div class="grade">
-        <div class="grade_top">
-            <div class="grade_subject">
-                <el-dropdown trigger="click"  @command="leftItem" placement="bottom-start">
-                    <span class="el-dropdown-link">
-                        {{subjectName}}
-                    </span>
-                    <el-dropdown-menu slot="dropdown" >
-                        <el-dropdown-item v-for="(item,index) in left" :command="item.value" >{{item.name}}</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </div>
-            <div class="grade_title">总体概况</div>
-            <div class="grade_test">
-                <el-dropdown trigger="click"  @command="rightItem">
-                    <span class="el-dropdown-link">
-                        {{testName}}
-                    </span>
-                    <el-dropdown-menu slot="dropdown" >
-                        <el-dropdown-item v-for="(item,index) in right" :command="[item.value,item.name]">{{item.name}}</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </div>
-            <div></div>
-        </div>
+
         <div class="grade_cont">
             <div class="grade_left">
                 <div class="grade_total">
@@ -40,15 +17,31 @@
                     </div>
                 </div>
                 <div class="grade_online">
+                    <div class="title_small">上线情况</div>
                     <pie-chart :option="pie"></pie-chart>
                 </div>
                 <div class="grade_from">
+                    <div class="title_small">学生构成分析</div>
                     <bar-chart :option="bar"></bar-chart>
                 </div>
             </div>
             <div class="grade_right">
                 <div class="grade_student">
-
+                    <div class="title_small">总分成绩显著进步学生名单</div>
+                    <div class="list">
+                        <div class="list_title">
+                            <div class="list_item">姓名</div><div class="list_item">班级</div><div class="list_item">本次总分</div>
+                            <div class="list_item">本次排名</div><div class="list_item">变化名次</div>
+                        </div>
+                        <div class="list_cont" v-for="item in studentList.slice(0,10)" >
+                            <div class="list_item">{{item.name}}</div><div class="list_item">{{item.showName}}</div><div class="list_item">{{item.total}}</div>
+                            <div class="list_item">{{item.school_rank}}</div><div class="list_item">{{item.changeRank}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grade_avg">
+                    <div class="title_small">本次考试-上次考试年级各科均分</div>
+                    <radar-chart :option="radar"></radar-chart>
                 </div>
             </div>
         </div>
@@ -56,9 +49,11 @@
 </template>
 
 <script>
-    import Vue from "vue";
+
     import PieChart from "../common/PieChart"
     import BarChart from "../common/BarChart"
+    import RadarChart from "../common/RadarChart"
+    import Vue from "vue";
     import { Dropdown, DropdownMenu, DropdownItem } from "element-ui";
     Vue.use(Dropdown);
     Vue.use(DropdownMenu);
@@ -67,22 +62,32 @@
         name: "AnalysisLife",
         components: {
             PieChart,
-            BarChart
+            BarChart,
+            RadarChart
+        },
+        props:{
+            test:{},
+            subject:{},
+        },
+        watch: {
+            "test"() {
+                this.refresh();
+            },
+            "subject"(){
+                this.refresh();
+            },
+            immediate: true,
+            deep: true
         },
         data() {
             return {
-                subjectName:'理科',
-                subject:1,
-                testName:'',
-                test:'',
-                left:[],
-                right:[],
+
                 num:[],
                 pie:{
                     id:'pieChart',
                     height:'280px',
                     orient:'',
-
+                    legendTop:'10%',
                     data:[]
                 },
                 bar:{
@@ -90,25 +95,17 @@
                     height:'280px',
                     data:[]
                 },
+                radar:{
+                    id:'radarChart',
+                    indicator: [],
+                    data:[],
+                },
+                studentList:[],
             };
         },
         mounted() {
-            this.$api.left().then(res => {
-                this.left = res;
-            });
-            this.init()
-
         },
         methods: {
-            init(){
-                this.$api.right({type:this.subject}).then(res => {
-                    this.right = res.list;
-                    this.test = res.list[0].value;
-                    this.testName = res.list[0].name;
-                    this.refresh();
-
-                });
-            },
             refresh(){
                 this.$api.num({type:this.subject,testNum:this.test}).then(res => {
                     this.num = res;
@@ -122,23 +119,27 @@
                 });
                 this.$api.constitute({type:this.subject,testNum:this.test}).then(res => {
                     this.bar.data = res;
-                    console.log(res);
                 });
+                this.$api.progress({type:this.subject,testNum:this.test}).then(res => {
+                    this.studentList = res;
+                    console.log(this.studentList);
+                });
+                this.$api.divide({type:this.subject,testNum:this.test}).then(res => {
+                    this.radar.indicator=[];
+                    this.radar.data = [];
+                    let xx=[];
+                    let yy=[];
+                    for(let i in res.currentTestList){
+                        this.radar.indicator.push({max:res.currentTestList[i].maxNum,name:res.currentTestList[i].name})
+                        xx.push(res.currentTestList[i].avg)
+                    }
+                    for(let i in res.lastTestList){
+                        yy.push(res.lastTestList[i].avg)
+                    }
+                    this.radar.data=[{value:xx, name:'本次考试'},{value:yy,name:'上次考试'}]
+                })
             },
-            leftItem(command){
-                this.subject= command;
-                if( command == 1){
-                    this.subjectName = '理科'
-                }else{
-                    this.subjectName = '文科'
-                }
-                this.init()
-            },
-            rightItem(command){
-                this.test = command[0];
-                this.testName = command[1];
-                this.refresh();
-            }
+
         }
     }
 </script>
@@ -146,15 +147,17 @@
 <style scoped>
     @import "../css/dropdown.css";
 
-    .grade_top{display: flex;text-align: center;align-items: center;justify-content: center}
-    .grade_subject{margin-right: 40px}
-    .grade_test{margin-left:40px;}
-    .grade_title{font-size: 46px;color:#fff;display:inline-block;border-bottom: 3px solid rgb( 110, 194, 255 );padding: 16px 0;}
+
     .grade_total{width: 480px;}
     .cont{position:relative;margin-top:15px;border: 1px solid #1a4f6b;border-radius: 6px;background-color: rgba(7, 53, 79, 0.749);overflow: hidden}
     .wave{display:flex;position:absolute;bottom:0;left:0;animation:wave 4s linear infinite;-webkit-animation:wave 8s linear infinite;}
-    .grade_cont{display: flex}
+    .grade_cont{display: flex;justify-content: space-between}
     .grade_online{width: 480px;margin-top:30px;}
+    .list{color:#fff}
+    .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
+    .list_cont{display: flex;font-size: 20px;padding:5px 0;}
+    .list_item{width: 120px;}
+    .grade_avg{margin-top:30px;}
     @keyframes wave
     {
         0% {
