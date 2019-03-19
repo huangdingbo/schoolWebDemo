@@ -27,13 +27,16 @@
                     gridBottom: "10%",
                     gridLeft: "5%",
                     gridRight: "5%",
+                    legendTop:'auto',
+                    legendLeft:'auto',
                     txtWidth: "100px",
                     colorArray: ["#01dafe", "#58e569", "#f0a54a", "#c23531", "#cfb2a9"], //颜色
                     unit: "", //单位
-                    // data: [
+                    // data2: [
                     //     {lineName: 1,name:555, value: [4, 5, 6, 7]}, {lineName: 2,name:444, value: [2, 5, 8, 9]},
                     //     {lineName: 3,name:999, value: [1, 3, 6, 9]}, {lineName: 4,name:333, value: [4, 5, 8, 2,]}
                     //     ],// 数据格式
+                    moreLine:false,
                     data: [
                         {lineName: 1, name: 666, value: 1},
                         {lineName: 2, name: 777, value: 2},
@@ -59,7 +62,7 @@
         methods: {
             init() {
                 let options = Object.assign(this.lineData, this.option);
-                let lineData = {};
+                let lineData = [];
                 let xAxisData = [];
                 let value = [];
                 let markPoint = {};
@@ -123,21 +126,41 @@
                         }
                     };
                 }
-                for (let i = 0; i < options.data.length; i++) {
-                    let obj = options.data[i];
-                    xAxisData.push(obj.name);
-                    value.push(options.data[i].value);
+                if (options.moreLine){
+                    for (let i = 0; i < options.data.length; i++) {
+                        let obj = options.data[i];
+                        xAxisData.push(obj.name);
+                        lineData.push({
+                            type: "line",
+                            smooth: true,
+                            name:options.data[i].lineName,
+                            areaStyle: areaStyle,
+                            data: options.data[i].value,
+                            markPoint: markPoint,
+                            markLine: markLine,
+                            symbolSize: 12
+                        })
+                    }
+
                 }
-                lineData = {
-                    // name: obj.lineName,
-                    type: "line",
-                    smooth: true,
-                    areaStyle: areaStyle,
-                    data: value,
-                    markPoint: markPoint,
-                    markLine: markLine,
-                    symbolSize: 12
-                };
+                else{
+                    for (let i = 0; i < options.data.length; i++) {
+                        let obj = options.data[i];
+                        xAxisData.push(obj.name);
+                        value.push(options.data[i].value);
+                    }
+                    lineData = {
+                        // name: obj.lineName,
+                        type: "line",
+                        smooth: true,
+                        areaStyle: areaStyle,
+                        data: value,
+                        markPoint: markPoint,
+                        markLine: markLine,
+                        symbolSize: 12
+                    };
+                }
+
 
                 let myChart = eCharts.init(document.getElementById(options.id));
                 let option = {
@@ -154,7 +177,8 @@
                     color: options.colorArray,
                     legend: {
                         show: options.legend,
-                        right: 0,
+                        top:options.legendTop,
+                        left: options.legendLeft,
                         icon: "circle",
                         textStyle: {
                             color: "#fff"

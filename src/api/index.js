@@ -45,5 +45,15 @@ export const scale = data =>
 // 学科概要分析和单科年级平均分上下分析
 export const profile = data =>
     api.post("api/web/index.php?r=discipline-analysis/profile", data).then(res => res);
-
-/*logout*/
+// 本次考试各班均分排名
+export const avgrank = data =>
+    api.post("api/web/index.php?r=class-analysis/avg-rank", data).then(res => res);
+// 本次考试班级均分排名下钻
+export const historyavg = data =>
+    api.post("api/web/index.php?r=discipline-analysis/history-avg-rank", data).then(res => res);
+// 各班本科上线稳定行分析
+export const stable = data =>
+    api.post("api/web/index.php?r=class-analysis/stable", data).then(res => res);
+// 课程列表
+export const course = data =>
+    api.post("api/web/index.php?r=discipline-analysis/course-list", data).then(res => res);

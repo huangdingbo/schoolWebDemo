@@ -1,31 +1,29 @@
 <template>
     <div class="grade">
-
-        <div class="grade_cont">
-            <div class="grade_left">
-                <div class="grade_total">
-                    <div class="title_small">参考人数</div>
-                    <div class="cont">
-                        <div class="wave">
-                            <img src="../assets/grade/card_wave_bg.png">
-                            <img  src="../assets/grade/card_wave_bg.png">
-                        </div>
-                        <div class="cont_item" v-for="item in num">
-                            <div class="num">{{ item.value}}</div>
-                            <div class="optic">{{ item.name}}</div>
-                        </div>
+        <div class="left">
+            <div class="grade_total">
+                <div class="title_small">参考人数</div>
+                <div class="cont">
+                    <div class="wave">
+                        <img src="../assets/grade/card_wave_bg.png">
+                        <img  src="../assets/grade/card_wave_bg.png">
+                    </div>
+                    <div class="cont_item" v-for="item in num">
+                        <div class="num">{{ item.value}}</div>
+                        <div class="optic">{{ item.name}}</div>
                     </div>
                 </div>
-                <div class="grade_online">
-                    <div class="title_small">上线情况</div>
-                    <pie-chart :option="pie"></pie-chart>
-                </div>
-                <div class="grade_from">
-                    <div class="title_small">学生构成分析</div>
-                    <bar-chart :option="bar"></bar-chart>
-                </div>
             </div>
-            <div class="grade_right">
+            <div class="grade_online">
+                <div class="title_small">上线情况</div>
+                <pie-chart :option="pie"></pie-chart>
+            </div>
+            <div class="grade_from">
+                <div class="title_small">学生构成分析</div>
+                <bar-chart :option="bar"></bar-chart>
+            </div>
+        </div>
+        <div class="right">
                 <div class="grade_student">
                     <div class="title_small">总分成绩显著进步学生名单</div>
                     <div class="list">
@@ -44,7 +42,6 @@
                     <radar-chart :option="radar"></radar-chart>
                 </div>
             </div>
-        </div>
     </div>
 </template>
 
@@ -113,7 +110,7 @@
                 this.$api.num({type:this.subject,testNum:this.test}).then(res => {
                     this.num = res;
                 });
-                this.$api.online({type:this.subject,testNum:this.test}).then(res => {
+                this.$api.online({type:1,testNum:this.test}).then(res => {
                     this.pie.data=[
                         {value:res.zhongBenNum,name:'重本上线人数'},
                         {value:res.benkeNum,name:'本科上线人数'},
@@ -148,14 +145,12 @@
 </script>
 
 <style scoped>
-    @import "../css/dropdown.css";
 
-
-    .grade_total{width: 480px;}
+    .grade{display: flex;justify-content: space-between;margin-top:20px}
+    .left,.right{width: 640px}
     .cont{position:relative;margin-top:15px;border: 1px solid #1a4f6b;border-radius: 6px;background-color: rgba(7, 53, 79, 0.749);overflow: hidden}
     .wave{display:flex;position:absolute;bottom:0;left:0;animation:wave 4s linear infinite;-webkit-animation:wave 8s linear infinite;}
-    .grade_cont{display: flex;justify-content: space-between}
-    .grade_online{width: 480px;margin-top:30px;}
+    .grade_online{margin-top:30px;}
     .list{color:#fff}
     .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
     .list_cont{display: flex;font-size: 20px;padding:5px 0;}

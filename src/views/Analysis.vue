@@ -93,6 +93,7 @@
 
 <style scoped>
     @import '../css/list.css';
+    @import "../css/dropdown.css";
 
     .analysis{display: flex;width: 100%;height:100%;}
     .title{margin-top:40px}
