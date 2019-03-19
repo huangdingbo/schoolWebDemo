@@ -81,7 +81,7 @@
 
 <style scoped>
     @import "../css/dropdown.css";
-    .warning{display: flex;width: 100%;height:100%;}
+    .warning{display: flex;width: 100%;height:100%;background: url("../assets/bg.jpg");}
     .title{margin-top:40px}
     .warning_nav{width: 400px;height:100%;border-right:2px solid #0a5b85}
     .warning_list{display: flex;flex-direction: column;font-size: 24px;font-weight: bold;margin-top:30px}

@@ -95,7 +95,7 @@
     @import '../css/list.css';
     @import "../css/dropdown.css";
 
-    .analysis{display: flex;width: 100%;height:100%;}
+    .analysis{display: flex;width: 100%;height:100%; background: url("../assets/bg.jpg");}
     .title{margin-top:40px}
     .analysis_nav{width: 400px;height:100%;border-right:2px solid #0a5b85}
     .analysis_list{display: flex;flex-direction: column;font-size: 24px;font-weight: bold;margin-top:30px}

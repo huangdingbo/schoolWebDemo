@@ -48,6 +48,7 @@
         width: 100%;
         height: 100%;
         position: relative;
+        background: url("../assets/bg.jpg");
     }
 
     .filter_style{
