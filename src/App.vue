@@ -1,10 +1,6 @@
 <template>
     <div id="app">
-        <img
-                class="nav-switch"
-                src="./assets/home/home_icon_top_right.svg"
-                @click="navShow()"
-        />
+        <img class="nav-switch" src="./assets/home/home_icon_top_right.svg" @click="navShow()"/>
         <Nav :option="isShow" v-on:navTab="navTab"></Nav>
         <RouterView></RouterView>
     </div>
@@ -82,7 +78,6 @@
         color: #2c3e50;
         background: url("assets/bg.jpg");
     }
-
     .router-link-active,
     a {
         color: #fff;

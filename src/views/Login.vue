@@ -59,7 +59,7 @@ export default {
   height: 100%;
   background: url("../assets/login_bg.jpg");
   position: relative;
-    overflow-y: hidden;
+    z-index: 5;
 }
 .login_logo {
   width: 240px;
