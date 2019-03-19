@@ -59,7 +59,28 @@ export default new Router({
             meta: {
                 requireAuth: true
             },
-            component: () => import("./views/Warning.vue")
+            redirect: "/warning/total",
+            component: () => import("./views/Warning.vue"),
+            children:[
+                {
+                    path: "total",
+                    name: "total",
+                    // meta: { menu: 1 },
+                    component: () => import("./components/WarningTotal.vue")
+                },
+                {
+                    path: "beyond",
+                    name: "beyond",
+                    // meta: { menu: 2 },
+                    component: () => import("./components/WarningBeyond.vue")
+                },
+                {
+                    path: "poor",
+                    name: "poor",
+                    // meta: { menu: 2 },
+                    component: () => import("./components/WarningPoor.vue")
+                },
+            ]
         }
     ]
 });

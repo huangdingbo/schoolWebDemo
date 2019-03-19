@@ -57,3 +57,32 @@ export const stable = data =>
 // 课程列表
 export const course = data =>
     api.post("api/web/index.php?r=discipline-analysis/course-list", data).then(res => res);
+
+
+// 预警工作台
+export const work = data =>
+    api.post("api/web/index.php?r=warning-index/warning-work", data).then(res => res);
+// 当前预警、总预警、预警数/次
+export const header = data =>
+    api.post("api/web/index.php?r=warning-index/header", data).then(res => res);
+// 年级列表
+export const gradelist = data =>
+    api.post("api/web/index.php?r=warning-index/grade-list", data).then(res => res);
+// 班级列表
+export const classlist = data =>
+    api.post("api/web/index.php?r=warning-index/class-list", data).then(res => res);
+// 高危学生预警
+export const risk = data =>
+    api.post("api/web/index.php?r=warning-index/high-risk", data).then(res => res);
+// 预警类型分析
+export const warningtype = data =>
+    api.post("api/web/index.php?r=warning-index/warning-type", data).then(res => res);
+// 近十次考试预警发展趋势
+export const warningdevelop = data =>
+    api.post("api/web/index.php?r=warning-index/warning-develop", data).then(res => res);
+// 五大类型预警统计
+export const statistical = data =>
+    api.post("api/web/index.php?r=warning-index/warning-statistical", data).then(res => res);
+
+
+
