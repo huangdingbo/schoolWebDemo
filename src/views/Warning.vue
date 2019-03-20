@@ -22,8 +22,19 @@
                     </el-dropdown>
                 </div>
                 <div class="warning_topic">监控预警总体情况</div>
+                <div class="warning_type">
+                    <el-dropdown trigger="click"  @command="typeSel" placement="bottom-start">
+                            <span class="el-dropdown-link">
+                                <!--{{subjectName}}-->
+                                学生类型
+                            </span>
+                        <el-dropdown-menu slot="dropdown" >
+                            <el-dropdown-item v-for="item in typeList" :command="item.value" >{{item.name}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
             </div>
-            <router-view></router-view>
+            <router-view :studentType="studentType" :grade="grade"></router-view>
         </div>
         <div class="warning_work">
             <div class="work_title">预警工作台</div>
@@ -51,8 +62,11 @@
         },
         data() {
             return {
+                studentType:'',
+                grade:'',
                 list:[],
                 gradeList:[],
+                typeList:[],
             };
         },
         mounted() {
@@ -64,16 +78,19 @@
                     this.list = res.list;
                 });
                 this.$api.gradelist().then(res => {
-                    console.log(res);
                     this.gradeList = res.list;
+                    this.grade = res.list[0].value
                 });
-                this.$api.gradelist().then(res => {
-                    console.log(res);
-                    this.gradeList = res.list;
+                this.$api.left().then(res => {
+                    this.typeList = res;
+                    this.studentType = res[0].value
                 });
             },
-            gradeSel(){
-
+            gradeSel(command){
+                this.grade = command
+            },
+            typeSel(command){
+                this.studentType = command
             },
         }
     }
@@ -89,6 +106,7 @@
     .warning_cont{width: 1200px;}
     .warning_title{display: flex;align-items: center;justify-content: center;margin-top:40px;}
     .warning_grade{margin-right:30px;}
+    .warning_type{margin-left:30px;}
     .warning_topic{font-size: 46px;color:#fff;display:inline-block;border-bottom: 3px solid rgb( 110, 194, 255 );}
     .warning_work{width: 360px;background: rgba( 1, 16, 29, 0.851 );border-left:2px solid #0a5b85;padding:40px 0 0 20px;}
     .work_title{font-size: 26px;text-shadow: 0 0 20px #145f87, 0 0 20px #145f87, 0 0 20px #145f87;font-weight: bold;color: #d6e9ff;text-align: left}

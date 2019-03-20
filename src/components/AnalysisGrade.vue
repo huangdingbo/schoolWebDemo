@@ -102,7 +102,6 @@
         mounted() {
             if(this.test){
                 this.refresh()
-
             }
         },
         methods: {
