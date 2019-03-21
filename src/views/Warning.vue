@@ -14,10 +14,21 @@
                     <el-dropdown trigger="click"  @command="gradeSel" placement="bottom-start">
                             <span class="el-dropdown-link">
                                 <!--{{subjectName}}-->
-                                年级
+                                年级选择
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in gradeList" :command="item.value" >{{item.name}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+                <div class="warning_grade" v-if="show">
+                    <el-dropdown trigger="click"  @command="classSel" placement="bottom-start">
+                            <span class="el-dropdown-link">
+                                <!--{{subjectName}}-->
+                                班级选择
+                            </span>
+                        <el-dropdown-menu slot="dropdown" >
+                            <el-dropdown-item v-for="item in classList" :command="item.value" >{{item.name}}</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
@@ -33,8 +44,18 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
+                <div class="warning_type" v-if="show">
+                    <el-dropdown trigger="click"  @command="test">
+                            <span class="el-dropdown-link">
+                                考试选择
+                            </span>
+                        <el-dropdown-menu slot="dropdown" >
+                            <el-dropdown-item v-for="(item,index) in testList" :command="item.value">{{item.name}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
             </div>
-            <router-view :studentType="studentType" :grade="grade"></router-view>
+            <router-view :studentType="studentType" :grade="grade" :classVal="classVal" :testVal="testVal"></router-view>
         </div>
         <div class="warning_work">
             <div class="work_title">预警工作台</div>
@@ -50,6 +71,7 @@
 </template>
 
 <script>
+
     import Vue from "vue";
     import { Dropdown, DropdownMenu, DropdownItem } from "element-ui";
     Vue.use(Dropdown);
@@ -62,15 +84,51 @@
         },
         data() {
             return {
-                studentType:'',
                 grade:'',
+                classVal:'',
+                studentType:'',
+                testVal:'',
                 list:[],
                 gradeList:[],
+                classList:[],
                 typeList:[],
+                testList:[],
+                show:false
             };
         },
+        watch:{
+            $route(to, from) {
+
+                if(this.$route.path!='/warning/total'){
+                    this.show=true;
+                }else{
+                    this.show=false
+                }
+            }
+
+        },
         mounted() {
-            this.init()
+            this.init();
+            if(this.$route.path!='/warning/total'){
+                this.show=true;
+            }else{
+                this.show=false
+            }
+            switch (this.$route.path) {
+                case '/warning/total':
+                    this.title = '监控预警总体情况';
+                    break;
+                case '/warning/beyond':
+                    break;
+                case '/warning/poor':
+                    break;
+                // case '/warning/total':
+                //     break;
+                // case '/warning/total':
+                //     break;
+                // case '/warning/total':
+                //     break
+            }
         },
         methods: {
             init(){
@@ -83,14 +141,28 @@
                 });
                 this.$api.left().then(res => {
                     this.typeList = res;
-                    this.studentType = res[0].value
+                    this.studentType = res[0].value;
+                    this.$api.right({type:this.studentType}).then(res => {
+                        this.testList = res.list;
+                        this.school =this.testList[0].value ;
+                    });
                 });
+                this.$api.classlist().then(res => {
+                    this.classList = res.list;
+                });
+
             },
             gradeSel(command){
                 this.grade = command
             },
             typeSel(command){
                 this.studentType = command
+            },
+            classSel(command){
+                this.classVal = command
+            },
+            test(command){
+                this.testVal = command
             },
         }
     }
@@ -103,14 +175,14 @@
     .warning_nav{width: 400px;height:100%;border-right:2px solid #0a5b85}
     .warning_list{display: flex;flex-direction: column;font-size: 24px;font-weight: bold;margin-top:30px}
     .warning_item{display: flex;align-items: center;height:90px;justify-content: center;font-size: 32px}
-    .warning_cont{width: 1200px;}
-    .warning_title{display: flex;align-items: center;justify-content: center;margin-top:40px;}
+    .warning_cont{width: 1200px;padding:40px}
+    .warning_title{display: flex;align-items: center;justify-content: center;}
     .warning_grade{margin-right:30px;}
     .warning_type{margin-left:30px;}
     .warning_topic{font-size: 46px;color:#fff;display:inline-block;border-bottom: 3px solid rgb( 110, 194, 255 );}
-    .warning_work{width: 360px;background: rgba( 1, 16, 29, 0.851 );border-left:2px solid #0a5b85;padding:40px 0 0 20px;}
+    .warning_work{width: 360px;background: rgba( 1, 16, 29, 0.851 );border-left:2px solid #0a5b85;padding:80px 0 0 20px;}
     .work_title{font-size: 26px;text-shadow: 0 0 20px #145f87, 0 0 20px #145f87, 0 0 20px #145f87;font-weight: bold;color: #d6e9ff;text-align: left}
-    .work_list{height:600px;overflow: auto;margin-top:30px;}
+    .work_list{height:800px;overflow: auto;margin-top:30px;}
     .work_item{padding:10px 0;font-size: 20px;color:#fff;border-top:2px solid #2a3c48}
     .name{display: flex;align-items: center;justify-content: space-around;font-size: 18px;padding:10px 0}
     .btn{border: 1px solid #2a3c48;font-size: 16px;padding:2px 5px;border-radius: 5px;background-color: #162736;cursor: pointer}

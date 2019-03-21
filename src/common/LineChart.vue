@@ -202,6 +202,11 @@
                                 fontSize: options.fontSize,
                                 baseline: "top",
                                 width: options.txtWidth
+                            },
+                            formatter:function (params) {
+                                if(params.length > 4){
+                                    return params.slice(0,4) +'...'
+                                }
                             }
                         },
                         axisLine: {
