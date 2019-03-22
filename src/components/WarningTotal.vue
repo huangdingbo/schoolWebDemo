@@ -18,8 +18,8 @@
                 </div>
             </div>
             <div class="lamp_item">
-                <img class="lamp_bg" src="../assets/warning/warn_red_bg.png">
-                <img class="lamp_light" src="../assets/warning/warn_red_light.png">
+                <img class="lamp_bg" src="../assets/warning/warn_blue_bg.png">
+                <img class="lamp_light" src="../assets/warning/warn_blue_light.png">
                 <div class="lamp_info">
                     <div class="lamp_info_num">{{lamp.avg}}</div>
                     <div class="lamp_info_name">预警数/次</div>
@@ -70,17 +70,17 @@
         },
         watch: {
             grade(){
-                if(this.studentType){
-                    this.refresh();
+                if(this.grade && this.studentType ){
+                    this.refresh()
                 }
             },
             studentType(){
-                if(this.grade){
-                    this.refresh();
+                if(this.grade && this.studentType ){
+                    this.refresh()
                 }
             },
-            immediate: true,
-            deep: true
+            // immediate: true,
+            // deep: true
         },
         data() {
             return {

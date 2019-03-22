@@ -35,22 +35,19 @@ export default new Router({
                 {
                     path: "grade",
                     name: "grade",
-                    // meta: { menu: 1 },
                     component: () => import("./components/AnalysisGrade.vue")
                 },
                 {
                     path: "class",
                     name: "class",
-                    // meta: { menu: 2 },
                     component: () => import("./components/AnalysisClass.vue")
                 },
                 {
                     path: "subject",
                     name: "subject",
-                    // meta: { menu: 3 },
                     component: () => import("./components/AnalysisSubject.vue")
+                },
 
-                }
             ]
         },
         {
@@ -80,6 +77,21 @@ export default new Router({
                     // meta: { menu: 2 },
                     component: () => import("./components/WarningPoor.vue")
                 },
+                {
+                    path: "partial",
+                    name: "partial",
+                    component: () => import("./components/WarningPartial.vue")
+                },
+                {
+                    path: "below",
+                    name: "below",
+                    component: () => import("./components/WarningBelow.vue")
+                },
+                {
+                    path: "decline",
+                    name: "decline",
+                    component: () => import("./components/WarningDecline.vue")
+                }
             ]
         }
     ]

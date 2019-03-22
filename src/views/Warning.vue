@@ -6,6 +6,9 @@
                 <router-link to="/warning/total" class="warning_item">监控预警总体情况</router-link>
                 <router-link to="/warning/beyond" class="warning_item">临界学生预警</router-link>
                 <router-link to="/warning/poor" class="warning_item">学困学生预警</router-link>
+                <router-link to="/warning/partial" class="warning_item">偏科学生预警</router-link>
+                <router-link to="/warning/below" class="warning_item">不合格学生预警</router-link>
+                <router-link to="/warning/decline" class="warning_item">成绩排名下滑学生预警</router-link>
             </div>
         </div>
         <div class="warning_cont">
@@ -32,7 +35,7 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
-                <div class="warning_topic">监控预警总体情况</div>
+                <div class="warning_topic">{{this.title}}</div>
                 <div class="warning_type">
                     <el-dropdown trigger="click"  @command="typeSel" placement="bottom-start">
                             <span class="el-dropdown-link">
@@ -84,6 +87,8 @@
         },
         data() {
             return {
+                title:{},
+
                 grade:'',
                 classVal:'',
                 studentType:'',
@@ -93,44 +98,49 @@
                 classList:[],
                 typeList:[],
                 testList:[],
-                show:false
+                show:false,
             };
         },
         watch:{
-            $route(to, from) {
+            $route(to,from) {
+                this.reTitle();
 
-                if(this.$route.path!='/warning/total'){
-                    this.show=true;
-                }else{
-                    this.show=false
-                }
+
             }
 
         },
         mounted() {
             this.init();
-            if(this.$route.path!='/warning/total'){
-                this.show=true;
-            }else{
-                this.show=false
-            }
-            switch (this.$route.path) {
-                case '/warning/total':
-                    this.title = '监控预警总体情况';
-                    break;
-                case '/warning/beyond':
-                    break;
-                case '/warning/poor':
-                    break;
-                // case '/warning/total':
-                //     break;
-                // case '/warning/total':
-                //     break;
-                // case '/warning/total':
-                //     break
-            }
+            this.reTitle();
         },
         methods: {
+            reTitle(){
+                if(this.$route.path!='/warning/total'){
+                    this.show=true;
+                }else{
+                    this.show=false
+                }
+                switch (this.$route.path) {
+                    case '/warning/total':
+                        this.title = '监控预警总体情况';
+                        break;
+                    case '/warning/beyond':
+                        this.title = '临界学生预警';
+                        break;
+                    case '/warning/poor':
+                        this.title = '学困学生预警';
+                        break;
+                    case '/warning/partial':
+                        this.title = '偏科学生预警';
+                        break;
+                    case '/warning/below':
+                        this.title = '不合格学生预警';
+                        break;
+                    case '/warning/decline':
+                        this.title = '成绩排名下滑学生预警';
+                        break
+                }
+            },
             init(){
                 this.$api.work().then(res => {
                     this.list = res.list;
