@@ -52,7 +52,6 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-
   "lint-staged": {
     "*.js": [
       "vue-cli-service lint",

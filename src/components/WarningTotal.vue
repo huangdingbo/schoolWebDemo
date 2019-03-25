@@ -87,6 +87,7 @@
                 lamp:{},
                 list:[],
                 pie:{
+
                     id:'pie-chart',
                     height:'300px',
                     radius:  "70%",
