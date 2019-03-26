@@ -88,7 +88,6 @@
         data() {
             return {
                 title:{},
-
                 grade:'',
                 classVal:'',
                 studentType:'',
@@ -104,10 +103,7 @@
         watch:{
             $route(to,from) {
                 this.reTitle();
-
-
             }
-
         },
         mounted() {
             this.init();
