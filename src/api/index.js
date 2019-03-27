@@ -84,5 +84,6 @@ export const warningdevelop = data =>
 export const statistical = data =>
     api.post("api/web/index.php?r=warning-index/warning-statistical", data).then(res => res);
 
-
+export const detail = data =>
+    api.post("api/web/index.php?r=warning-index/warning-detail", data).then(res => res);
 

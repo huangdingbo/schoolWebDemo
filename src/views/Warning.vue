@@ -64,23 +64,82 @@
             <div class="work_title">预警工作台</div>
             <div class="work_list">
                 <div class="work_item" v-for="item in list">
-                    <div class="name"><img src="../assets/warning/warn_badge_red.png">{{item.name}}<div class="btn" :data-id="item.id">查看详情</div></div>
+                    <div class="name"><img src="../assets/warning/warn_badge_red.png">{{item.name}}<div class="btn"  @click="workDetail(item.id)">查看详情</div></div>
                     <div class="info">{{item.value}}</div>
                 </div>
             </div>
-            <div class="work_btn">查看全部</div>
+
+            <div class="work_btn" @click="seeAll()">查看全部</div>
         </div>
+
+        <el-dialog title="预警工作台"  :visible="allDialog"   :append-to-body="true" width="1200px" @close="allDialog = false">
+
+        </el-dialog>
+        <el-dialog title="预警详情"  :visible="personDialog"   :append-to-body="true" width="600px" @close="personDialog = false">
+            <div class="list">
+                <div class="list_item">姓名：{{detail.scoreInfo.name}}</div><div class="list_item">学号：{{detail.scoreInfo.student_id}}</div>
+                <div class="list_item">考号：{{detail.scoreInfo.cand_id}}</div><div class="list_item">考试名：{{detail.scoreInfo.test_name}}</div>
+                <div class="list_item">考试编号：{{detail.scoreInfo.test_num}}</div><div class="list_item">年级：{{detail.scoreInfo.grade}}</div>
+                <div class="list_item">班级：{{detail.scoreInfo.banji}}</div><div class="list_item">考场：{{detail.scoreInfo.test_room}}</div>
+                <div class="list_item">考场位置：{{detail.scoreInfo.location}}</div><div class="list_item">座位号：{{detail.scoreInfo.seat_num}}</div>
+            </div>
+            <div class="score">
+                <div class="score_item">
+                    <div class="score_name">语文</div>
+                    <div class="score_val">{{detail.scoreInfo.chinese}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">数学</div>
+                    <div class="score_val">{{detail.scoreInfo.math}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">外语</div>
+                    <div class="score_val">{{detail.scoreInfo.english}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">物理</div>
+                    <div class="score_val">{{detail.scoreInfo.physics}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">化学</div>
+                    <div class="score_val">{{detail.scoreInfo.chemistry}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">生物</div>
+                    <div class="score_val">{{detail.scoreInfo.biology}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">总分</div>
+                    <div class="score_val">{{detail.scoreInfo.total}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">班级排名</div>
+                    <div class="score_val">{{detail.scoreInfo.class_rank}}</div>
+                </div>
+                <div class="score_item">
+                    <div class="score_name">校级排名</div>
+                    <div class="score_val">{{detail.scoreInfo.school_rank}}</div>
+                </div>
+            </div>
+            <div class="information">
+                <div class="information_item">预警类型：{{detail.warningInfo.type}}</div>
+                <div class="information_item">预警考试：{{detail.warningInfo.warning_test}}</div>
+                <div class="information_item">预警说明：{{detail.warningInfo.content}}</div>
+                <div class="information_item">预警状态：{{detail.warningInfo.status}}</div>
+                <div class="information_item" v-show="detail.warningInfo.dine">预警学科：{{detail.warningInfo.dine}}</div>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
 <script>
 
     import Vue from "vue";
-    import { Dropdown, DropdownMenu, DropdownItem } from "element-ui";
+    import { Dropdown, DropdownMenu, DropdownItem,Dialog } from "element-ui";
     Vue.use(Dropdown);
     Vue.use(DropdownMenu);
     Vue.use(DropdownItem);
-
+    Vue.use(Dialog);
     export default {
         name: "Warning",
         components: {
@@ -98,6 +157,13 @@
                 typeList:[],
                 testList:[],
                 show:false,
+                personDialog:false,
+                allDialog:false,
+                detail:{
+                    scoreInfo:'',
+                    warningInfo:'',
+                },
+
             };
         },
         watch:{
@@ -150,7 +216,6 @@
                     this.studentType = res[0].value;
                     this.$api.right({type:this.studentType}).then(res => {
                         this.testList = res.list;
-                        this.school =this.testList[0].value ;
                     });
                 });
                 this.$api.classlist().then(res => {
@@ -170,12 +235,22 @@
             test(command){
                 this.testVal = command
             },
+            workDetail(id){
+                this.personDialog = true;
+                this.$api.detail({id:id}).then(res => {
+                    this.detail = res;
+                });
+            },
+            seeAll(){
+
+            }
         }
     }
 </script>
 
 <style scoped>
     @import "../css/dropdown.css";
+    @import "../css/dialog.css";
     .warning{display: flex;width: 100%;height:100%;background: url("../assets/bg.jpg");}
     .title{margin-top:40px}
     .warning_nav{width: 400px;height:100%;border-right:2px solid #0a5b85}
@@ -194,4 +269,11 @@
     .btn{border: 1px solid #2a3c48;font-size: 16px;padding:2px 5px;border-radius: 5px;background-color: #162736;cursor: pointer}
     .work_btn{color: #fff;font-weight: bold;background-color: #1373d1;border-radius: 4px;font-size: 20px;width: 180px;display: inline-block;
         padding:5px 0;margin-top:20px;cursor: pointer}
+
+    .list{display: flex;flex-wrap: wrap;}
+    .list_item{width: 50%;padding: 5px 0}
+    .score{display: flex;margin-top:20px;padding-top:20px;border-top:1px solid;justify-content: space-around}
+    .score_item{text-align: center}
+    .information{margin-top:20px;padding-top:20px;border-top:1px solid;}
+    .information_item{padding:5px 0}
 </style>

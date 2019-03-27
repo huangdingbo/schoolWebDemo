@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import axios from 'axios';
 import * as api from "./api";
+import 'element-ui/lib/theme-chalk/index.css';
 import {getCookie} from "./plugins/cookie";
 
 import Qs from 'qs'
