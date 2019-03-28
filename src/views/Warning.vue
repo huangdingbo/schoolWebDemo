@@ -163,7 +163,9 @@
                     scoreInfo:'',
                     warningInfo:'',
                 },
+                all:{
 
+                }
             };
         },
         watch:{
@@ -242,7 +244,10 @@
                 });
             },
             seeAll(){
-
+                this.allDialog = true;
+                this.$api.all().then(res => {
+                    this.all = res.list;
+                });
             }
         }
     }

@@ -87,3 +87,6 @@ export const statistical = data =>
 export const detail = data =>
     api.post("api/web/index.php?r=warning-index/warning-detail", data).then(res => res);
 
+export const all = data =>
+    api.post("api/web/index.php?r=warning-index/warning-all", data).then(res => res);
+
