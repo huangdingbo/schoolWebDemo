@@ -1,5 +1,10 @@
 <template>
-    <div :id="option.id" :style="{ height : option.height ? option.height:radarData.height}"></div>
+    <div :id="option.id"
+         :style="{
+            height : option.height ? option.height:radarData.height,
+            width: option.width ? option.height : GaugeData.width
+        }">
+    </div>
 </template>
 
 <script>
@@ -13,6 +18,7 @@
             return{
                 radarData:{
                     height:'400px',
+                    width:"400px",
                     color:["rgba(8,130,221,0.9)",
                         "rgba(255,208,107,0.9)",
                         "rgba(9,192,213,0.9)"],
@@ -36,7 +42,7 @@
                             name : '实际开销'
                         }
                         ]
-                }
+                },
                 }
         },
         props:{
@@ -51,7 +57,8 @@
             deep: true
         },
         mounted() {
-            this.init()
+            this.init();
+
         },
         methods: {
             init(){
@@ -124,6 +131,7 @@
                         data :options.data
                     }]
                 };
+                myChart.clear();
                 myChart.setOption(option);
             }
 

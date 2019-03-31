@@ -1,7 +1,7 @@
 <template>
     <div
             :id="option.id"
-            :style="{ height: option.height ? option.height : lineData.height }"
+            :style="{ height: option.height ? option.height : lineData.height, width: option.width ? option.height : GaugeData.width }"
     ></div>
 </template>
 
@@ -16,6 +16,7 @@
             return {
                 lineData: {
                     height: "200px",
+                    width:"240px",
                     fontSize: 14,
                     legend: true,
                     isArea: false,
@@ -43,7 +44,7 @@
                         {lineName: 3, name: 888, value: 3},
                         {lineName: 4, name: 999, value: 4}
                     ]
-                }
+                },
             };
         },
         props: {
@@ -53,6 +54,7 @@
             "option.data"() {
                 this.init();
             },
+
             immediate: true,
             deep: true
         },
@@ -123,7 +125,7 @@
                                     color: "rgba(79,242,240,0.3)"
                                 }
                             ])
-                        }
+                        },
                     };
                 }
                 if (options.moreLine){
@@ -247,6 +249,7 @@
                     },
                     series: lineData
                 };
+                myChart.clear();
                 myChart.setOption(option);
             }
         }

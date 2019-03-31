@@ -1,5 +1,6 @@
 <template>
-    <div :id="option.id" :style="{ height: option.height ? option.height : barData.height }"></div>
+    <div :id="option.id" :style="{ height: option.height ? option.height : barData.height,
+     width: option.width ? option.height : GaugeData.width}"></div>
 </template>
 
 <script>
@@ -13,6 +14,7 @@
             return {
                 barData: {
                     height: "200px",
+                    width:"100%",
                     color: [
                         "rgba(8,130,221,0.9)",
                         "rgba(255,208,107,0.9)",
@@ -43,7 +45,7 @@
                         {lineName: 3, name: 888, value: 3},
                         {lineName: 4, name: 999, value: 4}
                     ]
-                }
+                },
             };
         },
         props: {
@@ -146,7 +148,7 @@
                     },
                     series: series
                 };
-                myChart.clear(option);
+                myChart.clear();
                 myChart.setOption(option);
                 if(options.Xtype =='value'){
                     option.xAxis.type = 'value';

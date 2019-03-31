@@ -93,8 +93,10 @@
     }
 
     .title_small {
+        height: 10%;
         display: flex;
         vertical-align: middle;
+        align-items: center;
         color: #fff;
         font-size: 28px;
         margin: 0;

@@ -35,7 +35,7 @@ export default {
         title_offsetCenter: ["0", "50%"],
         detail_offsetCenter: ["0", "75%"],
         data: [{ value: 85, name: "及格率" }] //数据格式
-      }
+      },
     };
   },
   props: {
@@ -43,6 +43,7 @@ export default {
   },
   mounted() {
     this.init();
+
   },
   methods: {
     init: function() {
@@ -140,6 +141,7 @@ export default {
           }
         ]
       };
+      myChart.clear();
       myChart.setOption(option);
     }
   }

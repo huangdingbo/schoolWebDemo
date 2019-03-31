@@ -83,10 +83,10 @@ export const warningdevelop = data =>
 // 五大类型预警统计
 export const statistical = data =>
     api.post("api/web/index.php?r=warning-index/warning-statistical", data).then(res => res);
-
+// 个人详情
 export const detail = data =>
     api.post("api/web/index.php?r=warning-index/warning-detail", data).then(res => res);
-
+// 预警工作台-查看全部
 export const all = data =>
     api.post("api/web/index.php?r=warning-index/warning-all", data).then(res => res);
 

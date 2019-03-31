@@ -32,7 +32,7 @@
 
 <style scoped>
     .lamp{display: flex;justify-content: space-around}
-    .lamp_item{position: relative;display: flex;align-items: center;width: 250px;height: 190px;}
+    .lamp_item{position: relative;display: flex;align-items: center;width: 250px;height: 100%;}
     .lamp_light{position: absolute;left:30px;width: 92px}
     .lamp_bg{position: absolute;width: 150px;animation: rotate 2s linear infinite}
     .lamp_info{ position: absolute;left:110px; display: inline-block;color: #fff;vertical-align: middle;padding: 20px;font-size: 20px;}

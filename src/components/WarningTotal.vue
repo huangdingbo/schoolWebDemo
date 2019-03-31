@@ -43,11 +43,16 @@
             <div class="total_chart">
                 <div class="total_radar">
                     <div class="title_small">预警类型分析</div>
-                    <pie-chart :option="pie"></pie-chart>
+                    <div class="pieChart">
+                        <pie-chart :option="pie"></pie-chart>
+
+                    </div>
                 </div>
                 <div class="total_line">
                     <div class="title_small">近十次考试预警发展趋势</div>
-                    <line-chart :option="line"></line-chart>
+                    <div class="lineChart">
+                        <line-chart :option="line"></line-chart>
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,17 +92,19 @@
                 lamp:{},
                 list:[],
                 pie:{
-
                     id:'pie-chart',
-                    height:'300px',
-                    radius:  "70%",
+                    orient:'vertical',
+                    height:'100%',
+                    width:"100%",
+                    radius:"70%",
                     legendTop:'20',
                     center:['50%','55%'],
                     data:[]
                 },
                 line:{
                     id:'line-chart',
-                    height:'300px',
+                    height:'100%',
+                    width:"100%",
                     legendTop:'20',
                     data:[]
                 },
@@ -129,19 +136,26 @@
 </script>
 
 <style scoped>
-    .lamp{display: flex;justify-content: space-around}
-    .lamp_item{position: relative;display: flex;align-items: center;width: 250px;height: 190px;}
+    .total{height: 88%}
+    .total_cont{display: flex;justify-content: space-around;height: 80%}
+    .total_list{height: 100%;width: 45%}
+    .total_chart{height: 100%;width: 45%}
+    .total_radar{height: 50%;width: 100%}
+    .pieChart,.lineChart{height: 80%;width: 100%}
+    .total_radar .title_small{height: 20%}
+    .total_line{height: 50%;width: 100%}
+    .total_line .title_small{height: 20%}
+    .lamp{display: flex;justify-content: space-around;height: 20%}
+    .lamp_item{position: relative;display: flex;align-items: center;width: 250px;height: 100%;}
     .lamp_light{position: absolute;left:30px;width: 92px}
     .lamp_bg{position: absolute;width: 150px;animation: rotate 2s linear infinite}
     .lamp_info{ position: absolute;left:110px; display: inline-block;color: #fff;vertical-align: middle;padding: 20px;font-size: 20px;}
     .lamp_info_num{font-size: 32px;}
-    .total_cont{display: flex;justify-content: space-between}
-    .list{color:#fff;margin-top:20px;}
-    .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
-    .list_box{height:600px; overflow: auto}
+    .list{color:#fff;height: 90%}
+    .list_title{display: flex;align-items:center;font-size: 26px;color: #27a9ff;}
+    .list_box{height:88%; overflow: auto}
     .list_cont{display: flex;font-size: 20px;padding:5px 0;}
     .list_item{width: 120px;}
-    .total_radar{width: 600px;}
     @keyframes rotate
     {
         from {

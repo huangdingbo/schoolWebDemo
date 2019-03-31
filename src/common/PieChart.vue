@@ -1,7 +1,10 @@
 <template>
     <div
             :id="option.id"
-            :style="{ height: option.height ? option.height : pieData.height }"
+            :style="{
+                height: option.height ? option.height : pieData.height,
+                width: option.width ? option.height : GaugeData.width
+            }"
     ></div>
 </template>
 
@@ -15,7 +18,8 @@
         data() {
             return {
                 pieData: {
-                    height: "200px",
+                    height: "100%",
+                    width:"100%",
                     color: [
                         "#ffb55d",
                         "#ee7662",
@@ -54,7 +58,7 @@
                             {value: 234, name: "3"}
                         ]
                     }
-                }
+                },
             };
         },
         props: {
@@ -69,6 +73,7 @@
             "option.data"() {
                 this.init();
             },
+
             immediate: true,
             deep: true
         },

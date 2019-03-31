@@ -65,23 +65,37 @@
             <div class="work_list">
                 <div class="work_item" v-for="item in list">
                     <div class="name"><img src="../assets/warning/warn_badge_red.png">{{item.name}}<div class="btn"  @click="workDetail(item.id)">查看详情</div></div>
-                    <div class="info">{{item.value}}</div>
+                    <div class="value">{{item.value}}</div>
                 </div>
             </div>
 
-            <div class="work_btn" @click="seeAll()">查看全部</div>
+            <div class="work_btn" @click="seeAll()"><div class="work_button">查看全部</div></div>
         </div>
 
-        <el-dialog title="预警工作台"  :visible="allDialog"   :append-to-body="true" width="1200px" @close="allDialog = false">
+        <el-dialog title="预警工作台"  :visible="allDialog"   :append-to-body="true" width="1600px" @close="allDialog = false">
 
+            <div class="list">
+                <div class="list_title">
+                    <div class="list_item">考试</div><div class="list_item">年级</div><div class="list_item">班级</div>
+                    <div class="list_item">姓名</div><div class="list_item">学生类型</div><div class="list_item">预警类型</div>
+                    <div class="list_item" style="width: 300px;">预警说明</div><div class="list_item">预警状态</div>
+                </div>
+                <div class="list_box">
+                    <div class="list_cont" v-for="item in all" >
+                        <div class="list_item">{{item.test_name}}</div><div class="list_item">{{item.grade}}</div><div class="list_item">{{item.banji}}</div>
+                        <div class="list_item">{{item.name}}</div><div class="list_item">{{item.studentType}}</div><div class="list_item">{{item.type}}</div>
+                        <div class="list_item" style="width: 300px;">{{item.content}}</div><div class="list_item">{{item.status}}</div>
+                    </div>
+                </div>
+            </div>
         </el-dialog>
         <el-dialog title="预警详情"  :visible="personDialog"   :append-to-body="true" width="600px" @close="personDialog = false">
-            <div class="list">
-                <div class="list_item">姓名：{{detail.scoreInfo.name}}</div><div class="list_item">学号：{{detail.scoreInfo.student_id}}</div>
-                <div class="list_item">考号：{{detail.scoreInfo.cand_id}}</div><div class="list_item">考试名：{{detail.scoreInfo.test_name}}</div>
-                <div class="list_item">考试编号：{{detail.scoreInfo.test_num}}</div><div class="list_item">年级：{{detail.scoreInfo.grade}}</div>
-                <div class="list_item">班级：{{detail.scoreInfo.banji}}</div><div class="list_item">考场：{{detail.scoreInfo.test_room}}</div>
-                <div class="list_item">考场位置：{{detail.scoreInfo.location}}</div><div class="list_item">座位号：{{detail.scoreInfo.seat_num}}</div>
+            <div class="info">
+                <div class="info_item">姓名：{{detail.scoreInfo.name}}</div><div class="info_item">学号：{{detail.scoreInfo.student_id}}</div>
+                <div class="info_item">考号：{{detail.scoreInfo.cand_id}}</div><div class="info_item">考试名：{{detail.scoreInfo.test_name}}</div>
+                <div class="info_item">考试编号：{{detail.scoreInfo.test_num}}</div><div class="info_item">年级：{{detail.scoreInfo.grade}}</div>
+                <div class="info_item">班级：{{detail.scoreInfo.banji}}</div><div class="info_item">考场：{{detail.scoreInfo.test_room}}</div>
+                <div class="info_item">考场位置：{{detail.scoreInfo.location}}</div><div class="info_item">座位号：{{detail.scoreInfo.seat_num}}</div>
             </div>
             <div class="score">
                 <div class="score_item">
@@ -163,9 +177,9 @@
                     scoreInfo:'',
                     warningInfo:'',
                 },
-                all:{
+                all:[]
 
-                }
+
             };
         },
         watch:{
@@ -246,6 +260,7 @@
             seeAll(){
                 this.allDialog = true;
                 this.$api.all().then(res => {
+                    console.log(res)
                     this.all = res.list;
                 });
             }
@@ -258,25 +273,33 @@
     @import "../css/dialog.css";
     .warning{display: flex;width: 100%;height:100%;background: url("../assets/bg.jpg");}
     .title{margin-top:40px}
-    .warning_nav{width: 400px;height:100%;border-right:2px solid #0a5b85}
+    .warning_nav{width:20%;height:100%;border-right:2px solid #0a5b85}
+
     .warning_list{display: flex;flex-direction: column;font-size: 24px;font-weight: bold;margin-top:30px}
     .warning_item{display: flex;align-items: center;height:90px;justify-content: center;font-size: 32px}
-    .warning_cont{width: 1200px;padding:40px}
-    .warning_title{display: flex;align-items: center;justify-content: center;}
+    .warning_cont{width: 60%;}
+    .warning_title{display: flex;align-items: center;justify-content: center;height: 12%}
     .warning_grade{margin-right:30px;}
     .warning_type{margin-left:30px;}
     .warning_topic{font-size: 46px;color:#fff;display:inline-block;border-bottom: 3px solid rgb( 110, 194, 255 );}
-    .warning_work{width: 360px;background: rgba( 1, 16, 29, 0.851 );border-left:2px solid #0a5b85;padding:80px 0 0 20px;}
-    .work_title{font-size: 26px;text-shadow: 0 0 20px #145f87, 0 0 20px #145f87, 0 0 20px #145f87;font-weight: bold;color: #d6e9ff;text-align: left}
-    .work_list{height:800px;overflow: auto;margin-top:30px;}
-    .work_item{padding:10px 0;font-size: 20px;color:#fff;border-top:2px solid #2a3c48}
+
+    .warning_work{width:20%;background: rgba( 1, 16, 29, 0.851 );border-left:2px solid #0a5b85;}
+    .work_title{font-size: 26px;text-shadow: 0 0 20px #145f87, 0 0 20px #145f87, 0 0 20px #145f87;font-weight: bold;color: #d6e9ff;padding-left:30px;
+        display: flex;align-items: center;height: 10%}
+    .work_list{height:80%;overflow: auto;}
+    .work_item{padding:8px 0;font-size: 20px;color:#fff;border-top:2px solid #2a3c48}
     .name{display: flex;align-items: center;justify-content: space-around;font-size: 18px;padding:10px 0}
     .btn{border: 1px solid #2a3c48;font-size: 16px;padding:2px 5px;border-radius: 5px;background-color: #162736;cursor: pointer}
-    .work_btn{color: #fff;font-weight: bold;background-color: #1373d1;border-radius: 4px;font-size: 20px;width: 180px;display: inline-block;
-        padding:5px 0;margin-top:20px;cursor: pointer}
+    .work_btn{display: flex;align-items: center;justify-content: center;height: 10%}
+    .work_button{color: #fff;font-weight: bold;background-color: #1373d1;border-radius: 4px;font-size: 20px;width: 180px;  cursor: pointer;}
+    .list{color:#fff;margin-top:20px;}
+    .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
+    .list_box{height:600px; overflow: auto}
+    .list_cont{display: flex;font-size: 20px;padding:5px 0;}
+    .list_item{width: 160px;padding:0 10px}
 
-    .list{display: flex;flex-wrap: wrap;}
-    .list_item{width: 50%;padding: 5px 0}
+    .info{display: flex;flex-wrap: wrap;}
+    .info_item{width: 50%;padding: 5px 0}
     .score{display: flex;margin-top:20px;padding-top:20px;border-top:1px solid;justify-content: space-around}
     .score_item{text-align: center}
     .information{margin-top:20px;padding-top:20px;border-top:1px solid;}
