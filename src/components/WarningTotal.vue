@@ -139,12 +139,11 @@
     .total{height: 88%}
     .total_cont{display: flex;justify-content: space-around;height: 80%}
     .total_list{height: 100%;width: 45%}
+    .total_list .title_small{height: 10%}
     .total_chart{height: 100%;width: 45%}
     .total_radar{height: 50%;width: 100%}
     .pieChart,.lineChart{height: 80%;width: 100%}
-    .total_radar .title_small{height: 20%}
     .total_line{height: 50%;width: 100%}
-    .total_line .title_small{height: 20%}
     .lamp{display: flex;justify-content: space-around;height: 20%}
     .lamp_item{position: relative;display: flex;align-items: center;width: 250px;height: 100%;}
     .lamp_light{position: absolute;left:30px;width: 92px}

@@ -93,7 +93,7 @@
     }
 
     .title_small {
-        height: 10%;
+        height: 20%;
         display: flex;
         vertical-align: middle;
         align-items: center;
@@ -115,4 +115,6 @@
         width: 30px;
         height: 30px;
     }
+
+    .chart_box{height: 80%;width: 100%}
 </style>

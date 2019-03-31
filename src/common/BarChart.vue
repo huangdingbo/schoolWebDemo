@@ -1,6 +1,5 @@
 <template>
-    <div :id="option.id" :style="{ height: option.height ? option.height : barData.height,
-     width: option.width ? option.height : GaugeData.width}"></div>
+    <div :id="option.id" :style="{ height: option.height ? option.height : barData.height }"></div>
 </template>
 
 <script>

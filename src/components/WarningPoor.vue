@@ -1,8 +1,8 @@
 <template>
-    <div class="">
+    <div class="center">
         <warning-lamp :option="lamp"></warning-lamp>
-        <div class="total_cont">
-            <div class="total_list">
+        <div class="center_cont">
+            <div class="center_list">
                 <div class="title_small">贫困学生预警</div>
                 <div class="list">
                     <div class="list_title">
@@ -15,10 +15,11 @@
                     </div>
                 </div>
             </div>
-            <div class="total_chart">
-                <div class="total_line">
-                    <div class="title_small">临界学生近十次考试预警发展趋势</div>
+            <div class="center_chart">
+                <div class="title_small">临界学生近十次考试预警发展趋势</div>
+                <div class="chart_box">
                     <line-chart :option="line"></line-chart>
+
                 </div>
             </div>
         </div>
@@ -48,7 +49,7 @@
 
                 line:{
                     id:'line-chart',
-                    height:'300px',
+                    height:'100%',
                     legendTop:'20',
                     data:[]
                 },
@@ -96,19 +97,16 @@
 </script>
 
 <style scoped>
-    .total_cont{display: flex;justify-content: space-between;flex-direction: column}
-    .list{color:#fff;margin-top:20px;}
-    .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px;justify-content: space-between}
-    .list_box{height:280px; overflow: auto}
+    @import "../css/warning.css";
+
+    .center{height: 88%;width: 100%}
+    .center_cont{display: flex;justify-content: space-between;flex-direction: column;height: 80%;padding: 0 40px;}
+    .lamp{display: flex;justify-content: space-around;height: 20%}
+    .center_list{height: 60%}
+    .center_chart{height: 40%}
+    .list{color:#fff;height: 80%;}
+    .list_title{display: flex;font-size: 26px;color: #27a9ff;justify-content: space-between;height: 16%}
+    .list_box{height:84%; overflow: auto}
     .list_cont{display: flex;font-size: 20px;padding:5px 0;    justify-content: space-between;}
     .list_item{width: 120px;}
-    @keyframes rotate
-    {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
 </style>

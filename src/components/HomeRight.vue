@@ -2,15 +2,24 @@
     <div class="index-right">
         <div class="barChart">
             <div class="title_small">本次考试各班本科概况</div>
-            <BarChart :option="bar"></BarChart>
+            <div class="chartBox">
+                <BarChart :option="bar"></BarChart>
+
+            </div>
         </div>
         <div class="pieChart">
             <div class="title_small">本次考试各班重本分布</div>
-            <PieChart :option="pie"></PieChart>
+            <div class="chartBox">
+                <PieChart :option="pie"></PieChart>
+
+            </div>
         </div>
         <div class="lineChart">
             <div class="title_small">各年级考试本科上线率</div>
-            <LineChart :option="line"></LineChart>
+            <div class="chartBox">
+                <LineChart :option="line"></LineChart>
+
+            </div>
         </div>
     </div>
 </template>
@@ -31,7 +40,8 @@
             return {
                 bar: {
                     id:'bar-chart3',
-                    height: "240px",
+                    height:'100%',
+                    width:'100%',
                     Xtype: 'value',
                     Ytype: '',
                     XaxisLine:false,
@@ -43,11 +53,14 @@
                     id: "pie-chart",
                     roseType: "",
                     radius: "65%",
-                    height: "240px",
+                    height:'100%',
+                    width:'100%',
                     data: []
                 },
                 line: {
                     id: "line-chart",
+                    height:'100%',
+                    width:'100%',
                     data: [],
                 }
             };
@@ -69,13 +82,16 @@
 <style scoped>
     .index-right {
         position: absolute;
-        right: 20px;
-        width: 360px;
+        right: 1%;
+        width:20%;
+        height: 80%;
         top: 100px;
         border: 1px solid #19516f;
-        padding: 20px;
+        padding:1%;
         border-radius: 5px;
         background-color: rgba(3, 16, 23, 0.702);
         box-shadow: 0px 0px 10px 0 #7bd4fc inset;
     }
+    .barChart,.pieChart,.lineChart{height: 33%}
+    .chartBox{height: 80%}
 </style>

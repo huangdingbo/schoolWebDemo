@@ -1,6 +1,6 @@
 <template>
     <div class="index-left">
-        <div class="lineChart">
+        <div class="index_info">
             <div class="title_small">校园概况</div>
             <div class="cont">
                 <div class="cont_item">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="pieChart">
+        <div class="index_info">
             <div class="title_small">校园事件概况</div>
             <div class="cont">
                 <div class="cont_item">
@@ -52,9 +52,11 @@
                 </div>
             </div>
         </div>
-        <div class="barChart">
+        <div class="index_chart">
             <div class="title_small">校园高发事件TOP6</div>
-            <BarChart :option="bar"></BarChart>
+            <div class="barChart">
+                <BarChart :option="bar"></BarChart>
+            </div>
         </div>
     </div>
 </template>
@@ -82,9 +84,10 @@
                 },
                 bar: {
                     id: "bar-chart",
+                    height:'100%',
+                    width:'100%',
                     XaxisLine: false,
                     data: []
-                    // height: '240px'
                 }
             };
         },
@@ -112,18 +115,22 @@
 
     .index-left {
         position: absolute;
-        padding: 20px;
-        width: 360px;
+        padding: 1%;
+        width:20%;
+        height: 80%;
         top: 100px;
-        left: 20px;
+        left: 1%;
         border: 1px solid #19516f;
         border-radius: 5px;
         background-color: rgba(3, 16, 23, 0.702);
         box-shadow: 0px 0px 10px 0 #7bd4fc inset;
     }
+    .index_info{height:20%;width: 100%}
+    .index_info .cont{height: 80%}
     .svg_info{color:#fff;}
     .svg_list{
         display: flex;
     }
-
+    .index_chart{height: 30%}
+    .barChart{height: 80%}
 </style>

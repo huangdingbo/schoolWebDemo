@@ -28,10 +28,9 @@
 </script>
 
 <style scoped>
-    .index-center{position: absolute;top:100px;left:450px;width: 1000px;height:750px;display: flex;flex-wrap: wrap;align-items: center;justify-content: space-around;
+    .index-center{position: absolute;top:100px;left:24%;width: 52%;height:70%;display: flex;flex-wrap: wrap;align-items: center;justify-content: space-around;
         border: 1px solid #19516f;border-radius: 5px;background-color: rgba(3, 16, 23, 0.702);box-shadow: 0px 0px 10px 0 #7bd4fc inset;}
-    .center-box{display: flex;flex-direction: column;align-items: center;position: relative }
-    /*.center-box img{width:130px;height: 176px;margin-top:24px}*/
+    .center-box{display: flex;flex-direction: column;align-items: center;position: relative;width: 20% }
     .box_bg{width: 200px;height: 280px;z-index: 2;}
     .box{position: absolute;width: 146px;margin-top:20px;overflow: hidden}
     .box img{height: 150px;position: relative;left: -25%;}

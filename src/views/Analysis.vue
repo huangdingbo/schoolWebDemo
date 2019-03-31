@@ -9,7 +9,6 @@
             </div>
         </div>
         <div class="analysis_cont">
-            <div class="grade_top">
                 <div class="grade_top">
                     <div class="grade_subject">
                         <el-dropdown trigger="click"  @command="leftItem" placement="bottom-start">
@@ -33,7 +32,6 @@
                         </el-dropdown>
                     </div>
                 </div>
-            </div>
 
             <router-view :subject="subject" :test="test"></router-view>
         </div>
@@ -97,12 +95,12 @@
 
     .analysis{display: flex;width: 100%;height:100%; background: url("../assets/bg.jpg");}
     .title{margin-top:40px}
-    .analysis_nav{width: 400px;height:100%;border-right:2px solid #0a5b85}
+    .analysis_nav{width: 20%;height:100%;border-right:2px solid #0a5b85}
     .analysis_list{display: flex;flex-direction: column;font-size: 24px;font-weight: bold;margin-top:30px}
     .analysis_item {display: flex;align-items: center;height:90px;justify-content: center;font-size: 32px}
     .analysis_item.router-link-active{color: #45daff}
-    .analysis_cont{width: 100%;padding:40px 80px}
-    .grade_top{display: flex;text-align: center;align-items: center;justify-content: center}
+    .analysis_cont{width: 80%;height: 100%}
+    .grade_top{display: flex;text-align: center;align-items: center;justify-content: center;height: 20%}
     .grade_subject{margin-right: 40px}
     .grade_test{margin-left:40px;}
     .grade_title{font-size: 46px;color:#fff;display:inline-block;border-bottom: 3px solid rgb( 110, 194, 255 );padding: 16px 0;}

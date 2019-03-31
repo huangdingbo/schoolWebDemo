@@ -1,9 +1,8 @@
 <template>
     <div :id="option.id"
          :style="{
-            height : option.height ? option.height:radarData.height,
-            width: option.width ? option.height : GaugeData.width
-        }">
+            height : option.height ? option.height:radarData.height
+       }">
     </div>
 </template>
 

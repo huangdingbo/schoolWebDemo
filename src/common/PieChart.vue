@@ -2,9 +2,7 @@
     <div
             :id="option.id"
             :style="{
-                height: option.height ? option.height : pieData.height,
-                width: option.width ? option.height : GaugeData.width
-            }"
+                height: option.height ? option.height : pieData.height}"
     ></div>
 </template>
 

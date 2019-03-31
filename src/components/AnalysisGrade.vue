@@ -16,11 +16,15 @@
             </div>
             <div class="grade_online">
                 <div class="title_small">上线情况</div>
-                <pie-chart :option="pie"></pie-chart>
+                <div class="chart_box">
+                    <pie-chart :option="pie"></pie-chart>
+                </div>
             </div>
             <div class="grade_from">
                 <div class="title_small">学生构成分析</div>
-                <bar-chart :option="bar"></bar-chart>
+                <div class="chart_box">
+                 <bar-chart :option="bar"></bar-chart>
+                </div>
             </div>
         </div>
         <div class="right">
@@ -39,7 +43,10 @@
                 </div>
                 <div class="grade_avg">
                     <div class="title_small">本次考试-上次考试年级各科均分</div>
-                    <radar-chart :option="radar"></radar-chart>
+                    <div class="chart_box">
+                        <radar-chart :option="radar"></radar-chart>
+
+                    </div>
                 </div>
             </div>
     </div>
@@ -81,18 +88,22 @@
                 num:[],
                 pie:{
                     id:'pieChart',
-                    height:'280px',
+                    height:'100%',
+                    width:'100%',
                     orient:'',
                     legendTop:'10%',
                     data:[]
                 },
                 bar:{
                     id:'barChart',
-                    height:'280px',
+                    height:'100%',
+                    width:'100%',
                     data:[]
                 },
                 radar:{
                     id:'radarChart',
+                    height:'100%',
+                    width:'100%',
                     indicator: [],
                     data:[],
                 },
@@ -121,7 +132,6 @@
                 });
                 this.$api.progress({type:this.subject,testNum:this.test}).then(res => {
                     this.studentList = res;
-                    console.log(this.studentList);
                 });
                 this.$api.divide({type:this.subject,testNum:this.test}).then(res => {
                     this.radar.indicator=[];
@@ -145,16 +155,18 @@
 
 <style scoped>
 
-    .grade{display: flex;justify-content: space-between;margin-top:20px}
-    .left,.right{width: 640px}
-    .cont{position:relative;margin-top:15px;border: 1px solid #1a4f6b;border-radius: 6px;background-color: rgba(7, 53, 79, 0.749);overflow: hidden}
+    .grade{display: flex;justify-content: space-around;height: 80%}
+    .left,.right{width: 45%;height: 100%}
+    .grade_total{height: 30%}
+    .grade_student{height: 55%}
+    .grade_avg{height: 45%}
+    .cont{position:relative;border: 1px solid #1a4f6b;border-radius: 6px;background-color: rgba(7, 53, 79, 0.749);overflow: hidden;height: 80%}
     .wave{display:flex;position:absolute;bottom:0;left:0;animation:wave 4s linear infinite;-webkit-animation:wave 8s linear infinite;}
-    .grade_online{margin-top:30px;}
-    .list{color:#fff}
-    .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
+    .grade_online,.grade_from{height: 35%}
+    .list{color:#fff;height: 80%;overflow: auto}
+    .list_title{display: flex;font-size: 26px;color: #27a9ff;}
     .list_cont{display: flex;font-size: 20px;padding:5px 0;}
     .list_item{width: 120px;}
-    .grade_avg{margin-top:30px;}
     @keyframes wave
     {
         0% {

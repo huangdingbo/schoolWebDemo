@@ -3,7 +3,7 @@
     :id="option.id"
     :style="{
       height: option.height ? option.height : GaugeData.height,
-      width: option.width ? option.height : GaugeData.width
+
     }"
   ></div>
 </template>

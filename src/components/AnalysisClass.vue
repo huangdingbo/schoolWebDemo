@@ -6,11 +6,15 @@
                 </div>
                 <div class="grade_online">
                     <div class="title_small">本次考试上线情况</div>
-                    <bar-chart :option="bar"></bar-chart>
+                    <div class="chart_box">
+                        <bar-chart :option="bar"></bar-chart>
+                    </div>
                 </div>
                 <div class="grade_online">
                     <div class="title_small">学生构成分析</div>
-                    <bar-chart :option="bar"></bar-chart>
+                    <div class="chart_box">
+                        <bar-chart :option="bar"></bar-chart>
+                    </div>
                 </div>
 
             </div>
@@ -28,7 +32,10 @@
                 </div>
                 <div class="grade_line">
                     <div class="title_small">各班本科上线稳定行分析</div>
-                    <line-chart :option="line"></line-chart>
+                    <div class="chart_box">
+                        <line-chart :option="line"></line-chart>
+
+                    </div>
                 </div>
             </div>
     </div>
@@ -51,12 +58,14 @@
             return{
                 bar:{
                     id:'barChart',
-                    height:'280px',
+                    height:'100%',
+                    width:'100%',
                     data:[]
                 },
                 line:{
                     id:'lineChart',
-                    height:'360px',
+                    height:'100%',
+                    width:'100%',
                     legendLeft:'0',
                     legendTop:'20',
                     gridTop:'20%',
@@ -115,11 +124,14 @@
 </script>
 
 <style scoped>
-    .test{display: flex;margin-top:20px;}
-    .left,.right{width: 640px;}
-    .list{color:#fff;margin-top:20px;}
-    .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
+    .test{width:100%;height:80%;display: flex;justify-content: space-around}
+    .left,.right{width: 45%;height: 100%}
+    .grade_total{height: 30%}
+    .grade_online{height: 35%}
+    .grade_rank{height: 60%}
+    .grade_line{height: 40%}
+    .list{color:#fff;height: 80%;overflow: auto}
+    .list_title{display: flex;font-size: 26px;color: #27a9ff;}
     .list_cont{display: flex;font-size: 20px;padding:5px 0;}
     .list_item{width: 120px;}
-    .grade_line{margin-top:40px;}
 </style>

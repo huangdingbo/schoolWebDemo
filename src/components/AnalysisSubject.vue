@@ -1,22 +1,24 @@
 <template>
     <div class="subject">
         <div class="top">
-            <div class="title_small">学科概要分析</div>
-            <div class="list">
-                <div class="list_title">
-                    <div class="list_item">科目</div><div class="list_item">卷面分数</div><div class="list_item">平均分</div><div class="list_item">最高分</div>
-                    <div class="list_item">最低分</div><div class="list_item">难度系数</div><div class="list_item">	平均分以上</div><div class="list_item">平均分以上比列</div>
-                    <div class="list_item">平均分以下</div><div class="list_item">	平均分以下比列</div><div class="list_item"></div>
-                </div>
-                <div class="list_bom">
-                    <div class="list_cont" v-for="item in list" >
-                        <div class="list_item">{{item.name}}</div><div class="list_item">{{item.maxNum}}</div><div class="list_item">{{item.avg}}</div>
-                        <div class="list_item">{{item.highest}}</div><div class="list_item">{{item.lowest}}</div><div class="list_item">{{item.nandu}}</div>
-                        <div class="list_item">{{item.avgUp}}</div><div class="list_item">{{item.avgUpRatio}}</div><div class="list_item">{{item.avgDown}}</div>
-                        <div class="list_item">{{item.avgDownRatio}}</div>
+            <div class="top_cen">
+                <div class="title_small">学科概要分析</div>
+                <div class="list">
+                    <div class="list_title">
+                        <div class="list_item">科目</div><div class="list_item">卷面分数</div><div class="list_item">平均分</div><div class="list_item">最高分</div>
+                        <div class="list_item">最低分</div><div class="list_item">难度系数</div><div class="list_item">	平均分以上</div><div class="list_item">平均分以上比列</div>
+                        <div class="list_item">平均分以下</div><div class="list_item">	平均分以下比列</div><div class="list_item"></div>
+                    </div>
+                    <div class="list_bom">
+                        <div class="list_cont" v-for="item in list" >
+                            <div class="list_item">{{item.name}}</div><div class="list_item">{{item.maxNum}}</div><div class="list_item">{{item.avg}}</div>
+                            <div class="list_item">{{item.highest}}</div><div class="list_item">{{item.lowest}}</div><div class="list_item">{{item.nandu}}</div>
+                            <div class="list_item">{{item.avgUp}}</div><div class="list_item">{{item.avgUpRatio}}</div><div class="list_item">{{item.avgDown}}</div>
+                            <div class="list_item">{{item.avgDownRatio}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
         <div class="bottom">
             <div class="bottom_left">
@@ -32,11 +34,15 @@
                         </el-dropdown>
                     </div>
                 </div>
-                <line-chart :option="line"></line-chart>
+                <div class="chart_box">
+                    <line-chart :option="line"></line-chart>
+                </div>
             </div>
             <div class="bottom_right">
                 <div class="title_small">单科年级平均分上下分析</div>
-                <bar-chart :option="bar"></bar-chart>
+                <div class="chart_box">
+                    <bar-chart :option="bar"></bar-chart>
+                </div>
             </div>
         </div>
     </div>
@@ -70,12 +76,14 @@
                 subName:'',
                 line:{
                     id:'line-chart',
-                    height:'280px',
+                    height:'100%',
+                    width:'100%',
                     data:[],
                 },
                 bar:{
                     id:'bar-chart',
-                    height:'280px',
+                    height:'100%',
+                    width:'100%',
                     data:[],
                 }
             }
@@ -128,13 +136,17 @@
 </script>
 
 <style scoped>
-    .list{color:#fff;margin-top:20px;    display: flex;}
+    .subject{height: 80%}
+    .top{height: 70%;display: flex;justify-content: space-around;}
+    .top_cen{width: 90%}
+    .bottom{height: 30%;display: flex;justify-content: space-around}
+    .list{color:#fff;height: 80%;overflow:auto;   display: flex;}
     .list_bom{color:#fff; display: flex;}
-    .list_title{display: flex;flex-direction: column;font-size: 26px;color: #27a9ff;margin-bottom:10px;}
+    .list_title{display: flex;flex-direction: column;font-size: 26px;color: #27a9ff;}
     .list_cont{display: flex;font-size: 20px;flex-direction: column}
-    .list_item{width: 200px;height: 40px;line-height: 40px;}
+    .list_item{width: 190px;height: 40px;line-height: 40px;}
     .tab_box{margin-left:20px;}
     .el-dropdown-selfdefine{font-size: 16px}
     .bottom{display: flex}
-    .bottom_left,.bottom_right{width: 640px;}
+    .bottom_left,.bottom_right{width: 45%;}
 </style>
