@@ -16,7 +16,6 @@
             return {
                 lineData: {
                     height: "200px",
-                    width:"240px",
                     fontSize: 14,
                     legend: true,
                     isArea: false,
@@ -31,6 +30,7 @@
                     legendTop:'auto',
                     legendLeft:'auto',
                     txtWidth: "100px",
+                    interval:0,
                     colorArray: ["#01dafe", "#58e569", "#f0a54a", "#c23531", "#cfb2a9"], //颜色
                     unit: "", //单位
                     // data2: [
@@ -54,7 +54,9 @@
             "option.data"() {
                 this.init();
             },
-
+            "option.resize"() {
+                this.init();
+            },
             immediate: true,
             deep: true
         },
@@ -162,8 +164,6 @@
                         symbolSize: 12
                     };
                 }
-
-
                 let myChart = eCharts.init(document.getElementById(options.id));
                 let option = {
                     tooltip: {
@@ -198,7 +198,7 @@
                         },
                         axisLabel: {
                             show: true,
-                            interval: 0,
+                            interval: options.interval,
                             textStyle: {
                                 color: "#b2b2b2",
                                 fontSize: options.fontSize,
@@ -206,8 +206,8 @@
                                 width: options.txtWidth
                             },
                             formatter:function (params) {
-                                if(params.length > 4){
-                                    return params.slice(0,4) +'...'
+                                if(params.length > 3){
+                                    return params.slice(0,3) +'...'
                                 }
                             }
                         },
@@ -250,6 +250,7 @@
                     series: lineData
                 };
                 myChart.clear();
+                myChart.resize();
                 myChart.setOption(option);
             }
         }

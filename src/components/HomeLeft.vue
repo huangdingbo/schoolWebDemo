@@ -78,15 +78,12 @@
                 svg:[],
                 bgcolorArray:['#353826','#38272b','#0a3744'],
                 colorArray:['#e9c355','#f1785f','#25d6f8'],
-                line: {
-                    id: "line-chart",
-                    height: "160px"
-                },
                 bar: {
                     id: "bar-chart",
                     height:'100%',
                     width:'100%',
                     XaxisLine: false,
+                    resize:'',
                     data: []
                 }
             };
@@ -104,7 +101,7 @@
             this.$api.teacher().then(res => {
                 this.svg = res.list;
                 console.log(res);
-            })
+            });
         },
         methods: {}
     };

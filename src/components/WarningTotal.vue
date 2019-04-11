@@ -154,7 +154,7 @@
     .list_title{display: flex;align-items:center;font-size: 26px;color: #27a9ff;}
     .list_box{height:88%; overflow: auto}
     .list_cont{display: flex;font-size: 20px;padding:5px 0;}
-    .list_item{width: 120px;}
+    .list_item{width: 120px;padding-bottom:5px;border-bottom: 1px solid}
     @keyframes rotate
     {
         from {

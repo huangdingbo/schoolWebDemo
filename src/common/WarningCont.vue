@@ -19,7 +19,6 @@
                 <div class="title_small">临界学生近十次考试预警发展趋势</div>
                 <div class="chart_box">
                     <line-chart :option="line"></line-chart>
-
                 </div>
             </div>
         </div>
@@ -29,9 +28,8 @@
 <script>
     import WarningLamp from '../common/WarningLamp'
     import LineChart from '../common/LineChart'
-    import PieChart from '../common/PieChart'
     export default {
-        name: "WarningPoor",
+        name: "WarningCont",
         components: {
             WarningLamp,
             LineChart,
@@ -41,12 +39,12 @@
             studentType:{},
             classVal:{},
             testVal:{},
+            type:'',
         },
         data(){
             return{
                 lamp:{},
                 list:[],
-
                 line:{
                     id:'line-chart',
                     height:'100%',
@@ -82,13 +80,13 @@
         },
         methods: {
             refresh(){
-                this.$api.header({type:4,studentType:this.studentType,grade:this.grade,testNum:this.testVal,class:this.classVal}).then(res => {
+                this.$api.header({type:1,studentType:this.studentType,grade:this.grade,testNum:this.testVal,class:this.classVal}).then(res => {
                     this.lamp = res.list;
                 });
-                this.$api.statistical({type:4,studentType:this.studentType,grade:this.grade,testNum:this.testVal,class:this.classVal}).then(res => {
+                this.$api.statistical({type:1,studentType:this.studentType,grade:this.grade,testNum:this.testVal,class:this.classVal}).then(res => {
                     this.list = res.list;
                 });
-                this.$api.warningdevelop({type:4,studentType:this.studentType,grade:this.grade,testNum:this.testVal,class:this.classVal}).then(res => {
+                this.$api.warningdevelop({type:1,studentType:this.studentType,grade:this.grade,testNum:this.testVal,class:this.classVal}).then(res => {
                     this.line.data = res.list
                 });
             }
@@ -107,6 +105,6 @@
     .list{color:#fff;height: 80%;}
     .list_title{display: flex;font-size: 26px;color: #27a9ff;justify-content: space-between;height: 16%}
     .list_box{height:84%; overflow: auto}
-    .list_cont{display: flex;font-size: 20px;justify-content: space-between;padding-bottom:5px;border-bottom: 1px solid}
+    .list_cont{display: flex;font-size: 20px;padding-bottom:5px;border-bottom: 1px solid ;   justify-content: space-between;}
     .list_item{width: 120px;}
 </style>

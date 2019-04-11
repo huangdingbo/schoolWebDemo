@@ -19,7 +19,6 @@
                 <div class="title_small">临界学生近十次考试预警发展趋势</div>
                 <div class="chart_box">
                     <line-chart :option="line"></line-chart>
-
                 </div>
             </div>
         </div>
@@ -106,6 +105,6 @@
     .list{color:#fff;height: 80%;}
     .list_title{display: flex;font-size: 26px;color: #27a9ff;justify-content: space-between;height: 16%}
     .list_box{height:84%; overflow: auto}
-    .list_cont{display: flex;font-size: 20px;padding:5px 0;    justify-content: space-between;}
+    .list_cont{display: flex;font-size: 20px;padding-bottom:5px;border-bottom: 1px solid ;   justify-content: space-between;}
     .list_item{width: 120px;}
 </style>

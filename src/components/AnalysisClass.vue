@@ -13,7 +13,7 @@
                 <div class="grade_online">
                     <div class="title_small">学生构成分析</div>
                     <div class="chart_box">
-                        <bar-chart :option="bar"></bar-chart>
+                        <line-chart :option="line2"></line-chart>
                     </div>
                 </div>
 
@@ -65,11 +65,19 @@
                 line:{
                     id:'lineChart',
                     height:'100%',
-                    width:'100%',
                     legendLeft:'0',
                     legendTop:'20',
                     gridTop:'20%',
                     moreLine:true,
+                    data:[]
+                },
+                line2:{
+                    id:'lineChart2',
+                    height:'100%',
+                    legendLeft:'0',
+                    legendTop:'20',
+                    gridTop:'20%',
+                    // moreLine:true,
                     data:[]
                 },
                 list:[],
@@ -100,7 +108,10 @@
                     }
                 });
                 this.$api.constitute({type:2,testNum:this.test}).then(res => {
-                    console.log(res);
+                    this.line2.data = res;
+                });
+                this.$api.num({type:2,testNum:this.test,}).then(res => {
+                    console.log(res)
                 });
                 this.$api.avgrank({type:2,testNum:this.test}).then(res => {
                     this.list = res.list
@@ -111,7 +122,6 @@
                         let yy=[];
                         for(let n in res.list[i].data){
                             yy.push(res.list[i].data[n].num)
-                            // console.log(yy);
                         }
                         this.line.data.push({name:res.list[i].name,lineName:res.list[i].data[i].testName,value:yy})
                     }

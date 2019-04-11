@@ -3,7 +3,6 @@
     :id="option.id"
     :style="{
       height: option.height ? option.height : GaugeData.height,
-
     }"
   ></div>
 </template>
@@ -20,7 +19,6 @@ export default {
       GaugeData: {
         name: "",
         height: "240px",
-        width: "240px",
         radius: "80%",
         center: ["50%", "50%"],
         min: 0,
@@ -141,7 +139,6 @@ export default {
           }
         ]
       };
-      myChart.clear();
       myChart.setOption(option);
     }
   }

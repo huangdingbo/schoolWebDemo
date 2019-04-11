@@ -4,21 +4,18 @@
             <div class="title_small">本次考试各班本科概况</div>
             <div class="chartBox">
                 <BarChart :option="bar"></BarChart>
-
             </div>
         </div>
         <div class="pieChart">
             <div class="title_small">本次考试各班重本分布</div>
             <div class="chartBox">
                 <PieChart :option="pie"></PieChart>
-
             </div>
         </div>
         <div class="lineChart">
-            <div class="title_small">各年级考试本科上线率</div>
+            <div class="title_small">各次考试本科上线率</div>
             <div class="chartBox">
                 <LineChart :option="line"></LineChart>
-
             </div>
         </div>
     </div>
@@ -41,7 +38,7 @@
                 bar: {
                     id:'bar-chart3',
                     height:'100%',
-                    width:'100%',
+                    resize:'',
                     Xtype: 'value',
                     Ytype: '',
                     XaxisLine:false,
@@ -52,15 +49,16 @@
                 pie: {
                     id: "pie-chart",
                     roseType: "",
+                    resize:'',
                     radius: "65%",
                     height:'100%',
-                    width:'100%',
                     data: []
                 },
                 line: {
                     id: "line-chart",
                     height:'100%',
-                    width:'100%',
+                    resize:'',
+                    interval:1,
                     data: [],
                 }
             };
@@ -73,8 +71,18 @@
                 this.pie.data = res.list;
             });
             this.$api.year().then(res => {
-                this.line.data = res.list;
+                this.line.data=[];
+                for(let i = 0;i <res.list.three.length; i++){
+                    this.line.data.push({name:res.list.three[i].test_name,value:res.list.three[i].benke_num})
+                }
             });
+            let that = this;
+            window.onresize = function () {
+                let height = document.body.clientHeight;
+                that.bar.resize = height;
+                that.pie.resize = height;
+                that.line.resize = height;
+            }
         }
     };
 </script>

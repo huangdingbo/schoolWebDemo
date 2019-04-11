@@ -31,14 +31,12 @@ export default {
       gauge: {
         id: "gauge-chart",
         height: "180px",
-        width: "180px",
         radius: "95%",
         center: ["50%", "60%"]
       },
       gauge2: {
         id: "gauge-chart2",
         height: "180px",
-        width: "180px",
         radius: "95%",
         center: ["50%", "60%"]
       }

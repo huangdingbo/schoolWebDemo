@@ -54,6 +54,9 @@
             "option.data"() {
                 this.init();
             },
+            "option.resize"() {
+                this.init();
+            },
             immediate: true,
             deep: true
         },
@@ -148,11 +151,12 @@
                     series: series
                 };
                 myChart.clear();
+                myChart.resize();
                 myChart.setOption(option);
                 if(options.Xtype =='value'){
                     option.xAxis.type = 'value';
                     option.yAxis.type = '';
-                    myChart.clear(option);
+                    myChart.clear();
                     myChart.setOption(option);
                 }
             }
