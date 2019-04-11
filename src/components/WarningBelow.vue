@@ -90,6 +90,7 @@
                     this.line.data = res.list
                 });
             }
+
         }
     }
 </script>
