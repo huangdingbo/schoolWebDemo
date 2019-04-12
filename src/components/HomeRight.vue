@@ -33,6 +33,16 @@
             PieChart,
             BarChart,
         },
+        props:{
+            option:{}
+        },
+        watch:{
+            'option'(){
+                this.bar.resize = this.option;
+                this.pie.resize = this.option;
+                this.line.resize = this.option;
+            }
+        },
         data() {
             return {
                 bar: {
@@ -64,6 +74,7 @@
             };
         },
         mounted() {
+
             this.$api.regular().then(res => {
                 this.bar.data = res.list;
             });
@@ -76,13 +87,7 @@
                     this.line.data.push({name:res.list.three[i].test_name,value:res.list.three[i].benke_num})
                 }
             });
-            let that = this;
-            window.onresize = function () {
-                let height = document.body.clientHeight;
-                that.bar.resize = height;
-                that.pie.resize = height;
-                that.line.resize = height;
-            }
+
         }
     };
 </script>

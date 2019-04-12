@@ -2,7 +2,7 @@
     <div id="app">
         <img class="nav-switch" src="./assets/home/home_icon_top_right.svg" @click="navShow()"/>
         <Nav :option="isShow" v-on:navTab="navTab"></Nav>
-        <RouterView></RouterView>
+        <RouterView :option="height"></RouterView>
     </div>
 </template>
 <script>
@@ -14,10 +14,15 @@
         },
         data() {
             return {
-                isShow: false
+                isShow: false,
+                height:'',
             };
         },
         mounted() {
+            let that = this;
+            window.onresize = function () {
+                that.height = document.body.clientHeight;
+            }
         },
         methods: {
             navTab: function (navTab) {

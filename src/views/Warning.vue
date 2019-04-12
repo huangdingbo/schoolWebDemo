@@ -76,13 +76,13 @@
 
             <div class="list">
                 <div class="list_title">
-                    <div class="list_item">考试</div><div class="list_item">年级</div><div class="list_item">班级</div>
+                    <div class="list_item" style="width: 240px;">考试</div><div class="list_item">年级</div><div class="list_item">班级</div>
                     <div class="list_item">姓名</div><div class="list_item">学生类型</div><div class="list_item">预警类型</div>
                     <div class="list_item" style="width: 300px;">预警说明</div><div class="list_item">预警状态</div>
                 </div>
                 <div class="list_box">
                     <div class="list_cont" v-for="item in all" >
-                        <div class="list_item">{{item.test_name}}</div><div class="list_item">{{item.grade}}</div><div class="list_item">{{item.banji}}</div>
+                        <div class="list_item" style="width: 240px;">{{item.test_name}}</div><div class="list_item">{{item.grade}}</div><div class="list_item">{{item.banji}}</div>
                         <div class="list_item">{{item.name}}</div><div class="list_item">{{item.studentType}}</div><div class="list_item">{{item.type}}</div>
                         <div class="list_item" style="width: 300px;">{{item.content}}</div><div class="list_item">{{item.status}}</div>
                     </div>
@@ -260,10 +260,14 @@
             seeAll(){
                 this.allDialog = true;
                 this.$api.all().then(res => {
-                    console.log(res)
                     this.all = res.list;
                 });
-            }
+            },
+            refreshWork(){
+                this.$api.all({grade:this.grade,class:s,test:s,type:s,}).then(res => {
+                    this.all = res.list;
+                });
+            },
         }
     }
 </script>
@@ -294,7 +298,7 @@
     .work_button{color: #fff;font-weight: bold;background-color: #1373d1;border-radius: 4px;font-size: 20px;width: 180px;  cursor: pointer;}
     .list{color:#fff;margin-top:20px;}
     .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
-    .list_box{height:600px; overflow: auto}
+    .list_box{height:540px; overflow: auto}
     .list_cont{display: flex;font-size: 20px;padding:5px 0;}
     .list_item{width: 160px;padding:0 10px}
 

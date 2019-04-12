@@ -2,8 +2,8 @@
     <div class="index">
         <div class="home">
             <HomeTop></HomeTop>
-            <HomeLeft></HomeLeft>
-            <HomeRight></HomeRight>
+            <HomeLeft :option="option"></HomeLeft>
+            <HomeRight :option="option"></HomeRight>
             <HomeBottom></HomeBottom>
             <HomeCenter></HomeCenter>
         </div>
@@ -27,12 +27,20 @@
             HomeRight,
             HomeCenter,
         },
+        props:{
+            option:{}
+        },
+        watch:{
+            'option'() {
+            },
+        },
         data () {
             return {
-                isShow: false
+                isShow: false,
             }
         },
-
+        mounted() {
+        },
         methods: {
 
         }

@@ -1,7 +1,6 @@
 "use strict";
 import Vue from "vue";
 import axios from "axios";
-import router from "../router";
 import Qs from "qs";
 import { Loading, Message } from "element-ui";
 const baseUrl = {

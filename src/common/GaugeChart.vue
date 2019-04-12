@@ -1,9 +1,8 @@
 <template>
   <div
     :id="option.id"
-    :style="{
-      height: option.height ? option.height : GaugeData.height,
-    }"
+    :style="{height: option.height ? option.height : GaugeData.height}"
+    style="width: 100%"
   ></div>
 </template>
 
