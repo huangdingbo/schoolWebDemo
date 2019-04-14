@@ -73,6 +73,51 @@
         </div>
 
         <el-dialog title="预警工作台"  :visible="allDialog"   :append-to-body="true" width="1600px" @close="allDialog = false">
+            <div class="screen">
+                <div class="screen_left">
+                    <el-input placeholder="输入学生姓名" v-model="input" clearable
+                              @blur="searchVal()"></el-input>
+                </div>
+                <div class="screen_right">
+                    <el-dropdown trigger="click"  @command="refreshWork" placement="bottom-start">
+                            <span class="el-dropdown-link">
+                                <!--{{subjectName}}-->
+                                年级选择
+                            </span>
+                        <el-dropdown-menu slot="dropdown" >
+                            <el-dropdown-item v-for="item in gradeList" :command="item.value" >{{item.name}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown trigger="click"  @command="refreshWork2" placement="bottom-start">
+                            <span class="el-dropdown-link">
+                                <!--{{subjectName}}-->
+                                班级选择
+                            </span>
+                        <el-dropdown-menu slot="dropdown" >
+                            <el-dropdown-item v-for="item in classList" :command="item.value" >{{item.name}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown trigger="click"  @command="refreshWork3" placement="bottom-start">
+                            <span class="el-dropdown-link">
+                                <!--{{subjectName}}-->
+                                考试选择
+                            </span>
+                        <el-dropdown-menu slot="dropdown" >
+                            <el-dropdown-item v-for="item in testList" :command="item.value" >{{item.name}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown trigger="click"  @command="refreshWork4" placement="bottom-start">
+                            <span class="el-dropdown-link">
+                                <!--{{subjectName}}-->
+                                学生类型
+                            </span>
+                        <el-dropdown-menu slot="dropdown" >
+                            <el-dropdown-item v-for="item in typeList" :command="item.value" >{{item.name}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+
+            </div>
 
             <div class="list">
                 <div class="list_title">
@@ -149,11 +194,12 @@
 <script>
 
     import Vue from "vue";
-    import { Dropdown, DropdownMenu, DropdownItem,Dialog } from "element-ui";
+    import { Dropdown, DropdownMenu, DropdownItem,Dialog,Input} from "element-ui";
     Vue.use(Dropdown);
     Vue.use(DropdownMenu);
     Vue.use(DropdownItem);
     Vue.use(Dialog);
+    Vue.use(Input);
     export default {
         name: "Warning",
         components: {
@@ -161,6 +207,7 @@
         data() {
             return {
                 title:{},
+                input: '',
                 grade:'',
                 classVal:'',
                 studentType:'',
@@ -177,8 +224,11 @@
                     scoreInfo:'',
                     warningInfo:'',
                 },
-                all:[]
-
+                all:[],
+                workGrade:'',
+                workClass:'',
+                workTest:'',
+                workType:'',
 
             };
         },
@@ -263,11 +313,35 @@
                     this.all = res.list;
                 });
             },
-            refreshWork(){
-                this.$api.all({grade:this.grade,class:s,test:s,type:s,}).then(res => {
+            refreshWork(commend){
+                this.workGrade = commend;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
                     this.all = res.list;
                 });
             },
+            refreshWork2(commend){
+                this.workClass = commend;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
+                    this.all = res.list;
+                });
+            },
+            refreshWork3(commend){
+                this.workTest = commend;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
+                    this.all = res.list;
+                });
+            },
+            refreshWork4(commend){
+                this.workType = commend;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
+                    this.all = res.list;
+                });
+            },
+            searchVal(){
+                this.$api.all({nameStr:this.input}).then(res => {
+                    this.all = res.list;
+                });
+            }
         }
     }
 </script>
@@ -275,6 +349,7 @@
 <style scoped>
     @import "../css/dropdown.css";
     @import "../css/dialog.css";
+    @import "../css/input.css";
     .warning{display: flex;width: 100%;height:100%;background: url("../assets/bg.jpg");}
     .title{margin-top:40px}
     .warning_nav{width:20%;height:100%;border-right:2px solid #0a5b85}
@@ -308,4 +383,6 @@
     .score_item{text-align: center}
     .information{margin-top:20px;padding-top:20px;border-top:1px solid;}
     .information_item{padding:5px 0}
+    .screen{display: flex;justify-content:space-between;align-items: center}
+    .screen .el-dropdown{margin-left:15px;}
 </style>
