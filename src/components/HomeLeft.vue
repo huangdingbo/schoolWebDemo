@@ -108,7 +108,6 @@
             });
             this.$api.teacher().then(res => {
                 this.svg = res.list;
-                console.log(res);
             });
         },
         methods: {}

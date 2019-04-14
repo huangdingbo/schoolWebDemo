@@ -140,8 +140,8 @@
     .grade_online{height: 35%}
     .grade_rank{height: 60%}
     .grade_line{height: 40%}
-    .list{color:#fff;height: 80%;overflow: auto}
+    .list{color:#fff;height: 80%;overflow: auto;width: 50%}
     .list_title{display: flex;font-size: 26px;color: #27a9ff;}
-    .list_cont{display: flex;font-size: 20px;padding:5px 0;}
+    .list_cont{display: flex;font-size: 20px;padding:5px 0;border-bottom: 1px solid}
     .list_item{width: 120px;}
 </style>

@@ -144,7 +144,7 @@
     .list_bom{color:#fff; display: flex;}
     .list_title{display: flex;flex-direction: column;font-size: 26px;color: #27a9ff;}
     .list_cont{display: flex;font-size: 20px;flex-direction: column}
-    .list_item{width: 190px;height: 40px;line-height: 40px;}
+    .list_item{width: 190px;height: 40px;line-height: 40px;border-bottom: 1px solid #fff}
     .tab_box{margin-left:20px;}
     .el-dropdown-selfdefine{font-size: 16px}
     .bottom{display: flex}

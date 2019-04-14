@@ -163,9 +163,9 @@
     .cont{position:relative;border: 1px solid #1a4f6b;border-radius: 6px;background-color: rgba(7, 53, 79, 0.749);overflow: hidden;height: 80%}
     .wave{display:flex;position:absolute;bottom:0;left:0;animation:wave 4s linear infinite;-webkit-animation:wave 8s linear infinite;}
     .grade_online,.grade_from{height: 35%}
-    .list{color:#fff;height: 80%;overflow: auto}
+    .list{color:#fff;height: 80%;overflow: auto;}
     .list_title{display: flex;font-size: 26px;color: #27a9ff;}
-    .list_cont{display: flex;font-size: 20px;padding:5px 0;}
+    .list_cont{display: flex;font-size: 20px;padding:5px 0;border-bottom: 1px solid}
     .list_item{width: 120px;}
     @keyframes wave
     {

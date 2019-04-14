@@ -1,8 +1,8 @@
 <template>
     <svg :height="radius * 2" :width="radius * 2">
         <circle :stroke="bgcolor" :stroke-width="stroke" fill="transparent" :r="normalizedRadius" :cx="radius" :cy="radius"></circle>
-        <circle :stroke="color" :stroke-dasharray="circumference + ' ' + circumference" :style="{ strokeDashoffset: strokeDashoffset }" :stroke-width="stroke"
-                fill="transparent" :r="normalizedRadius" :cx="radius" :cy="radius">
+        <circle :stroke="color" :stroke-dasharray="circumference + ' ' + circumference" :style="{ strokeDashoffset: strokeDashoffset }"
+                :stroke-width="stroke" fill="transparent" :r="normalizedRadius" :cx="radius" :cy="radius">
         </circle>
     </svg>
 </template>

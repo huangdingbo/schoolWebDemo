@@ -20,6 +20,8 @@ export const regular = data =>
     api.post("api/web/index.php?r=cockpit/regular-map", data).then(res => res);
 export const rank = data =>
     api.post("api/web/index.php?r=cockpit/rank-pic", data).then(res => res);
+export const stuDetail = data =>
+    api.post("api/web/index.php?r=cockpit/student-detail", data).then(res => res);
 export const teacher = data =>
     api.post("api/web/index.php?r=cockpit/teacher-distribution", data).then(res => res);
 export const left = data =>
