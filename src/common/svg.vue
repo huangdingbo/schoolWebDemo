@@ -1,11 +1,24 @@
 <template>
     <svg :height="radius * 2" :width="radius * 2">
-        <circle :stroke="bgcolor" :stroke-width="stroke" fill="transparent" :r="normalizedRadius" :cx="radius" :cy="radius"></circle>
-        <circle :stroke="color" :stroke-dasharray="circumference + ' ' + circumference" :style="{ strokeDashoffset: strokeDashoffset }"
-                :stroke-width="stroke" fill="transparent" :r="normalizedRadius" :cx="radius" :cy="radius">
+        <circle :stroke="bgcolor" :stroke-width="stroke" fill="transparent" :r="InnerRadius" :cx="radius" :cy="radius"></circle>
+        <circle :stroke="color" stroke-dasharray="1000"  :stroke-width="stroke" fill="transparent" :r="InnerRadius" :cx="radius" :cy="radius">
+            <animate  attributeName="stroke-dashoffset" from="1000" :to="dashoffset" begin="0" dur="3s" repeatDur="indefinite"></animate>
         </circle>
+
+        <defs>
+            <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="60%" id="tail">
+                <stop stop-opacity="1" stop-color="#fff" offset="30%"/>
+                <stop stop-opacity="0.5" stop-color="#fff" offset="40%"/>
+                <stop stop-opacity="0" stop-color="#fff" offset="80%"/>
+            </radialGradient>
+        </defs>
+        <rect :x="InnerRadius" y="0" width="16" height="16" fill="url(#tail)" >
+            <animateTransform attributeName="transform"  type="rotate" :from="[0, radius, radius]" :to="[angle,radius,radius]" begin="0" dur="3s" repeatDur="indefinite"></animateTransform>
+        </rect>
     </svg>
 </template>
+<!--:style="{ strokeDashoffset: strokeDashoffset }"-->
+
 <script>
     export default {
         props: {
@@ -16,33 +29,49 @@
             bgcolor:String,
         },
         data() {
-            const normalizedRadius = this.radius - this.stroke * 2;
-            const circumference = normalizedRadius * 2 * Math.PI;
+            const InnerRadius = this.radius - this.stroke;
+            // const circumference = InnerRadius * 2 * Math.PI;
+            const radius = 1000 - (325* this.progress/100);
             return {
-                normalizedRadius,
-                circumference
+                InnerRadius,
+                // circumference,
+                dashoffset:radius,
+                angle:'',
             }
         },
         mounted(){
-            // const circle = document.querySelector('.progress-ring__circle');
-            // const radius = circle.r.baseVal.value;
-            // const circumference = radius * 2 * Math.PI;
-            // circle.style.strokeDasharray = `${circumference} ${circumference}`;
-            // circle.style.strokeDashoffset = circumference;
+            console.log(this.dashoffset,this.radius);
+            this.angle = this.progress/100 *360;
         },
         computed: {
-            strokeDashoffset() {
-                return this.circumference - this.progress / 100 * this.circumference;
-            }
+            // strokeDashoffset() {
+            //     return  this.circumference - this.progress / 100 * this.circumference;
+            // }
         }
     }
 
 </script>
 
 <style scoped>
+    svg{position: relative;}
     circle {
-        transition: stroke-dashoffset 0.35s;
+        /*transition: stroke-dashoffset 2s;*/
         transform: rotate(-90deg);
         transform-origin: 50% 50%;
     }
+    /*rect{transform-origin:50% 50%;*/
+    /*    animation: rotate 3s linear infinite;*/
+    /*}*/
+
+
+    /*@keyframes rotate{*/
+    /*    from {*/
+    /*        transform:rotate(0);*/
+    /*    }*/
+    /*    to {*/
+    /*        transform:rotate(120deg);*/
+    /*    }*/
+
+    /*}*/
+
 </style>
