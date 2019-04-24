@@ -74,11 +74,6 @@
         props:{
             option:{}
         },
-        watch:{
-            'option'(){
-                this.bar.resize = this.option;
-            }
-        },
         data() {
             return {
                 situation: {},

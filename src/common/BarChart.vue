@@ -151,7 +151,9 @@
                     series: series
                 };
                 myChart.clear();
-                myChart.resize();
+                window.addEventListener('resize',function () {
+                    myChart.resize();
+                });
                 myChart.setOption(option);
                 if(options.Xtype =='value'){
                     option.xAxis.type = 'value';

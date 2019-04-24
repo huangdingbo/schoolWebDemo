@@ -33,16 +33,6 @@
             PieChart,
             BarChart,
         },
-        props:{
-            option:{}
-        },
-        watch:{
-            'option'(){
-                this.bar.resize = this.option;
-                this.pie.resize = this.option;
-                this.line.resize = this.option;
-            }
-        },
         data() {
             return {
                 bar: {

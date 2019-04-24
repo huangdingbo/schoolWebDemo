@@ -250,8 +250,10 @@
                     series: lineData
                 };
                 myChart.clear();
-                myChart.resize();
                 myChart.setOption(option);
+                window.addEventListener('resize',function () {
+                    myChart.resize();
+                });
             }
         }
     };
