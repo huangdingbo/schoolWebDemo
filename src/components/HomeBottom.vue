@@ -32,17 +32,25 @@ export default {
         id: "gauge-chart",
         height: "180px",
         radius: "95%",
-        center: ["50%", "60%"]
+        center: ["50%", "60%"],
+        data:[],
       },
       gauge2: {
         id: "gauge-chart2",
         height: "180px",
         radius: "95%",
-        center: ["50%", "60%"]
+        center: ["50%", "60%"],
+        data:[]
       }
     };
   },
-  mounted() {},
+  mounted() {
+    this.$api.wheel().then(res =>{
+      this.gauge.data.push({name:'本科上线率',value:res.benkeRatio*100});
+      this.gauge2.data.push({name:'重本占比',value:res.zhongbenRatio*100});
+    });
+    console.log(this.gauge)
+  },
   methods: {}
 };
 </script>

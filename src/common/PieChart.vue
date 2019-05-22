@@ -71,9 +71,6 @@
             "option.data"() {
                 this.init();
             },
-            "option.resize"() {
-                this.init();
-            },
             immediate: true,
             deep: true
         },

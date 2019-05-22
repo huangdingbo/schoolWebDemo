@@ -59,8 +59,9 @@ export const stable = data =>
 // 课程列表
 export const course = data =>
     api.post("api/web/index.php?r=discipline-analysis/course-list", data).then(res => res);
-
-
+//底部轮子
+export const wheel = data =>
+    api.post("api/web/index.php?r=cockpit/wheel", data).then(res => res);
 // 预警工作台
 export const work = data =>
     api.post("api/web/index.php?r=warning-index/warning-work", data).then(res => res);

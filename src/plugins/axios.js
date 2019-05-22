@@ -35,7 +35,7 @@ axios.defaults.headers.post["Content-Type"] =
 let config = {
   baseURL: baseUrl.online,
   timeout: 300 * 1000, // Timeout
-  withCredentials: true // Check cross-site Access-Control
+  withCredentials: false // Check cross-site Access-Control
 };
 const _axios = axios.create(config);
 _axios.interceptors.request.use(

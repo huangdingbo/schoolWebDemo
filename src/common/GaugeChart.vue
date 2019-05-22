@@ -33,7 +33,15 @@ export default {
         detail_offsetCenter: ["0", "75%"],
         data: [{ value: 85, name: "及格率" }] //数据格式
       },
+
     };
+  },
+  watch: {
+    "option.data"() {
+      this.init();
+    },
+    immediate: true,
+    deep: true
   },
   props: {
     option: {}
@@ -46,6 +54,7 @@ export default {
     init: function() {
       let options = Object.assign(this.GaugeData, this.option);
       let myChart = eCharts.init(document.getElementById(options.id));
+      console.log(this.option.data)
       let option = {
         tooltip: {
           // formatter: "{a} <br/>{c} {b}"
@@ -129,7 +138,6 @@ export default {
               fontSize:16,
               offsetCenter: options.detail_offsetCenter,
               textStyle: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: "bolder",
                 color: "#fff"
               }
