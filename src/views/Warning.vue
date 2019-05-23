@@ -26,7 +26,7 @@
                 <div class="warning_grade" v-if="show">
                     <el-dropdown trigger="click"  @command="classSel" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                {{classVal==''? '全部':classVal}}
+                                {{classVal==''? '全部班级':classVal}}
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in classList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -47,7 +47,8 @@
                 <div class="warning_type" v-if="show">
                     <el-dropdown trigger="click"  @command="test">
                             <span class="el-dropdown-link">
-                                {{testName==''? '全部':testName}}
+<!--                                {{testName==''? '全部':testName}}-->
+                                {{testName}}
 <!--                                考试选择-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
@@ -288,6 +289,8 @@
             reSub(){
                 this.$api.right({type:this.studentType}).then(res => {
                     this.testList = res.list;
+                    this.testName = this.testList[0].name
+                    console.log(this.testList[0])
                 });
             },
             gradeSel(command){
