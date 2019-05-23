@@ -33,6 +33,14 @@
             PieChart,
             BarChart,
         },
+        props:{
+            option:{}
+        },
+        watch:{
+            option(){
+                this.init(this.option)
+            }
+        },
         data() {
             return {
                 bar: {
@@ -60,24 +68,28 @@
                     resize:'',
                     interval:1,
                     data: [],
-                }
+                },
+                testValue:'',
             };
         },
         mounted() {
-
-            this.$api.regular().then(res => {
-                this.bar.data = res.list;
-            });
-            this.$api.weigh().then(res => {
-                this.pie.data = res.list;
-            });
-            this.$api.year().then(res => {
-                this.line.data=[];
-                for(let i = 0;i <res.list.three.length; i++){
-                    this.line.data.push({name:res.list.three[i].test_name,value:res.list.three[i].benke_num})
-                }
-            });
-
+            this.init();
+        },
+        methods: {
+            init(testVal){
+                this.$api.regular({test:testVal}).then(res => {
+                    this.bar.data = res.list;
+                });
+                this.$api.weigh({test:testVal}).then(res => {
+                    this.pie.data = res.list;
+                });
+                this.$api.year({test:testVal}).then(res => {
+                    this.line.data=[];
+                    for(let i = 0;i <res.list.three.length; i++){
+                        this.line.data.push({name:res.list.three[i].test_name,value:res.list.three[i].benke_num})
+                    }
+                });
+            }
         }
     };
 </script>

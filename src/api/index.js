@@ -32,6 +32,10 @@ export const num = data =>
     api.post("api/web/index.php?r=read-grade/num", data).then(res => res);
 export const online = data =>
     api.post("api/web/index.php?r=read-grade/online", data).then(res => res);
+
+// 考试列表
+export const lined = data =>
+    api.post("api/web/index.php?r=cockpit/lined-test", data).then(res => res);
 // 年级---学生构成分析
 export const constitute = data =>
     api.post("api/web/index.php?r=read-grade/constitute-analysis", data).then(res => res);

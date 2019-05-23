@@ -46,10 +46,9 @@ export default {
   },
   mounted() {
     this.$api.wheel().then(res =>{
-      this.gauge.data.push({name:'本科上线率',value:res.benkeRatio*100});
-      this.gauge2.data.push({name:'重本占比',value:res.zhongbenRatio*100});
+      this.gauge.data.push({name:'本科上线率',value:res.benkeRatio});
+      this.gauge2.data.push({name:'重本占比',value:res.zhongbenRatio});
     });
-    console.log(this.gauge)
   },
   methods: {}
 };

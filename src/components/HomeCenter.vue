@@ -64,12 +64,23 @@
                 detail:{}
             }
         },
+        props:{
+            option:{}
+        },
+        watch:{
+            option(){
+                this.init(this.option)
+            }
+        },
         mounted() {
-            this.$api.rank().then(res =>{
-                this.test = res.list;
-            });
+           this.init()
         },
         methods:{
+            init(testVal){
+                this.$api.rank({test:testVal}).then(res =>{
+                    this.test = res.list;
+                });
+            },
             studentDet(id){
                 this.personDialog = true;
                 this.$api.stuDetail({id:id}).then(res =>{

@@ -16,8 +16,8 @@
                 <div class="warning_grade">
                     <el-dropdown trigger="click"  @command="gradeSel" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                <!--{{subjectName}}-->
-                                年级选择
+                                {{grade}}
+<!--                                年级选择-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in gradeList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -27,8 +27,8 @@
                 <div class="warning_grade" v-if="show">
                     <el-dropdown trigger="click"  @command="classSel" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                <!--{{subjectName}}-->
-                                班级选择
+                                {{classVal==''? '全部':classVal}}
+<!--                                班级选择-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in classList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -39,8 +39,8 @@
                 <div class="warning_type">
                     <el-dropdown trigger="click"  @command="typeSel" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                <!--{{subjectName}}-->
-                                学生类型
+                                {{studentType==1? '理科':'文科'}}
+<!--                                学生类型-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in typeList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -50,7 +50,8 @@
                 <div class="warning_type" v-if="show">
                     <el-dropdown trigger="click"  @command="test">
                             <span class="el-dropdown-link">
-                                考试选择
+                                {{testName==''? '全部':testName}}
+<!--                                考试选择-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="(item,index) in testList" :command="item.value">{{item.name}}</el-dropdown-item>
@@ -208,6 +209,7 @@
             return {
                 title:{},
                 input: '',
+
                 grade:'',
                 classVal:'',
                 studentType:'',
@@ -230,6 +232,7 @@
                 workTest:'',
                 workType:'',
 
+                testName:'',
             };
         },
         watch:{
@@ -299,7 +302,14 @@
                 this.classVal = command
             },
             test(command){
-                this.testVal = command
+                this.testVal = command;
+                console.log(this.testList);
+                for(let i=0;i<this.testList.length;i++){
+                    if(this.testList[i].value==command){
+                        return  this.testName = this.testList[i].name
+                    }
+
+                }
             },
             workDetail(id){
                 this.personDialog = true;
@@ -313,26 +323,26 @@
                     this.all = res.list;
                 });
             },
-            refreshWork(commend){
-                this.workGrade = commend;
+            refreshWork(command){
+                this.workGrade = command;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
                     this.all = res.list;
                 });
             },
-            refreshWork2(commend){
-                this.workClass = commend;
+            refreshWork2(command){
+                this.workClass = command;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
                     this.all = res.list;
                 });
             },
-            refreshWork3(commend){
-                this.workTest = commend;
+            refreshWork3(command){
+                this.workTest = command;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
                     this.all = res.list;
                 });
             },
-            refreshWork4(commend){
-                this.workType = commend;
+            refreshWork4(command){
+                this.workType = command;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
                     this.all = res.list;
                 });

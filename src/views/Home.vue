@@ -1,11 +1,11 @@
 <template>
     <div class="index">
-        <div class="home">
-            <HomeTop></HomeTop>
-            <HomeLeft ></HomeLeft>
-            <HomeRight ></HomeRight>
+        <div class="home" >
+            <HomeTop v-on:testVal="testVal"></HomeTop>
+            <HomeLeft></HomeLeft>
+            <HomeRight :option="this.testValue"></HomeRight>
             <HomeBottom></HomeBottom>
-            <HomeCenter></HomeCenter>
+            <HomeCenter :option="this.testValue"></HomeCenter>
         </div>
     </div>
 </template>
@@ -30,12 +30,17 @@
         data () {
             return {
                 isShow: false,
+                testValue:''
             }
         },
         mounted() {
+            // console.log(this.va)
         },
         methods: {
-
+            testVal(val){
+                this.testValue = val;
+                console.log(this.testValue)
+            }
         }
     };
 </script>

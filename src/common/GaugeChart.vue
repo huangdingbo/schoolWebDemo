@@ -54,7 +54,6 @@ export default {
     init: function() {
       let options = Object.assign(this.GaugeData, this.option);
       let myChart = eCharts.init(document.getElementById(options.id));
-      console.log(this.option.data)
       let option = {
         tooltip: {
           // formatter: "{a} <br/>{c} {b}"

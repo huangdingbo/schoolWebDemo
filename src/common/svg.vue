@@ -43,7 +43,6 @@
             }
         },
         mounted(){
-            console.log(this.dashoffset,this.radius);
             this.angle = this.progress/100 *360;
         },
         computed: {
