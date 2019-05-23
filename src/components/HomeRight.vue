@@ -66,8 +66,20 @@
                     id: "line-chart",
                     height:'100%',
                     resize:'',
-                    interval:1,
-                    data: [],
+                    interval:0,
+                    moreLine:true,
+                    xAxisData:[],
+                    data: [
+                        {
+                            lineName:'2017届',value:[],
+                        },
+                        {
+                            lineName:'2018届',value:[]
+                        },
+                        {
+                            lineName:'2019届',value:[]
+                        },
+                    ],
                 },
                 testValue:'',
             };
@@ -84,10 +96,28 @@
                     this.pie.data = res.list;
                 });
                 this.$api.year({test:testVal}).then(res => {
-                    this.line.data=[];
-                    for(let i = 0;i <res.list.three.length; i++){
-                        this.line.data.push({name:res.list.three[i].test_name,value:res.list.three[i].benke_num})
+                    console.log(this.line.data[0].value);
+                    this.line.data= [{lineName:'2017届',value:[],}, {lineName:'2018届',value:[]}, {lineName:'2019届',value:[]},];
+                    this.line.xAxisData=[];
+                    for(let x in res.list.one){
+                        this.line.xAxisData.push(res.list.one[x].test_name)
                     }
+                    for(let i in res.list.one){
+                        this.line.data[0].value.push(res.list.one[i].ratio)
+                    }
+                    for(let i in res.list.one){
+                        this.line.data[1].value.push(res.list.two[i].ratio)
+                    }
+                    for(let i in res.list.one){
+                        this.line.data[2].value.push(res.list.three[i].ratio)
+                    }
+                    // for(let i in res.list){
+                    //     let yy=[];
+                    //     for(let n in res.list[i].data){
+                    //         yy.push(res.list[i].data[n].num);
+                    //     }
+                    //     this.line.data.push({name:res.list[i].name,lineName:res.list[i].name,value:yy})
+                    // }
                 });
             }
         }

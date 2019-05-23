@@ -17,7 +17,6 @@
                     <el-dropdown trigger="click"  @command="gradeSel" placement="bottom-start">
                             <span class="el-dropdown-link">
                                 {{grade}}
-<!--                                年级选择-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in gradeList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -28,7 +27,6 @@
                     <el-dropdown trigger="click"  @command="classSel" placement="bottom-start">
                             <span class="el-dropdown-link">
                                 {{classVal==''? '全部':classVal}}
-<!--                                班级选择-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in classList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -40,7 +38,6 @@
                     <el-dropdown trigger="click"  @command="typeSel" placement="bottom-start">
                             <span class="el-dropdown-link">
                                 {{studentType==1? '理科':'文科'}}
-<!--                                学生类型-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in typeList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -203,8 +200,6 @@
     Vue.use(Input);
     export default {
         name: "Warning",
-        components: {
-        },
         data() {
             return {
                 title:{},
@@ -283,27 +278,31 @@
                 this.$api.left().then(res => {
                     this.typeList = res;
                     this.studentType = res[0].value;
-                    this.$api.right({type:this.studentType}).then(res => {
-                        this.testList = res.list;
-                    });
+                    this.reSub()
                 });
                 this.$api.classlist().then(res => {
                     this.classList = res.list;
                 });
 
             },
+            reSub(){
+                this.$api.right({type:this.studentType}).then(res => {
+                    this.testList = res.list;
+                });
+            },
             gradeSel(command){
-                this.grade = command
+                this.grade = command;
             },
             typeSel(command){
-                this.studentType = command
+                this.studentType = command;
+                this.reSub()
+
             },
             classSel(command){
                 this.classVal = command
             },
             test(command){
                 this.testVal = command;
-                console.log(this.testList);
                 for(let i=0;i<this.testList.length;i++){
                     if(this.testList[i].value==command){
                         return  this.testName = this.testList[i].name
@@ -395,4 +394,6 @@
     .information_item{padding:5px 0}
     .screen{display: flex;justify-content:space-between;align-items: center}
     .screen .el-dropdown{margin-left:15px;}
+
+    .warning_item.router-link-exact-active{color: #27a9ff;}
 </style>

@@ -3,7 +3,7 @@
         <warning-lamp :option="lamp"></warning-lamp>
         <div class="center_cont">
             <div class="center_list">
-                <div class="title_small">贫困学生预警</div>
+                <div class="title_small">学困学生预警</div>
                 <div class="list">
                     <div class="list_title">
                         <div class="list_item">学生姓名</div><div class="list_item">年级班级</div><div class="list_item" style="width: 300px">预警说明</div><div class="list_item">预警状态</div>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="center_chart">
-                <div class="title_small">临界学生近十次考试预警发展趋势</div>
+                <div class="title_small">学困学生近十次考试预警发展趋势</div>
                 <div class="chart_box">
                     <line-chart :option="line"></line-chart>
 

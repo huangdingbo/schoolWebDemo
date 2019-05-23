@@ -31,11 +31,11 @@
                     legendLeft:'auto',
                     txtWidth: "100px",
                     interval:0,
+                    xAxisData:[],
                     colorArray: ["#01dafe", "#58e569", "#f0a54a", "#c23531", "#cfb2a9"], //颜色
                     unit: "", //单位
                     // data2: [
                     //     {lineName: 1,name:555, value: [4, 5, 6, 7]}, {lineName: 2,name:444, value: [2, 5, 8, 9]},
-                    //     {lineName: 3,name:999, value: [1, 3, 6, 9]}, {lineName: 4,name:333, value: [4, 5, 8, 2,]}
                     //     ],// 数据格式
                     moreLine:false,
                     data: [
@@ -128,9 +128,8 @@
                     };
                 }
                 if (options.moreLine){
+                    xAxisData = options.xAxisData;
                     for (let i = 0; i < options.data.length; i++) {
-                        let obj = options.data[i];
-                        xAxisData.push(obj.name);
                         lineData.push({
                             type: "line",
                             smooth: true,
@@ -140,9 +139,9 @@
                             markPoint: markPoint,
                             markLine: markLine,
                             symbolSize: 12
-                        })
+                        });
                     }
-
+                    console.log(lineData)
                 }
                 else{
                     for (let i = 0; i < options.data.length; i++) {

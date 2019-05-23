@@ -69,6 +69,7 @@
                     legendTop:'20',
                     gridTop:'20%',
                     moreLine:true,
+                    xAxisData:[],
                     data:[]
                 },
                 line2:{
@@ -77,7 +78,6 @@
                     legendLeft:'0',
                     legendTop:'20',
                     gridTop:'20%',
-                    // moreLine:true,
                     data:[]
                 },
                 list:[],
@@ -111,21 +111,23 @@
                     this.line2.data = res;
                 });
                 this.$api.num({type:2,testNum:this.test,}).then(res => {
-                    console.log(res)
                 });
                 this.$api.avgrank({type:2,testNum:this.test}).then(res => {
                     this.list = res.list
                 });
                 this.$api.stable({testNum:this.test}).then(res => {
                     this.line.data=[];
+                    this.line.xAxisData=[];
+                    for(let x in res.list[0].data){
+                        this.line.xAxisData.push(res.list[0].data[x].testName)
+                    }
                     for(let i in res.list){
                         let yy=[];
                         for(let n in res.list[i].data){
-                            yy.push(res.list[i].data[n].num)
+                            yy.push(res.list[i].data[n].num);
                         }
-                        this.line.data.push({name:res.list[i].name,lineName:res.list[i].data[i].testName,value:yy})
+                        this.line.data.push({name:res.list[i].name,lineName:res.list[i].name,value:yy})
                     }
-
                 });
                 
             }
