@@ -26,7 +26,7 @@
                 <div class="warning_grade" v-if="show">
                     <el-dropdown trigger="click"  @command="classSel" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                {{classVal==''? '全部班级':classVal}}
+                                {{classVal == '' ? '全部班级':classVal}}
                             </span>
                         <el-dropdown-menu slot="dropdown" >
                             <el-dropdown-item v-for="item in classList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -47,12 +47,10 @@
                 <div class="warning_type" v-if="show">
                     <el-dropdown trigger="click"  @command="test">
                             <span class="el-dropdown-link">
-<!--                                {{testName==''? '全部':testName}}-->
                                 {{testName}}
-<!--                                考试选择-->
                             </span>
                         <el-dropdown-menu slot="dropdown" >
-                            <el-dropdown-item v-for="(item,index) in testList" :command="item.value">{{item.name}}</el-dropdown-item>
+                            <el-dropdown-item v-for="item in testList" :command="item.test_num">{{item.test_name}}</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
@@ -80,7 +78,6 @@
                 <div class="screen_right">
                     <el-dropdown trigger="click"  @command="refreshWork" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                <!--{{subjectName}}-->
                                 年级选择
                             </span>
                         <el-dropdown-menu slot="dropdown" >
@@ -89,7 +86,6 @@
                     </el-dropdown>
                     <el-dropdown trigger="click"  @command="refreshWork2" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                <!--{{subjectName}}-->
                                 班级选择
                             </span>
                         <el-dropdown-menu slot="dropdown" >
@@ -98,7 +94,6 @@
                     </el-dropdown>
                     <el-dropdown trigger="click"  @command="refreshWork3" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                <!--{{subjectName}}-->
                                 考试选择
                             </span>
                         <el-dropdown-menu slot="dropdown" >
@@ -107,7 +102,6 @@
                     </el-dropdown>
                     <el-dropdown trigger="click"  @command="refreshWork4" placement="bottom-start">
                             <span class="el-dropdown-link">
-                                <!--{{subjectName}}-->
                                 学生类型
                             </span>
                         <el-dropdown-menu slot="dropdown" >
@@ -120,18 +114,19 @@
 
             <div class="list">
                 <div class="list_title">
-                    <div class="list_item" style="width: 240px;">考试</div><div class="list_item">年级</div><div class="list_item">班级</div>
+                    <div class="list_item" style="width: 280px;">考试</div><div class="list_item">年级</div><div class="list_item">班级</div>
                     <div class="list_item">姓名</div><div class="list_item">学生类型</div><div class="list_item">预警类型</div>
                     <div class="list_item" style="width: 300px;">预警说明</div><div class="list_item">预警状态</div>
                 </div>
                 <div class="list_box">
                     <div class="list_cont" v-for="item in all" >
-                        <div class="list_item" style="width: 240px;">{{item.test_name}}</div><div class="list_item">{{item.grade}}</div><div class="list_item">{{item.banji}}</div>
+                        <div class="list_item" style="width: 280px;">{{item.test_name}}</div><div class="list_item">{{item.grade}}</div><div class="list_item">{{item.banji}}</div>
                         <div class="list_item">{{item.name}}</div><div class="list_item">{{item.studentType}}</div><div class="list_item">{{item.type}}</div>
                         <div class="list_item" style="width: 300px;">{{item.content}}</div><div class="list_item">{{item.status}}</div>
                     </div>
                 </div>
             </div>
+            <div class="page"><div class="page_pre"  v-show="offset>1" @click="pagePrev"> 上一页</div><div class="page_next" v-show="hasmore" @click="pageNext">下一页</div></div>
         </el-dialog>
         <el-dialog title="预警详情"  :visible="personDialog"   :append-to-body="true" width="600px" @close="personDialog = false">
             <div class="info">
@@ -207,7 +202,7 @@
                 input: '',
 
                 grade:'',
-                classVal:'',
+                classVal:0,
                 studentType:'',
                 testVal:'',
                 list:[],
@@ -223,6 +218,9 @@
                     warningInfo:'',
                 },
                 all:[],
+                offset:'',
+                hasmore:'',
+
                 workGrade:'',
                 workClass:'',
                 workTest:'',
@@ -274,35 +272,37 @@
                 });
                 this.$api.gradelist().then(res => {
                     this.gradeList = res.list;
-                    this.grade = res.list[0].value
+                    this.grade = res.list[0].value;
+                    this.$api.left().then(res2 => {
+                        this.typeList = res2;
+                        this.studentType = res2[0].value;
+                        this.reSub()
+                    });
                 });
-                this.$api.left().then(res => {
-                    this.typeList = res;
-                    this.studentType = res[0].value;
-                    this.reSub()
-                });
-                this.$api.classlist().then(res => {
-                    this.classList = res.list;
-                });
+
+
 
             },
             reSub(){
-                this.$api.right({type:this.studentType}).then(res => {
-                    this.testList = res.list;
-                    this.testName = this.testList[0].name
-                    console.log(this.testList[0])
+                this.$api.testlist({type:this.studentType,grade:this.grade}).then(res => {
+                    this.testList = res;
+                    this.testName =this.testList[0].test_name;
+                });
+                this.$api.classlist({type:this.studentType}).then(res => {
+                    this.classList = res.list;
                 });
             },
             gradeSel(command){
                 this.grade = command;
+                this.reSub()
             },
             typeSel(command){
                 this.studentType = command;
                 this.reSub()
-
             },
             classSel(command){
-                this.classVal = command
+                this.classVal = command;
+                console.log(this.classVal)
             },
             test(command){
                 this.testVal = command;
@@ -313,6 +313,7 @@
 
                 }
             },
+
             workDetail(id){
                 this.personDialog = true;
                 this.$api.detail({id:id}).then(res => {
@@ -323,37 +324,64 @@
                 this.allDialog = true;
                 this.$api.all().then(res => {
                     this.all = res.list;
+                    this.offset = res.list.offset;
+                    this.hasmore = res.list.hasMore;
                 });
             },
             refreshWork(command){
                 this.workGrade = command;
-                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
+                this.offset = 0;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
+                    this.offset =res.list.offset
                 });
             },
             refreshWork2(command){
                 this.workClass = command;
-                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
+                this.offset = 0;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
+                    this.offset =res.list.offset
                 });
             },
             refreshWork3(command){
                 this.workTest = command;
-                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
+                this.offset = 0;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
+                    this.offset =res.list.offset
                 });
             },
             refreshWork4(command){
                 this.workType = command;
-                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,type:this.workType,}).then(res => {
+                this.offset = 0;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
+                    this.offset =res.list.offset
                 });
             },
             searchVal(){
+                this.offset = 0;
                 this.$api.all({nameStr:this.input}).then(res => {
                     this.all = res.list;
+                    this.offset =res.list.offset
                 });
-            }
+            },
+
+
+            pagePrev(){
+                this.offset = this.offset-2;
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
+                    this.all = res.list;
+                    this.offset =res.list.offset
+                });
+            },
+            pageNext(){
+                this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
+                    this.all = res.list;
+                    this.offset =res.list.offset
+                });
+            },
         }
     }
 </script>
@@ -385,9 +413,9 @@
     .work_button{color: #fff;font-weight: bold;background-color: #1373d1;border-radius: 4px;font-size: 20px;width: 180px;  cursor: pointer;}
     .list{color:#fff;margin-top:20px;}
     .list_title{display: flex;font-size: 26px;color: #27a9ff;margin-bottom:10px}
-    .list_box{height:540px; overflow: auto}
-    .list_cont{display: flex;font-size: 20px;padding:5px 0;}
-    .list_item{width: 160px;padding:0 10px}
+    .list_box{height:400px; overflow: auto}
+    .list_cont{display: flex;font-size: 20px;padding:6px 0;}
+    .list_item{width: 120px;padding:0 10px}
 
     .info{display: flex;flex-wrap: wrap;}
     .info_item{width: 50%;padding: 5px 0}
@@ -397,6 +425,8 @@
     .information_item{padding:5px 0}
     .screen{display: flex;justify-content:space-between;align-items: center}
     .screen .el-dropdown{margin-left:15px;}
+    .page{display: flex;justify-content: space-around}
 
     .warning_item.router-link-exact-active{color: #27a9ff;}
+
 </style>

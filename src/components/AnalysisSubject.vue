@@ -26,7 +26,7 @@
                     <div class="tab_box">
                         <el-dropdown trigger="click"  @command="subTab" placement="bottom-start">
                                 <span class="el-dropdown-link">
-                                    切换学科
+                                    {{subShow}}
                                 </span>
                             <el-dropdown-menu slot="dropdown" >
                                 <el-dropdown-item v-for="item in subList" :command="item.value" >{{item.name}}</el-dropdown-item>
@@ -74,6 +74,7 @@
                 list:[],
                 subList:[],
                 subName:'',
+                subShow:'',
                 line:{
                     id:'line-chart',
                     height:'100%',
@@ -108,7 +109,6 @@
                 this.$api.profile({type:this.subject,testNum:this.test}).then(res => {
                     this.list = res.list;
                     this.bar.data = [];
-                    console.log(res);
                     for(let i in res.list){
                         this.bar.data.push({name:res.list[i].name,value:res.list[i].avg})
                     }
@@ -116,6 +116,8 @@
                 this.$api.course({type:this.subject}).then(res => {
                     this.subList = res.list;
                     this.subName = res.list[0].value;
+                    this.subShow = res.list[0].name;
+
                     this.rechart()
                 });
             },
@@ -129,7 +131,12 @@
             },
             subTab(command){
                 this.subName = command;
-                this.rechart()
+                this.rechart();
+                for(let i in this.subList){
+                    if(this.subList[i].value == command){
+                        return this.subShow = this.subList[i].name
+                    }
+                }
             }
         }
     }

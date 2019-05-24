@@ -2,7 +2,10 @@
     <div class="test">
             <div class="left">
                 <div class="grade_total">
-                    <div class="title_small">参考人数</div>
+                    <div class="title_small">本次考试各班预警人数</div>
+                    <div class="chart_box">
+                        <funnel-chart :option="funnel"></funnel-chart>
+                    </div>
                 </div>
                 <div class="grade_online">
                     <div class="title_small">本次考试上线情况</div>
@@ -44,9 +47,11 @@
 <script>
     import LineChart from"../common/LineChart"
     import BarChart from"../common/BarChart"
+    import FunnelChart from "../common/FunnelChart"
     export default {
         name: "AnalysisTest",
         components: {
+            FunnelChart,
             LineChart,
             BarChart
         },
@@ -80,6 +85,11 @@
                     gridTop:'20%',
                     data:[]
                 },
+                funnel:{
+                    id:'funnelChart',
+                    height:'100%',
+                    data:[]
+                },
                 list:[],
             }
         },
@@ -108,12 +118,17 @@
                     }
                 });
                 this.$api.constitute({type:2,testNum:this.test}).then(res => {
+                    this.line2.data ='';
                     this.line2.data = res;
                 });
-                this.$api.num({type:2,testNum:this.test,}).then(res => {
-                });
+                // this.$api.num({type:2,testNum:this.test,}).then(res => {
+                // });
                 this.$api.avgrank({type:2,testNum:this.test}).then(res => {
                     this.list = res.list
+                });
+                this.$api.warningnum({testNum:this.test}).then(res => {
+                    this.funnel.data = [];
+                    this.funnel.data = res.list
                 });
                 this.$api.stable({testNum:this.test}).then(res => {
                     this.line.data=[];

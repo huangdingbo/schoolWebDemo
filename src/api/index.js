@@ -33,6 +33,11 @@ export const num = data =>
 export const online = data =>
     api.post("api/web/index.php?r=read-grade/online", data).then(res => res);
 
+export const warningnum = data =>
+    api.post("api/web/index.php?r=class-analysis/warning-num", data).then(res => res);
+
+
+
 // 考试列表
 export const lined = data =>
     api.post("api/web/index.php?r=cockpit/lined-test", data).then(res => res);
@@ -96,4 +101,9 @@ export const detail = data =>
 // 预警工作台-查看全部
 export const all = data =>
     api.post("api/web/index.php?r=warning-index/warning-all", data).then(res => res);
-
+//考试列表
+export const testlist = data =>
+    api.post("api/web/index.php?r=warning-index/test-list", data).then(res => res);
+// 预警类型列表
+export const typeliset = data =>
+    api.post("api/web/index.php?r=warning-index/type-list", data).then(res => res);

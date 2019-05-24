@@ -141,7 +141,6 @@
                             symbolSize: 12
                         });
                     }
-                    console.log(lineData)
                 }
                 else{
                     for (let i = 0; i < options.data.length; i++) {
