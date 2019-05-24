@@ -19,6 +19,7 @@
         },
         mounted() {
 
+
         },
         methods: {
             navTab: function (navTab) {

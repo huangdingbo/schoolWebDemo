@@ -1,18 +1,19 @@
 <template>
-    <div class="login">
+    <div class="login" id="particles">
         <div class="login-wrap" v-show="showLogin">
-            <img class="login_logo" src="../assets/login_logo.jpg">
             <div class="login_input">
-                <h1>登录</h1>
+                <h1>管理员登录</h1>
                 <input type="text" placeholder="请输入用户名" v-model="username">
                 <input type="password" placeholder="请输入密码" v-model="password">
-                <button v-on:click="login">登录</button>
+                <button class="login_go" v-on:click="login">登录</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import particles from 'particles.js'
+    import particlesConfig from "../assets/particles.json";
 import { setCookie } from "../plugins/cookie";
 export default {
   name: "login",
@@ -26,7 +27,10 @@ export default {
       newPassword: ""
     };
   },
-  mounted() {},
+  mounted() {
+      particlesJS("particles", particlesConfig);
+      // particlesJS.load('app','http://huangdingbo.work/school/api/web/index.php?r=json/index')
+  },
   methods: {
     login() {
       if (this.username == "" || this.password == "") {
@@ -55,9 +59,11 @@ export default {
 
 <style scoped>
 .login {
+
+
   width: 100%;
   height: 100%;
-  background: url("../assets/login_bg.jpg");
+  background: url("../assets/bg.jpg");
   position: relative;
     z-index: 5;
 }
@@ -65,43 +71,74 @@ export default {
   width: 240px;
 }
 .login-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 300px;
-  padding: 20px;
-  background: #fff;
-  display: flex;
-  justify-content: space-around;
+    position: absolute;
+    height: 300px;
+    width: 240px;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    padding:100px 40px 40px 40px;
+    box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
 }
 
 h1 {
-  margin: 30px 0 40px;
+    color: #D3D7F7;
+    height: 60px;
+    text-align: left;
+    font-size: 16px;
 }
 input {
-  display: block;
-  width: 250px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  outline: none;
-  border: 1px solid #888;
-  padding: 10px;
-  box-sizing: border-box;
+    margin-top: -2px;
+    background: rgba(57, 61, 82, 0);
+    left: 0;
+    padding: 10px 65px;
+    border-top: 2px solid rgba(57, 61, 82, 0);
+    border-bottom: 2px solid rgba(57, 61, 82, 0);
+    border-right: none;
+    border-left: none;
+    outline: none;
+    font-family: 'Gudea', sans-serif;
+    box-shadow: none;
+    color: #afb1be;
 }
 
 button {
-  display: block;
-  width: 250px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0 auto;
-  border: none;
-  background-color: #41b883;
-  color: #fff;
-  font-size: 16px;
+    border-radius: 50px;
+    background: transparent;
+    padding: 10px 50px;
+    border: 2px solid #4FA1D9;
+    color: #4FA1D9;
+    text-transform: uppercase;
+    font-size: 11px;
+    -webkit-transition-property: background,color;
+    transition-property: background,color;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
 }
+button:hover{
+    color: white;
+    background: #4FA1D9;
+    cursor: pointer;
+    -webkit-transition-property: background,color;
+    transition-property: background,color;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+}
+#particles{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #b61924;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+    .login_go{    position: relative;
+        top: 40px;
+        left: 0;
+        width: 60%;
+        right: 0;
+        margin: auto;}
 </style>
