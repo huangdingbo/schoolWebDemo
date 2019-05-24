@@ -126,7 +126,15 @@
                     </div>
                 </div>
             </div>
-            <div class="page"><div class="page_pre"  v-show="offset>1" @click="pagePrev"> 上一页</div><div class="page_next" v-show="hasmore" @click="pageNext">下一页</div></div>
+            <div class="page">
+                <div class="page_num">
+                    {{pageCur}} / {{pageTotal}}
+                </div>
+                <div class="num_show">
+                    <div class="page_pre"  v-show="offset>1" @click="pagePrev"> 上一页</div>
+                    <div class="page_next" v-show="hasmore" @click="pageNext">下一页</div>
+                </div>
+            </div>
         </el-dialog>
         <el-dialog title="预警详情"  :visible="personDialog"   :append-to-body="true" width="600px" @close="personDialog = false">
             <div class="info">
@@ -220,7 +228,8 @@
                 all:[],
                 offset:'',
                 hasmore:'',
-
+                pageCur:'',
+                pageTotal:'',
                 workGrade:'',
                 workClass:'',
                 workTest:'',
@@ -324,8 +333,7 @@
                 this.allDialog = true;
                 this.$api.all().then(res => {
                     this.all = res.list;
-                    this.offset = res.list.offset;
-                    this.hasmore = res.list.hasMore;
+                    this.repage(res)
                 });
             },
             refreshWork(command){
@@ -333,7 +341,7 @@
                 this.offset = 0;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
-                    this.offset =res.list.offset
+                    this.repage(res)
                 });
             },
             refreshWork2(command){
@@ -341,7 +349,7 @@
                 this.offset = 0;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
-                    this.offset =res.list.offset
+                    this.repage(res)
                 });
             },
             refreshWork3(command){
@@ -349,7 +357,7 @@
                 this.offset = 0;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
-                    this.offset =res.list.offset
+                    this.repage(res)
                 });
             },
             refreshWork4(command){
@@ -357,14 +365,21 @@
                 this.offset = 0;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
-                    this.offset =res.list.offset
+                    this.repage(res)
                 });
             },
+            repage(res){
+                this.offset = res.paging.offset;
+                this.hasmore = res.paging.hasMore;
+                this.pageTotal = res.paging.total;
+                this.pageCur = res.paging.currentPage*10;
+            },
+
             searchVal(){
                 this.offset = 0;
                 this.$api.all({nameStr:this.input}).then(res => {
                     this.all = res.list;
-                    this.offset =res.list.offset
+                    this.offset =res.paging.offset
                 });
             },
 
@@ -373,13 +388,13 @@
                 this.offset = this.offset-2;
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
-                    this.offset =res.list.offset
+                    this.repage(res)
                 });
             },
             pageNext(){
                 this.$api.all({grade:this.workGrade,class:this.workClass,test:this.workTest,studentType:this.workType,offset:this.offset}).then(res => {
                     this.all = res.list;
-                    this.offset =res.list.offset
+                    this.repage(res)
                 });
             },
         }
@@ -426,6 +441,8 @@
     .screen{display: flex;justify-content:space-between;align-items: center}
     .screen .el-dropdown{margin-left:15px;}
     .page{display: flex;justify-content: space-around}
+    .num_show{display: flex;justify-content: space-around;width: 300px;}
+
 
     .warning_item.router-link-exact-active{color: #27a9ff;}
 
