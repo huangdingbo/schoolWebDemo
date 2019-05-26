@@ -3,8 +3,14 @@
         <div class="login-wrap" v-show="showLogin">
             <div class="login_input">
                 <h1>管理员登录</h1>
-                <input type="text" placeholder="请输入用户名" v-model="username">
-                <input type="password" placeholder="请输入密码" v-model="password">
+                <div class="login_input2">
+                    <img src="../assets/user_icon_copy.png">
+                    <input type="text" placeholder="请输入用户名" v-model="username">
+                </div>
+                <div class="login_input2">
+                    <img src="../assets/lock_icon_copy.png">
+                    <input type="password" placeholder="请输入密码" v-model="password">
+                </div>
                 <button class="login_go" v-on:click="login">登录</button>
             </div>
         </div>
@@ -15,6 +21,7 @@
     import particles from 'particles.js'
     import particlesConfig from "../assets/particles.json";
 import { setCookie } from "../plugins/cookie";
+    import {  Message } from "element-ui";
 export default {
   name: "login",
   data() {
@@ -34,7 +41,8 @@ export default {
   methods: {
     login() {
       if (this.username == "" || this.password == "") {
-        alert("请输入用户名或密码");
+          Message.error('请输入用户名或密码');
+        // alert("");
       } else {
         // this.$router.push("/home");
         // setCookie('username',this.username,1000*60);
@@ -45,7 +53,7 @@ export default {
         };
         this.$api.login(data).then(res => {
           if (res.isPass == false) {
-            alert("密码或者账号错误");
+              Message.error('用户名或密码错误');
           } else {
             setCookie("username", this.username, 1000 * 60);
             this.$router.push("/home");
@@ -86,13 +94,15 @@ h1 {
     color: #D3D7F7;
     height: 60px;
     text-align: left;
-    font-size: 16px;
+    font-size: 20px;
 }
-input {
+.login_input2{display: flex;align-items: center;padding-left:30px;}
+.login_input input {
+    font-size: 14px;
     margin-top: -2px;
     background: rgba(57, 61, 82, 0);
     left: 0;
-    padding: 10px 65px;
+    padding: 10px ;
     border-top: 2px solid rgba(57, 61, 82, 0);
     border-bottom: 2px solid rgba(57, 61, 82, 0);
     border-right: none;
@@ -104,6 +114,7 @@ input {
 }
 
 button {
+    outline:0 none !important; blr:expression(this.onFocus=this.blur());
     border-radius: 50px;
     background: transparent;
     padding: 10px 50px;
@@ -129,10 +140,7 @@ button:hover{
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #b61924;
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: 50% 50%;
 }
 
     .login_go{    position: relative;

@@ -9,42 +9,10 @@
             </div>
         </div>
         <el-dialog title="学生成绩详情"  :visible="personDialog"   :append-to-body="true" width="300px" @close="personDialog = false">
-            <div class="score">
+            <div class="score" v-for="item in detail">
                 <div class="score_item">
-                    <div class="score_name">语文</div>
-                    <div class="score_val">{{detail.chinese}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">数学</div>
-                    <div class="score_val">{{detail.math}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">外语</div>
-                    <div class="score_val">{{detail.english}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">物理</div>
-                    <div class="score_val">{{detail.physics}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">化学</div>
-                    <div class="score_val">{{detail.chemistry}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">生物</div>
-                    <div class="score_val">{{detail.biology}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">总分</div>
-                    <div class="score_val">{{detail.total}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">班级排名</div>
-                    <div class="score_val">{{detail.class_rank}}</div>
-                </div>
-                <div class="score_item">
-                    <div class="score_name">校级排名</div>
-                    <div class="score_val">{{detail.school_rank}}</div>
+                    <div class="score_name">{{item.name}}</div>
+                    <div class="score_val">{{item.value}}</div>
                 </div>
             </div>
         </el-dialog>
@@ -61,7 +29,7 @@
             return{
                 test:[],
                 personDialog:false,
-                detail:{}
+                detail:[]
             }
         },
         props:{
@@ -84,8 +52,8 @@
             studentDet(id){
                 this.personDialog = true;
                 this.$api.stuDetail({id:id}).then(res =>{
-                    this.detail = res.item;
-                    console.log(res)
+                    this.detail = res.list;
+                    console.log(this.detail);
 
                 })
             },
