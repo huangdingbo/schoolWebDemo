@@ -30,7 +30,7 @@
         data () {
             return {
                 isShow: false,
-                testValue:''
+                testValue:[]
             }
         },
         mounted() {
@@ -39,8 +39,8 @@
         methods: {
             testVal(val){
                 this.testValue = val;
-                console.log(this.testValue)
-            }
+            },
+
         }
     };
 </script>

@@ -6,13 +6,13 @@
       <div class="header-center-title title">智慧校园管理中心</div>
       <div class="header-test">
         <el-dropdown trigger="click"  @command="test">
-                            <span class="el-dropdown-link">
-<!--                                {{testName==''? '全部':testName}}-->考试选择
-                            </span>
-        <el-dropdown-menu slot="dropdown" >
-          <el-dropdown-item v-for="(item,index) in testList" :command="item.value">{{item.name}}</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown></div>
+          <span class="el-dropdown-link">
+            考试选择
+          </span>
+          <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-item v-for="(item,index) in testList" :command="{name:item.name,value:item.value}">{{item.name}}</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown></div>
     </div>
     <img
       class="header-right-interval"
@@ -39,11 +39,13 @@ export default {
   mounted() {
     this.$api.lined().then(res => {
       this.testList = res.list;
+      this.$emit("testVal", res.list[0]);
     });
+
   },
   methods: {
     test(command){
-      this.$emit("testVal", command)
+      this.$emit("testVal", command);
     }
   }
 };
@@ -93,10 +95,11 @@ export default {
   left: 525px;
 }
 .header-center-title {
-  width: 870px;
-  padding: 5px 0 25px;
+  width: 840px;
+    height: 100px;
   background-size: 100%;
-  background: url(../assets/home/nav_title_bg.png) no-repeat;
+  background-image: url(../assets/home/nav_title_bg.png);
+
 }
-  .header-test{color:#fff;font-size: 20px;position: absolute;right: 100px;top: 24px;}
+  .header-test{color:#fff;font-size: 20px;position: absolute;right: 100px;top: 20px;}
 </style>

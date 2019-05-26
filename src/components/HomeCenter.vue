@@ -1,11 +1,14 @@
 <template>
     <div class="index-center" >
-        <div class="center-box" v-for="(item,index) in test.slice(0, 10)" @click="studentDet(item.id)">
-            <img class="box_bg" src="../assets/home/box.png">
-            <div class="box">
-                <img :src="item.pic">
-                <div class="num">{{item.total}}分</div>
-                <div class="name">{{item.name}} {{item.banji}}</div>
+        <div class="title_small">{{name}}排行榜</div>
+        <div class="index-list">
+            <div class="center-box" v-for="(item,index) in test.slice(0, 10)" @click="studentDet(item.id)">
+                <img class="box_bg" src="../assets/home/box.png">
+                <div class="box">
+                    <img :src="item.pic">
+                    <div class="num">{{item.total}}分</div>
+                    <div class="name">{{item.name}} {{item.banji}}</div>
+                </div>
             </div>
         </div>
         <el-dialog title="学生成绩详情"  :visible="personDialog"   :append-to-body="true" width="300px" @close="personDialog = false">
@@ -29,7 +32,8 @@
             return{
                 test:[],
                 personDialog:false,
-                detail:[]
+                detail:[],
+                name:'',
             }
         },
         props:{
@@ -37,7 +41,9 @@
         },
         watch:{
             option(){
-                this.init(this.option)
+                console.log(this.option);
+                this.name = this.option.name ;
+                this.init(this.option.value);
             }
         },
         mounted() {
@@ -53,8 +59,6 @@
                 this.personDialog = true;
                 this.$api.stuDetail({id:id}).then(res =>{
                     this.detail = res.list;
-                    console.log(this.detail);
-
                 })
             },
         }
@@ -63,9 +67,11 @@
 
 <style scoped>
     @import "../css/dialog.css";
-    .index-center{position: absolute;top:100px;left:24%;width: 52%;height:70%;display: flex;flex-wrap: wrap;align-items: center;justify-content: space-around;
+    .index-center{position: absolute;top:100px;left:24%;width: 52%;height:70%;
         border: 1px solid #19516f;border-radius: 5px;background-color: rgba(3, 16, 23, 0.702);box-shadow: 0px 0px 10px 0 #7bd4fc inset;}
     .center-box{display: flex;flex-direction: column;align-items: center;position: relative;width: 20% }
+    .title_small{justify-content: center;height: 60px;font-weight: bold}
+    .index-list{display: flex;flex-wrap: wrap;align-items: center;justify-content: space-around;}
     .box_bg{width: 200px;height: 280px;z-index: 2;}
     .box{position: absolute;width: 146px;margin-top:20px;overflow: hidden;display: flex;flex-direction: column}
     .box img{height: 156px}

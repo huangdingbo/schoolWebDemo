@@ -41,6 +41,18 @@
                         </div>
                         <p>监控预警系统</p>
                     </div>
+                    <div class="nav-item" @click="jump(4)" @mouseenter="pointEnter(4)" @mouseleave="pointOut" :class="{ac:this.ac==4}">
+                        <div class="svg_icon">
+                            <svg version="1.2" baseProfile="tiny" id="Layer_4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 48 48" xml:space="preserve">
+                                <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M2.6,13.4h42.9c0.8,0,1.5,0.7,1.5,1.5v7.5c0,0.8-0.7,1.5-1.5,1.5H2.6c-0.8,0-1.5-0.7-1.5-1.5v-7.5C1.1,14,1.8,13.4,2.6,13.4z" style="stroke-dasharray: 111, 113; stroke-dashoffset: 0;"></path>
+                                <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M4,23.8h40.1c0.8,0,1.5,0.7,1.5,1.5v19.1c0,0.8-0.7,1.5-1.5,1.5H4c-0.8,0-1.5-0.7-1.5-1.5V25.3C2.5,24.5,3.2,23.8,4,23.8z" style="stroke-dasharray: 128, 130; stroke-dashoffset: 0;"></path>
+                                <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M2,13.4l8.3-10.8C10.6,2.2,11,2,11.5,2h25.3c0.4,0,0.9,0.2,1.2,0.5l7.9,10.8" style="stroke-dasharray: 56, 58; stroke-dashoffset: 0;"></path>
+                                <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M13.4,5.6L34.4,5.6" style="stroke-dasharray: 22, 24; stroke-dashoffset: 0;"></path>
+                                <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M10.5,9.3L37.3,9.3" style="stroke-dasharray: 27, 29; stroke-dashoffset: 0;"></path>
+                            </svg>
+                        </div>
+                        <p>后台管理系统</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,7 +75,6 @@
             }
         },
         mounted(){
-            this.opacity
         },
         methods:{
             jump:function(index){
@@ -77,10 +88,13 @@
                         break;
                     case 3:
                         this.$router.push("/warning");
-                        break
+                        break;
+                    case 4:
+                        window.location.href="http://huangdingbo.work/school/frontend/web/index.php";
                 }
             },
             pointEnter:function (index) {
+                console.log(index)
                 this.ac = index;
                 this.play(index)
             },

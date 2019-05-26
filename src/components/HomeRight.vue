@@ -38,7 +38,8 @@
         },
         watch:{
             option(){
-                this.init(this.option)
+                console.log(this.option.value)
+                this.init(this.option.value)
             }
         },
         data() {
@@ -96,7 +97,6 @@
                     this.pie.data = res.list;
                 });
                 this.$api.year({test:testVal}).then(res => {
-                    console.log(this.line.data[0].value);
                     this.line.data= [{lineName:'2017届',value:[],}, {lineName:'2018届',value:[]}, {lineName:'2019届',value:[]},];
                     this.line.xAxisData=[];
                     for(let x in res.list.one){
