@@ -94,7 +94,6 @@
                 }
             },
             pointEnter:function (index) {
-                console.log(index)
                 this.ac = index;
                 this.play(index)
             },

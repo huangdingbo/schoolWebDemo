@@ -95,7 +95,7 @@ export default {
   left: 525px;
 }
 .header-center-title {
-  width: 840px;
+  width: 856px;
     height: 100px;
   background-size: 100%;
   background-image: url(../assets/home/nav_title_bg.png);
